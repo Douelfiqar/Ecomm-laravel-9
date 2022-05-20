@@ -43,8 +43,25 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
 });
 
 
+
+Route::middleware(['auth', 'role:client'])->group(function () {
+
+    Route::prefix('client')->group(function () {
+        Route::get('/account', [ClientController::class,'account'] )->name('client.profile');
+        Route::post('/profileUpdate', [ClientController::class,'updateProfile'])->name('client.updateProfile');
+        
+        Route::post('/editPassword', [ClientController::class,'editPassword'])->name('client.editPassword');
+    });
+
+});
+
+
+
+
 Route::prefix('client')->group(function () {
     Route::get('/home', [ClientController::class,'index'])->name('home');
+
+
 });
 
 

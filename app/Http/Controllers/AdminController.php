@@ -55,7 +55,7 @@ class AdminController extends Controller
     }
 
     public function editPassword(Request $request){
-        $user = User::find(1);
+        $user = $request->user();
 
         if (Hash::check($request->input('oldPassword'), $user['password']) && $request->input('newPassword')==$request->input('confirmPassword')) {
             $user->password = Hash::make($request->input('newPassword'));

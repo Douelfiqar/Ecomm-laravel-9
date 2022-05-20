@@ -6,7 +6,7 @@
         <div class="header-top-inner">
           <div class="cnt-account">
             <ul class="list-unstyled">
-              <li><a href="#"><i class="icon fa fa-user"></i>My Account</a></li>
+              <li><a href="{{route('client.profile')}}"><i class="icon fa fa-user"></i>My Account</a></li>
               <li><a href="#"><i class="icon fa fa-heart"></i>Wishlist</a></li>
               <li><a href="#"><i class="icon fa fa-shopping-cart"></i>My Cart</a></li>
               <li><a href="#"><i class="icon fa fa-check"></i>Checkout</a></li>
@@ -17,7 +17,7 @@
                 <a onclick="this.closest('form').submit();return false;" style="cursor: pointer"><i class="icon fa fa-lock"></i>Logout</a>
               </form></li>
               @else
-              <li><a href="{{route('login')}}"><i class="icon fa fa-lock"></i>Login</a></li>
+              <li><a href="{{route('login')}}"><i class="icon fa fa-lock"></i>Login/Register</a></li>
               @endif
             </ul>
           </div>
