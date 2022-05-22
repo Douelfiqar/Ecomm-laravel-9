@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\BrandController;
 use App\Http\Controllers\ClientController;
 
 /*
@@ -38,6 +39,19 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
         Route::get('/updatePassword', [AdminController::class,'updatePassword'] )->name('update.password');
 
         Route::post('/editPassword', [AdminController::class,'editPassword'] )->name('admin.editPassword');
+        
+        Route::get('/allBrands', [BrandController::class,'allBrands'] )->name('admin.allBrands');
+        
+        Route::post('/addBrand', [BrandController::class,'addBrand'] )->name('admin.addBrand');
+
+        Route::get('/updateBrand/{id}', [BrandController::class,'updateBrand'] )->name('admin.updateBrand');
+
+        Route::get('/deleteBrand/{id}', [BrandController::class,'deleteBrand'] )->name('admin.deleteBrand');
+
+        Route::get('/update/{id}', [BrandController::class,'updateBrand'] )->name('admin.updateBrand');
+        
+        Route::get('/edite', [BrandController::class,'editBrand'] )->name('admin.editBrand');
+
     });
 
 });

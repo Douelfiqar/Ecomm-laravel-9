@@ -1,6 +1,7 @@
 @extends('admin.adminMaster')
 
 @section('contentadmin')
+
 <div class="container-full">
     
     <section class="content">
