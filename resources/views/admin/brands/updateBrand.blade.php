@@ -19,7 +19,7 @@
     </div>
 @endif
                 <div class="box">
-                    <form action="{{route('admin.editBrand')}}" method="get" style="padding: 20px" enctype="multipart/form-data">
+                    <form action="{{url('/admin/editeBrand')}}" method="POST" style="padding: 20px" enctype="multipart/form-data">
                         @csrf
                         <input type="hidden" name="id" value="{{$brand->id}}">
                         <div class="input-group mb-3">

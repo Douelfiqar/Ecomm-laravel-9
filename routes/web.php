@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\BrandController;
 use App\Http\Controllers\ClientController;
+use App\Http\Controllers\CategoryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -40,19 +41,36 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
 
         Route::post('/editPassword', [AdminController::class,'editPassword'] )->name('admin.editPassword');
         
+            //   -----------------------------------  Brand  --------------------------------
+
         Route::get('/allBrands', [BrandController::class,'allBrands'] )->name('admin.allBrands');
         
         Route::post('/addBrand', [BrandController::class,'addBrand'] )->name('admin.addBrand');
 
-        Route::get('/updateBrand/{id}', [BrandController::class,'updateBrand'] )->name('admin.updateBrand');
+        // Route::get('/updateBrand/{id}', [BrandController::class,'updateBrand'] )->name('admin.updateBrand');
 
         Route::get('/deleteBrand/{id}', [BrandController::class,'deleteBrand'] )->name('admin.deleteBrand');
 
         Route::get('/update/{id}', [BrandController::class,'updateBrand'] )->name('admin.updateBrand');
         
-        Route::get('/edite', [BrandController::class,'editBrand'] )->name('admin.editBrand');
+        Route::post('/editeBrand', [BrandController::class,'editBrand'] )->name('admin.editBrand');
 
+
+
+    //   -----------------------------------  Category  --------------------------------
+    
+    Route::get('/allCategory', [CategoryController::class,'allCategory'] )->name('admin.allCategory');
+
+    Route::post('/addCategory', [CategoryController::class,'addCategory'] )->name('admin.addCategory');
+
+    Route::get('/updateCategory/{id}', [CategoryController::class,'updateCategory'] )->name('admin.updateCategory');
+    
+    Route::POST('/edite', [CategoryController::class,'editCategory'] )->name('admin.editCategory');
+
+    Route::get('/deleteCategory/{id}', [CategoryController::class,'deleteCategory'] )->name('admin.deleteCategory');
     });
+    
+    
 
 });
 
@@ -66,6 +84,8 @@ Route::middleware(['auth', 'role:client'])->group(function () {
         
         Route::post('/editPassword', [ClientController::class,'editPassword'])->name('client.editPassword');
     });
+
+    
 
 });
 

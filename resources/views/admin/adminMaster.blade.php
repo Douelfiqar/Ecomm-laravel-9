@@ -16,7 +16,8 @@
 	<!-- Style-->  
 	<link rel="stylesheet" href=" {{ asset('admin/css/style.css') }}">
 	<link rel="stylesheet" href="{{ asset('admin/css/skin_color.css') }}">
-     
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
   </head>
 
 <body class="hold-transition dark-skin sidebar-mini theme-primary fixed">
@@ -53,7 +54,46 @@
 <!-- ./wrapper -->
 	 
 	<!-- Vendor JS -->
+
+  <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<script type="text/javascript">
+    $(function(){
+      $(document).on('click','#deleteee',function(e){
+        
+        e.preventDefault();
+
+console.log("first")
+        Swal.fire('Any fool can use a computer');
+
+        var link = $(this).attr("href");
+
+        Swal.fire({
+  title: 'Are you sure?',
+  text: "You won't be able to revert this!",
+  icon: 'warning',
+  showCancelButton: true,
+  confirmButtonColor: '#3085d6',
+  cancelButtonColor: '#d33',
+  confirmButtonText: 'Yes, delete it!'
+}).then((result) => {
+  if (result.isConfirmed) {
+    window.location.href = link;
+    Swal.fire(
+      'Deleted!',
+      'Your file has been deleted.',
+      'success'
+    )
+  }
+})
+
+
+      })
+      
+    })
+  </script>
 	<script src="{{ asset('admin/js/vendors.min.js') }}"></script>
+
     <script src="{{ asset('assets/icons/feather-icons/feather.min.js') }}"></script>	
 	<script src="{{ asset('assets/vendor_components/easypiechart/dist/jquery.easypiechart.js') }}"></script>
 	<script src="{{ asset('assets/vendor_components/apexcharts-bundle/irregular-data-series.js') }}assets/vendor_components/apexcharts-bundle/irregular-data-series.js"></script>

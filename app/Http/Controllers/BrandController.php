@@ -68,7 +68,7 @@ class BrandController extends Controller
         $brand = Brand::findOrFail($brandId);
         $oldImage = $brand->brand_image;
         if($request->file('brandImage')){
-            unlink($oldImage);
+            unlink('upload/brandPhoto/'.$oldImage);
             $file = $request->file('brandImage');
             $filename = date('YmdHi').$file->getClientOriginalName();
             $file->move(public_path('upload/brandPhoto'),$filename);
