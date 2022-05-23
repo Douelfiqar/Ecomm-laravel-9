@@ -6,6 +6,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\BrandController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\SubCategoryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -68,10 +69,20 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::POST('/edite', [CategoryController::class,'editCategory'] )->name('admin.editCategory');
 
     Route::get('/deleteCategory/{id}', [CategoryController::class,'deleteCategory'] )->name('admin.deleteCategory');
-    });
-    
-    
 
+    //   -----------------------------------  subCategory  --------------------------------
+
+    
+    Route::get('/allSubCategory', [SubCategoryController::class,'allSubCategory'] )->name('admin.allSubCategory');   
+
+    Route::post('/addSubCategory', [SubCategoryController::class,'addSubCategory'] )->name('admin.addSubCategory');
+
+    Route::get('/updateSubCategory/{id}', [SubCategoryController::class,'updateSubCategory'] )->name('admin.updateSubCategory');
+    
+    Route::POST('/editeSubCategory', [SubCategoryController::class,'editSubCategory'] )->name('admin.editSubCategory');
+
+    Route::get('/deleteSubCategory/{id}', [SubCategoryController::class,'deleteSubCategory'] )->name('admin.deleteSubCategory');
+    });
 });
 
 

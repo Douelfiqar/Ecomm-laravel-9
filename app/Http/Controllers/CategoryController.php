@@ -50,7 +50,7 @@ class CategoryController extends Controller
     }
 
 
-    public function editcategory(Request $request){
+    public function editCategory(Request $request){
 
         $validated = $request->validate([
             'categoryNameFr' => 'required|max:30',
