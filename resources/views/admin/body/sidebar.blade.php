@@ -52,7 +52,7 @@
       <ul class="treeview-menu">
         <li><a href="{{route('admin.allCategory')}}"><i class="ti-more"></i>Category</a></li>
         <li><a href="{{route('admin.allSubCategory')}}"><i class="ti-more"></i>Sub Category</a></li>
-        <li><a href="{{route('admin.allSubCategory')}}"><i class="ti-more"></i>Sub SubCategory</a></li>
+        <li><a href="{{route('admin.allSubSubCategory')}}"><i class="ti-more"></i>Sub SubCategory</a></li>
 
       </ul>
     </li>

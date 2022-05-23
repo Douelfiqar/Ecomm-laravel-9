@@ -82,6 +82,19 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::POST('/editeSubCategory', [SubCategoryController::class,'editSubCategory'] )->name('admin.editSubCategory');
 
     Route::get('/deleteSubCategory/{id}', [SubCategoryController::class,'deleteSubCategory'] )->name('admin.deleteSubCategory');
+
+     //   ----------------------------------- Sub subCategory  --------------------------------
+
+    
+     Route::get('/allSubSubCategory', [SubCategoryController::class,'allSubCategory'] )->name('admin.allSubCategory');   
+
+     Route::post('/addSubCategory', [SubCategoryController::class,'addSubCategory'] )->name('admin.addSubCategory');
+ 
+     Route::get('/updateSubCategory/{id}', [SubCategoryController::class,'updateSubCategory'] )->name('admin.updateSubCategory');
+     
+     Route::POST('/editeSubCategory', [SubCategoryController::class,'editSubCategory'] )->name('admin.editSubCategory');
+ 
+     Route::get('/deleteSubCategory/{id}', [SubCategoryController::class,'deleteSubCategory'] )->name('admin.deleteSubCategory');
     });
 });
 
