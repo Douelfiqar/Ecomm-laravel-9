@@ -20,24 +20,24 @@ class CategoryController extends Controller
         $request->validate([
             'CategoryNameFr' => 'required|max:30',
             'CategoryNameEn' => 'required|max:30',
-            'CategoryImage' => 'required',
         ]);
+        // 'CategoryImage' => 'required',
         $category = new Category();
         $category->category_name_en = $request->input('CategoryNameEn');
         $category->category_name_fr = $request->input('CategoryNameFr');
         $category->category_slug_en = strtolower(str_replace(' ',' -',$request->input('CategoryNameEn')));
         $category->category_slug_fr = str_replace(' ',' -',$request->input('CategoryNameFr'));
-        
-        if($request->file('CategoryImage')){
-
-            $file = $request->file('CategoryImage');
-            $filename = date('YmdHi').$file->getClientOriginalName();
-            $file->move(public_path('upload/categoryPhoto'),$filename);
-            $category['category_image'] = $filename;
-
-        }
-
         $category->save();
+        // if($request->file('CategoryImage')){
+
+        //     $file = $request->file('CategoryImage');
+        //     $filename = date('YmdHi').$file->getClientOriginalName();
+        //     $file->move(public_path('upload/categoryPhoto'),$filename);
+        //     $category['category_image'] = $filename;
+
+        // }
+
+        
 
         return redirect()->back()->with('success','add with success');
     }
@@ -72,23 +72,25 @@ class CategoryController extends Controller
                 'category_slug_fr' => str_replace(' ',' -',$request->input('categoryNameFr')),
             ]);
 
-        }else{
-            unlink('upload/categoryPhoto/'.$oldImage);
-            $file = $request->file('categoryImage');
-            $filename = date('YmdHi').$file->getClientOriginalName();
-            $file->move(public_path('upload/categoryPhoto'),$filename);
-
-            $category->category_slug_en = strtolower(str_replace(' ',' -',$request->input('categoryNameEn')));
-            $category->category_slug_fr = str_replace(' ',' -',$request->input('categoryNameFr'));
-
-            Category::findOrFail($categoryId)->update([
-                'category_name_en' => $request->input('categoryNameEn'),
-                'category_name_fr' => $request->input('categoryNameFr'),
-                'category_slug_en' => strtolower(str_replace(' ',' -',$request->input('categoryNameEn'))),
-                'category_slug_fr' => str_replace(' ',' -',$request->input('categoryNameFr')),
-                'category_image' => $filename,
-            ]);
         }
+
+        // else{
+        //     unlink('upload/categoryPhoto/'.$oldImage);
+        //     $file = $request->file('categoryImage');
+        //     $filename = date('YmdHi').$file->getClientOriginalName();
+        //     $file->move(public_path('upload/categoryPhoto'),$filename);
+
+        //     $category->category_slug_en = strtolower(str_replace(' ',' -',$request->input('categoryNameEn')));
+        //     $category->category_slug_fr = str_replace(' ',' -',$request->input('categoryNameFr'));
+
+        //     Category::findOrFail($categoryId)->update([
+        //         'category_name_en' => $request->input('categoryNameEn'),
+        //         'category_name_fr' => $request->input('categoryNameFr'),
+        //         'category_slug_en' => strtolower(str_replace(' ',' -',$request->input('categoryNameEn'))),
+        //         'category_slug_fr' => str_replace(' ',' -',$request->input('categoryNameFr')),
+        //         'category_image' => $filename,
+        //     ]);
+        // }
 
  return redirect()->route('admin.allCategory')->with('success','update with success');
     }

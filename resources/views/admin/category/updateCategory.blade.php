@@ -32,10 +32,7 @@
                          <input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1" name="categoryNameFr" value="{{$category->category_name_fr}}">
                        </div>
                 
-                       <div class="input-group mb-3">
-                         <span class="input-group-text" id="basic-addon1">category Image</span>
-                         <input type="file" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1" name="categoryImage">
-                       </div>
+                      
                        <div class="input-group mb-3 row">
                            <div class="col-5"></div>
                        <button class="btn btn-success col-3">Update</button>
