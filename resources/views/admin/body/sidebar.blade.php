@@ -29,6 +29,13 @@
       </a>
     </li>  
     
+    <li class="{{$route == 'home'? 'active':''}}">
+      <a href="{{route('home')}}">
+        <i data-feather="pie-chart"></i>
+        <span>Home</span>
+      </a>
+    </li>  
+
     <li class="treeview {{$route == 'admin.allBrands'? 'active':''}}">
       <a href="#">
         <i data-feather="message-circle"></i>
@@ -66,14 +73,25 @@
         </span>
       </a>
       <ul class="treeview-menu">
-        <li><a href="{{route('admin.allProduct')}}"><i class="ti-more"></i>Add Product</a></li>
         <li><a href="{{route('admin.manageProduct')}}"><i class="ti-more"></i>Manage Product</a></li>
-        {{-- <li><a href="gallery.html"><i class="ti-more"></i>Gallery</a></li>
-        <li><a href="faq.html"><i class="ti-more"></i>FAQs</a></li>
-        <li><a href="timeline.html"><i class="ti-more"></i>Timeline</a></li>  --}}
+        <li><a href="{{route('admin.allProduct')}}"><i class="ti-more"></i>Add Product</a></li>
       </ul>
     </li> 		      
  
+    <li class="treeview {{$route == 'admin.allSlider' ? 'active':''}} {{$route == 'admin.addSlider' ? 'active':''}}">
+      <a href="#">
+        <i data-feather="file"></i>
+        <span>Slider</span>
+        <span class="pull-right-container">
+          <i class="fa fa-angle-right pull-right"></i>
+        </span>
+      </a>
+      <ul class="treeview-menu">
+        <li><a href="{{route('admin.allSlider')}}"><i class="ti-more"></i>All Slider</a></li>
+
+        <li><a href="{{route('admin.addSlider')}}"><i class="ti-more"></i>Add Slider</a></li>
+      </ul>
+    </li>
   </ul>
 </section>
 

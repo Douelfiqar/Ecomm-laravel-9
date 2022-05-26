@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\BrandController;
 use App\Http\Controllers\ClientController;
+use App\Http\Controllers\SliderController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\SubCategoryController;
@@ -109,7 +110,7 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
 
     Route::get('/updateProduct/{id}', [ProductController::class,'updateProduct'] );
 
-    Route::post('/edite', [ProductController::class,'editProduct'])->name('admin.editProduct');
+    Route::post('/editeProduct', [ProductController::class,'editProduct'])->name('admin.editProduct');
 
 
     Route::get('/manageProduct', [ProductController::class,'manageProduct'] )->name('admin.manageProduct');
@@ -122,6 +123,23 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
 
 
     Route::get('/status/{id}', [ProductController::class,'statusUpdate'] )->name('admin.status');
+
+    //   ----------------------------------- Slider  --------------------------------
+
+        
+    Route::get('/allSlider', [SliderController::class,'allSlider'] )->name('admin.allSlider');   
+
+    Route::post('/addSlider', [SliderController::class,'addSlider'] )->name('admin.addSlider');
+
+    Route::get('/updateSlider/{id}', [SliderController::class,'updateSlider'])->name('admin.updateslider');
+
+    Route::post('/editeSlider', [SliderController::class,'editSlider'])->name('admin.editSlider');
+
+    Route::get('/deleteSlider/{id}', [SliderController::class,'deleteSlider'] );
+
+    Route::get('/status/{id}', [SliderController::class,'statusUpdate'] )->name('admin.statusSldier');
+        
+    Route::get('/statusSlider/{id}', [SliderController::class,'statusUpdate'] )->name('admin.statusSlider');
     });
 });
 
