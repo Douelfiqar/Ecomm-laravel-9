@@ -66,11 +66,11 @@
         </span>
       </a>
       <ul class="treeview-menu">
-        <li><a href="{{route('admin.allProduct')}}"><i class="ti-more"></i>Product Index</a></li>
-        {{-- <li><a href="invoice.html"><i class="ti-more"></i>Invoice</a></li>
-        <li><a href="gallery.html"><i class="ti-more"></i>Gallery</a></li>
+        <li><a href="{{route('admin.allProduct')}}"><i class="ti-more"></i>Add Product</a></li>
+        <li><a href="{{route('admin.manageProduct')}}"><i class="ti-more"></i>Manage Product</a></li>
+        {{-- <li><a href="gallery.html"><i class="ti-more"></i>Gallery</a></li>
         <li><a href="faq.html"><i class="ti-more"></i>FAQs</a></li>
-        <li><a href="timeline.html"><i class="ti-more"></i>Timeline</a></li> --}}
+        <li><a href="timeline.html"><i class="ti-more"></i>Timeline</a></li>  --}}
       </ul>
     </li> 		      
  

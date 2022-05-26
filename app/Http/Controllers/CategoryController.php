@@ -12,7 +12,7 @@ class CategoryController extends Controller
     //
     public function allCategory(){
         $user = Auth::user();
-        $categorys = Category::all();
+        $categorys = Category::paginate(5);
         return view('admin.category.category',compact('user','categorys'));
     }
     

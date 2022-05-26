@@ -2,7 +2,7 @@
 
 @section('contentadmin')
 
-<div class="content-wrapper">
+<div class="">
     <div class="container-full">
       <!-- Content Header (Page header) -->
       <div class="content-header">
@@ -23,7 +23,7 @@
       </div>	  
 
       <!-- Main content -->
-      <section class="content">
+      <section class="content" >
 
        <!-- Basic Forms -->
         <div class="box">
@@ -34,7 +34,19 @@
           <div class="box-body">
             <div class="row">
               <div class="col">
-                  <form novalidate>
+                <div>
+                    @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
+                </div>
+                  <form method="POST" action="{{route('admin.addProduct')}}" enctype="multipart/form-data">
+                    @csrf
 {{-- first row --}}
 
                     <div class="row">
@@ -43,7 +55,7 @@
                               <div class="form-group">
                                   <h5>Brand Select <span class="text-danger">*</span></h5>
                                   <div class="controls">
-                                    <select name="BrandId" id="optionBrand" class="form-control">
+                                    <select name="brand_id" id="optionBrand" class="form-control">
                                         @foreach ($Brands as $Brand)
                                         <option value="{{$Brand->id}}">{{$Brand->brand_name_en}}</option>
                                         @endforeach
@@ -57,7 +69,7 @@
                             <div class="form-group">
                                 <h5>Category Select <span class="text-danger">*</span></h5>
                                 <div class="controls">
-                                  <select name="categorieId" id="optionCateg" class="form-control">
+                                  <select name="category_id" id="optionCateg" class="form-control">
                                       @foreach ($Categories as $Category)
                                       <option value="{{$Category->id}}">{{$Category->category_name_en}}</option>
                                       @endforeach
@@ -71,7 +83,7 @@
                             <div class="form-group">
                                 <h5>SubCategory Select <span class="text-danger">*</span></h5>
                                 <div class="controls">
-                                  <select name="SubCategorieId" id="optionSubCateg" class="form-control">
+                                  <select name="subcategory_id" id="optionSubCateg" class="form-control">
                                       <option disabled selected>Select a Sub Categ</option>
                                    </select>
                                 </div>
@@ -88,7 +100,7 @@
                             <div class="form-group">
                                 <h5>Sub SubCategory Select <span class="text-danger">*</span></h5>
                                 <div class="controls">
-                                  <select name="SubSubCategorieId" id="optionSubSubCateg" class="form-control">
+                                  <select name="subsubcategory_id" id="optionSubSubCateg" class="form-control">
                                     <option disabled selected>Select a Sub Categ</option>
                                    </select>
                                 </div>
@@ -245,7 +257,7 @@
                             <div class="form-group">
                                 <h5 class="col-form-label">Multi Image <span class="text-danger">*</span></label>
                                 <div>
-                                    <input type="file" class="form-control" name="">
+                                    <input type="file" class="form-control" name="multi_img[]" multiple>
                                 </div>
                             </div>
                         </div>
@@ -276,7 +288,7 @@
 
                     </div>
 
-{{-- 7 row --}}
+{{-- 7-2 row --}}
 
                     <div class="row">
                                             
@@ -400,8 +412,9 @@
                         data: {text: $('#optionCateg').val()},
     
                 success: function(result){
+                    $('#optionSubSubCateg').html('');
                     $('#optionSubCateg').empty();
-                    $.each(result, function(i, value) {
+                    $.each(result.result, function(i, value) {
              $('#optionSubCateg').append($('<option>').text(value.SubCategory_name_en).attr('value', value.id));
                 
     });
@@ -434,7 +447,7 @@
             success: function(result){
 
                 $('#optionSubSubCateg').empty();
-                $.each(result, function(i, value) {
+                $.each(result.result, function(i, value) {
          $('#optionSubSubCateg').append($('<option>').text(value.SubSubCategory_name_en).attr('value', value.id));
             
 });

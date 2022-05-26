@@ -13,7 +13,7 @@ class SubSubCategoryController extends Controller
     //
     public function allSubSubCategory(){
         $user = Auth::user();
-        $SubSubCategorys = SubSubCategory::all();
+        $SubSubCategorys = SubSubCategory::paginate(5);
         $SubCategorys = SubCategory::all();
         $Categories = Category::all();
 
@@ -23,8 +23,8 @@ class SubSubCategoryController extends Controller
     public function addSubSubCategory(Request $request){
 
         $request->validate([
-            'SubSubCategoryNameFr' => 'required|max:30',
-            'SubSubCategoryNameEn' => 'required|max:30',
+            'SubSubCategoryNameFr' => 'required',
+            'SubSubCategoryNameEn' => 'required',
             'categoryId' => 'required',
             'SubCategoryId' => 'required',
         ]);
@@ -66,8 +66,8 @@ class SubSubCategoryController extends Controller
     public function editSubSubCategory(Request $request){
 
         $validated = $request->validate([
-            'SubSubCategoryNameFr' => 'required|max:30',
-            'SubSubCategoryNameEn' => 'required|max:30',
+            'SubSubCategoryNameFr' => 'required',
+            'SubSubCategoryNameEn' => 'required',
         ]);
 
         $SubSubCategoryId = $request->input('id');
@@ -121,8 +121,7 @@ class SubSubCategoryController extends Controller
 
         $Category = $request->text;
         $ajaxSubCategory = SubCategory::where('category_id',$Category)->get();
-// dd($ajaxSubCategory );
-// ->orderBy('SubSubCategory_name_en','ASC')
+
          return response()->json(['result' => $ajaxSubCategory]);
     }
 }

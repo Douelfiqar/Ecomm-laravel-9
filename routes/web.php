@@ -103,20 +103,25 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     //   ----------------------------------- Products  --------------------------------
 
         
-     Route::get('/allProduct', [ProductController::class,'allProduct'] )->name('admin.allProduct');   
+    Route::get('/allProduct', [ProductController::class,'allProduct'] )->name('admin.allProduct');   
 
-    // Route::post('/addProduct', [ProductController::class,'addPoduct'] )->name('admin.addSubSubCategory');
+    Route::post('/addProduct', [ProductController::class,'addProduct'] )->name('admin.addProduct');
 
-    // Route::get('/updateProduct/{id}', [ProductController::class,'updateSubSubCategory'] )->name('admin.updateSubSubCategory');
+    Route::get('/updateProduct/{id}', [ProductController::class,'updateProduct'] );
 
-    // Route::POST('/editeProduct', [ProductController::class,'editSubSubCategory'] )->name('admin.editSubSubCategory');
+    Route::post('/edite', [ProductController::class,'editProduct'])->name('admin.editProduct');
 
-    // Route::get('/deleteProduct/{id}', [ProductController::class,'deleteSubSubCategory'] )->name('admin.deleteSubSubCategory');
 
-    // Route::post('/product/SubCategoryajax', [ProductController::class,'ajaxCategoryProduct'] )->name('admin.ajaxCategoryProduct');
+    Route::get('/manageProduct', [ProductController::class,'manageProduct'] )->name('admin.manageProduct');
 
-    // Route::post('/product/SubSubCategoryajax', [ProductController::class,'ajaxSubCategoryProduct'] )->name('admin.ajaxCategoryProduct');
+    Route::get('/deleteProduct/{id}', [ProductController::class,'deleteProduct'] );
 
+    Route::post('/product/SubCategoryajax', [ProductController::class,'ajaxCategoryProduct'] )->name('admin.ajaxCategoryProduct');
+
+    Route::post('/product/SubSubCategoryajax', [ProductController::class,'ajaxSubCategoryProduct'] )->name('admin.ajaxCategoryProduct');
+
+
+    Route::get('/status/{id}', [ProductController::class,'statusUpdate'] )->name('admin.status');
     });
 });
 

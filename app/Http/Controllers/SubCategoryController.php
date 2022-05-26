@@ -12,7 +12,7 @@ class SubCategoryController extends Controller
     //
     public function allSubCategory(){
         $user = Auth::user();
-        $SubCategorys = SubCategory::all();
+        $SubCategorys = SubCategory::paginate(5);
         $Categories = Category::all();
 
         return view('admin.SubCategory.SubCategorie',compact('user','SubCategorys','Categories'));
@@ -82,32 +82,10 @@ class SubCategoryController extends Controller
         ]);
 
 
-        // if($request->SubCategoryImage == NULL){
-           
-
-         
-
-        // }else{
-        //     unlink('upload/SubCategoryPhoto/'.$oldImage);
-        //     $file = $request->file('SubCategoryImage');
-        //     $filename = date('YmdHi').$file->getClientOriginalName();
-        //     $file->move(public_path('upload/SubCategoryPhoto'),$filename);
-
-        //     $SubCategory->SubCategory_slug_en = strtolower(str_replace(' ',' -',$request->input('SubCategoryNameEn')));
-        //     $SubCategory->SubCategory_slug_fr = str_replace(' ',' -',$request->input('SubCategoryNameFr'));
-
-        //     SubCategory::findOrFail($SubCategoryId)->update([
-        //         'SubCategory_name_en' => $request->input('SubCategoryNameEn'),
-        //         'SubCategory_name_fr' => $request->input('SubCategoryNameFr'),
-        //         'SubCategory_slug_en' => strtolower(str_replace(' ',' -',$request->input('SubCategoryNameEn'))),
-        //         'SubCategory_slug_fr' => str_replace(' ',' -',$request->input('SubCategoryNameFr')),
-        //         'SubCategory_image' => $filename,
-        //     ]);
-        // }
-
  return redirect()->route('admin.allSubCategory')->with('success','update with success');
     }
 
+    
 
     public function deleteSubCategory($id){
         $SubCategory = SubCategory::findOrFail($id);
