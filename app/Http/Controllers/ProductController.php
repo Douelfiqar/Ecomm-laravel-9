@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Auth;
 class productController extends Controller
 {
     //
-    public function allProduct(){
+    public function addProductGet(){
 
         $user = Auth::user();
         $Brands = Brand::latest()->get();
@@ -184,8 +184,8 @@ return redirect()->back();
     $product = Product::find($id);
     $Brands = Brand::latest()->get();
     $Categories = Category::latest()->get();
-    
-    return view('admin.Product.updateProduct',compact('product','Brands','Categories','user'));
+    $productMultiImages = ProductImage::where('product_id',$id)->get();
+    return view('admin.Product.updateProduct',compact('product','Brands','Categories','user','productMultiImages'));
     }
 
     public function editProduct(Request $request){
@@ -205,7 +205,6 @@ return redirect()->back();
             'product_color_en' => 'required',
             'product_color_fr' => 'required',
             'selling_price' => 'required',
-            'discount_price' => 'required',
             'short_desc_en' => 'required',
             'short_desc_fr' => 'required',
             'long_desc_en' => 'required',
@@ -251,7 +250,7 @@ return redirect()->back();
         Product::findOrFail($id)->update([
             'brand_id' => $request->brand_id,
             'category_id' => $request->category_id,
-            'subcategory_id' => $request->subsubcategory_id,
+            'subcategory_id' => $request->subcategory_id,
 
             'subsubcategory_id' => $request->subsubcategory_id, 
             'product_name_en' => $request->product_name_en,
@@ -299,7 +298,7 @@ return redirect()->back();
         }
 
         $productImage = ProductImage::where('product_id',$id)->get();
-        return redirect()->route('admin.allProduct');
+        return redirect()->route('admin.manageProduct');
     }
 
 
@@ -308,10 +307,11 @@ return redirect()->back();
         
         $product = Product::find($id);
 
-        if($product->status == 1){
-            $prodStatus = 0;
+       
+        if($product->status == '1'){
+            $prodStatus = '0';
         }else{
-            $prodStatus = 1;
+            $prodStatus = '1';
         }
 
         $product->update([

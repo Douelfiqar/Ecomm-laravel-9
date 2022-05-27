@@ -74,7 +74,7 @@
       </a>
       <ul class="treeview-menu">
         <li><a href="{{route('admin.manageProduct')}}"><i class="ti-more"></i>Manage Product</a></li>
-        <li><a href="{{route('admin.allProduct')}}"><i class="ti-more"></i>Add Product</a></li>
+        <li><a href="{{route('admin.addProduct')}}"><i class="ti-more"></i>Add Product</a></li>
       </ul>
     </li> 		      
  

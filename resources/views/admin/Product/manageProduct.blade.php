@@ -37,10 +37,10 @@
                             <td>{{$product->product_name_en}}</td>
                             <td>{{$product->product_name_fr}}</td>
                             <td>{{$product->product_qty}}</td>
-                            <td> @if ($product->status == 1)
-                                <a href="{{url('/admin/status/'.$product->id)}}" class="btn btn-success">Active</a>
+                            <td> @if ($product->status == '1')
+                                <a href="{{url('/admin/statusProduct/'.$product->id)}}" class="btn btn-success">Active</a>
                             @else
-                            <a href="{{url('/admin/status/'.$product->id)}}"  class="btn btn-danger">Inactive</a>
+                            <a href="{{url('/admin/statusProduct/'.$product->id)}}"  class="btn btn-danger">Inactive</a>
                             @endif</td>
                             <td>
                                 <div class="d-flex d-flex justify-content-center align-items-center">

@@ -8,7 +8,9 @@
 <meta name="author" content="">
 <meta name="keywords" content="MediaCenter, Template, eCommerce">
 <meta name="robots" content="all">
-<title>Flipmart premium HTML5 & CSS3 Template</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+
+<title>@yield('title')</title>
 
 <!-- Bootstrap Core CSS -->
 <link rel="stylesheet" href="{{asset('client/assets/css/bootstrap.min.css')}}">
@@ -26,6 +28,8 @@
 <link rel="stylesheet" href="{{asset('client/assets/css/font-awesome.css')}}">
 
 <!-- Fonts -->
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">
 <link href='http://fonts.googleapis.com/css?family=Roboto:300,400,500,700' rel='stylesheet' type='text/css'>
 <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,400italic,600,600italic,700,700italic,800' rel='stylesheet' type='text/css'>
 <link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>

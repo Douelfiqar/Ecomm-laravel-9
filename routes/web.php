@@ -10,6 +10,8 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\SubCategoryController;
 use App\Http\Controllers\SubSubCategoryController;
+use App\Http\Controllers\frontend\DetailController;
+use App\Http\Controllers\frontend\LangClientController;
 
 /*
 |--------------------------------------------------------------------------
@@ -103,8 +105,8 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
 
     //   ----------------------------------- Products  --------------------------------
 
-        
-    Route::get('/allProduct', [ProductController::class,'allProduct'] )->name('admin.allProduct');   
+        //route pour ajouter un produit!!!!
+    Route::get('/addProduct', [ProductController::class,'addProductGet'] )->name('admin.allProduct');   
 
     Route::post('/addProduct', [ProductController::class,'addProduct'] )->name('admin.addProduct');
 
@@ -122,7 +124,7 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::post('/product/SubSubCategoryajax', [ProductController::class,'ajaxSubCategoryProduct'] )->name('admin.ajaxCategoryProduct');
 
 
-    Route::get('/status/{id}', [ProductController::class,'statusUpdate'] )->name('admin.status');
+    Route::get('/statusProduct/{id}', [ProductController::class,'statusUpdate'] );
 
     //   ----------------------------------- Slider  --------------------------------
 
@@ -162,7 +164,14 @@ Route::middleware(['auth', 'role:client'])->group(function () {
 
 
 Route::prefix('client')->group(function () {
+    
     Route::get('/home', [ClientController::class,'index'])->name('home');
+
+    Route::get('/home/lang/en', [LangClientController::class,'langEng']);
+
+    Route::get('/home/lang/fr', [LangClientController::class,'langFr']);
+
+    Route::get('/home/details/{id}', [DetailController::class,'index']);
 
 
 });

@@ -3,15 +3,23 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Slider;
+use App\Models\Product;
+use App\Models\Category;
+use App\Models\SubCategory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Session;
 
 class ClientController extends Controller
 {
     //
     public function index(){
-        return view('client.index');
+        $categories = Category::all();
+        $slides = Slider::where('status','1')->orderBy('id','DESC')->limit(3)->get();
+        $products = Product::where('status','1')->orderBy('id','DESC')->limit(6)->get();
+        return view('client.index',compact('categories','slides','products'));
     }
 
     public function account(){
