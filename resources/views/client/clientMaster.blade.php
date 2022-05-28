@@ -62,5 +62,89 @@
 <script src="{{asset('client/assets/js/bootstrap-select.min.js')}}"></script> 
 <script src="{{asset('client/assets/js/wow.min.js')}}"></script> 
 <script src="{{asset('client/assets/js/scripts.js')}}"></script>
+
+
+
+{{--------------------------- add model------------------- --}}
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          
+            <div class="row">
+
+                <div class="col-md-4">
+                    <div class="card" style="width: 18rem;">
+                        <img src="{{asset('upload/productPhoto/'.$product->product_thambnail)}}" class="card-img-top" alt="..." style="height:200px;width:200px;object-fit: contain;" >
+                      </div>
+                </div>
+
+
+                <div class="col-md-4">
+                      <ul class="list-group">
+                        <li class="list-group-item">Product Price: </li>
+                        <li class="list-group-item">Product Code:</li>
+                        <li class="list-group-item">Stock</li>
+                        <li class="list-group-item">Category</li>
+                        <li class="list-group-item">Brand</li>
+                      </ul>
+                </div>
+
+
+                <div class="col-md-4">
+                    <div class="form-group">
+
+                        <label for="exampleFormControlSelect1">Select Color</label>
+                        <select class="form-control" id="exampleFormControlSelect1">
+                          <option>1</option>
+                          <option>2</option>
+                          <option>3</option>
+                          <option>4</option>
+                          <option>5</option>
+                        </select>
+                      </div>
+
+
+                      <div class="form-group">
+                        <label for="exampleFormControlSelect1">Select Size</label>
+                        <select class="form-control" id="exampleFormControlSelect1">
+                          <option>1</option>
+                          <option>2</option>
+                          <option>3</option>
+                          <option>4</option>
+                          <option>5</option>
+                        </select>
+                      </div>
+
+                      <div class="form-group">
+                        <label for="exampleFormControlInput1">Qty</label>
+                        <input type="number" class="form-control" id="exampleFormControlInput1" min="1">
+                      </div>
+
+
+                </div>
+
+            </div>
+
+
+
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">ADD TO CART</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
 </body>
 </html>

@@ -12,6 +12,7 @@ use App\Http\Controllers\SubCategoryController;
 use App\Http\Controllers\SubSubCategoryController;
 use App\Http\Controllers\frontend\DetailController;
 use App\Http\Controllers\frontend\LangClientController;
+use App\Http\Controllers\frontend\CategoryClientController;
 
 /*
 |--------------------------------------------------------------------------
@@ -151,6 +152,7 @@ Route::middleware(['auth', 'role:client'])->group(function () {
 
     Route::prefix('client')->group(function () {
         Route::get('/account', [ClientController::class,'account'] )->name('client.profile');
+
         Route::post('/profileUpdate', [ClientController::class,'updateProfile'])->name('client.updateProfile');
         
         Route::post('/editPassword', [ClientController::class,'editPassword'])->name('client.editPassword');
@@ -173,6 +175,9 @@ Route::prefix('client')->group(function () {
 
     Route::get('/home/details/{id}', [DetailController::class,'index']);
 
+    Route::get('/category', [CategoryClientController::class,'indexCategory']);
+
+    Route::get('/category/{id}', [CategoryClientController::class,'filterCategory']);
 
 });
 

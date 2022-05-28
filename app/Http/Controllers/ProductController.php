@@ -221,7 +221,7 @@ return redirect()->back();
         }
 
         
-        if($request->hot_deals)
+        if($request->hot_deals )
             $deals = 1;
         else{
             $deals = 0;

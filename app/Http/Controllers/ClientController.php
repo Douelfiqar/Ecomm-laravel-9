@@ -19,7 +19,19 @@ class ClientController extends Controller
         $categories = Category::all();
         $slides = Slider::where('status','1')->orderBy('id','DESC')->limit(3)->get();
         $products = Product::where('status','1')->orderBy('id','DESC')->limit(6)->get();
-        return view('client.index',compact('categories','slides','products'));
+        $HotDeals = Product::where('hot_deals','1')->whereNotNull('discount_price')->orderBy('id','DESC')->limit(3)->get();
+        $SpecialOffers = Product::where('special_offer','1')->whereNotNull('discount_price')->orderBy('id','DESC')->limit(3)->get();
+      
+        $Featureds = Product::inRandomOrder()
+                    ->limit(6)
+                    ->get();
+
+        $SpecialDeals = Product::where('special_deals','1')->whereNotNull('discount_price')->orderBy('id','DESC')->limit(3)->get();
+
+        $Electroniques =  Product::inRandomOrder()->where('category_id',8)
+        ->limit(6)
+        ->get();
+        return view('client.index',compact('categories','slides','products','HotDeals','SpecialOffers','Featureds','Electroniques','SpecialDeals'));
     }
 
     public function account(){

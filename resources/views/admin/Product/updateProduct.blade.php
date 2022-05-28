@@ -350,7 +350,7 @@
 
                         <div class="col-3">
                                         <div class="form-check">
-                                            @if ($product->featured == 0)
+                                            @if ($product->special_offer == 0)
                                             <input class="form-check-input" type="checkbox" name="special_offer" id="flexCheckChecked">
                                             @else
                                             <input class="form-check-input" type="checkbox" name="special_offer" id="flexCheckChecked" checked>
@@ -364,7 +364,8 @@
 
                         <div class="col-3">
                             <div class="form-check">
-                                            @if ($product->special_offer == 0)
+                                            
+                                            @if ($product->featured == 0)
                                             <input class="form-check-input" type="checkbox" name="featured" id="flexCheckIndeterminate">
                                             @else
                                             <input class="form-check-input" type="checkbox" name="featured" id="flexCheckIndeterminate" checked>
