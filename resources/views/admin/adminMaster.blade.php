@@ -57,6 +57,7 @@
 	<!-- Vendor JS -->
 
   <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"></script>
 
 <script type="text/javascript">
     $(function(){
@@ -125,6 +126,8 @@ console.log("first")
 	<script src="{{asset('admin/js/template.js')}}"></script>
 
 
+
+  
 </body>
 </html>
 <!-- Vendor JS -->

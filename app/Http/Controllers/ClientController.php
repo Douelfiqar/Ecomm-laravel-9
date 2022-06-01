@@ -15,13 +15,20 @@ use Illuminate\Support\Facades\Session;
 class ClientController extends Controller
 {
     //
-    public function index(){
+    public function index(Request $request){
         $categories = Category::all();
         $slides = Slider::where('status','1')->orderBy('id','DESC')->limit(3)->get();
         $products = Product::where('status','1')->orderBy('id','DESC')->limit(6)->get();
         $HotDeals = Product::where('hot_deals','1')->whereNotNull('discount_price')->orderBy('id','DESC')->limit(3)->get();
         $SpecialOffers = Product::where('special_offer','1')->whereNotNull('discount_price')->orderBy('id','DESC')->limit(3)->get();
-      
+       
+        $admin = false;
+        if(Auth::check()){
+            if($request->user()->roles()->first()->name == 'admin'){
+                $admin = true;
+            };
+        }
+
         $Featureds = Product::inRandomOrder()
                     ->limit(6)
                     ->get();
@@ -31,12 +38,13 @@ class ClientController extends Controller
         $Electroniques =  Product::inRandomOrder()->where('category_id',8)
         ->limit(6)
         ->get();
-        return view('client.index',compact('categories','slides','products','HotDeals','SpecialOffers','Featureds','Electroniques','SpecialDeals'));
+        return view('client.index',compact('categories','slides','products','HotDeals','SpecialOffers','Featureds','Electroniques','SpecialDeals','admin'));
     }
 
     public function account(){
         $user = Auth::user();
-        return view('client.profile.account',compact('user'));
+        $categories = Category::all();
+        return view('client.profile.account',compact('user','categories'));
     }
     
     public function updateProfile(Request $request){

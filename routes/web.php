@@ -8,10 +8,14 @@ use App\Http\Controllers\ClientController;
 use App\Http\Controllers\SliderController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\ShippingController;
 use App\Http\Controllers\SubCategoryController;
+use App\Http\Controllers\frontend\CartController;
 use App\Http\Controllers\SubSubCategoryController;
 use App\Http\Controllers\frontend\DetailController;
+use App\Http\Controllers\frontend\CheckoutController;
 use App\Http\Controllers\frontend\LangClientController;
+use App\Http\Controllers\frontend\ShoppingCartController;
 use App\Http\Controllers\frontend\CategoryClientController;
 
 /*
@@ -144,23 +148,35 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
         
     Route::get('/statusSlider/{id}', [SliderController::class,'statusUpdate'] )->name('admin.statusSlider');
     });
+
+
+    // ------------------------------------------Shipping-----------------------------------
+
+    Route::get('/allOrder',[ShippingController::class,'allOrder'])->name('admin.allOrder');
+
+    Route::post('/addCountry',[ShippingController::class,'addCountry'])->name('admin.addCount');
+
+    Route::post('/addCity',[ShippingController::class,'addCity'])->name('admin.addCity');
+
 });
 
 Route::post('/ajax', [SubSubCategoryController::class,'testAjax'] );
 
-Route::middleware(['auth', 'role:client'])->group(function () {
 
-    Route::prefix('client')->group(function () {
-        Route::get('/account', [ClientController::class,'account'] )->name('client.profile');
 
-        Route::post('/profileUpdate', [ClientController::class,'updateProfile'])->name('client.updateProfile');
+// Route::middleware(['auth'])->group(function () {
+
+//     Route::prefix('client')->group(function () {
+//         Route::get('/account', [ClientController::class,'account'] )->name('client.profile');
+
+//         Route::post('/profileUpdate', [ClientController::class,'updateProfile'])->name('client.updateProfile');
         
-        Route::post('/editPassword', [ClientController::class,'editPassword'])->name('client.editPassword');
-    });
+//         Route::post('/editPassword', [ClientController::class,'editPassword'])->name('client.editPassword');
+//     });
 
     
 
-});
+// });
 
 
 
@@ -179,7 +195,50 @@ Route::prefix('client')->group(function () {
 
     Route::get('/category/{id}', [CategoryClientController::class,'filterCategory']);
 
+    Route::get('/product/view/modal/{id}', [CategoryClientController::class,'modelCategory']);
+
+    Route::post('/cart/data/store/{id}', [CartController::class,'addCart']);
+
+    Route::get('/product/mini/cart', [CartController::class,'getMiniCart']);
+    
+    Route::get('/product/remove/mini/cart/{rowId}', [CartController::class,'removeMiniCart']);
+
+    Route::get('/display/shopping-cart', [ShoppingCartController::class,'indexShopping']);
+    
+    Route::get('/removeCart/{rowId}', [ShoppingCartController::class,'removeIteam']);
+    
+    Route::get('/getCart', [ShoppingCartController::class,'getCart']);
+    
+    Route::get('/updateQuantiter/{rowId}/{qty}', [ShoppingCartController::class,'updateQuantiter']);
+    
+    Route::get('/getTotal', [ShoppingCartController::class,'totalCart']);
+    
+
+
+
+
+    Route::middleware(['auth'])->group(function (){
+
+        //------------------------ profile-------------------------------
+
+        Route::get('/account', [ClientController::class,'account'] )->name('client.profile');
+
+        Route::post('/profileUpdate', [ClientController::class,'updateProfile'])->name('client.updateProfile');
+        
+        Route::post('/editPassword', [ClientController::class,'editPassword'])->name('client.editPassword');
+
+        //------------------------ end profile---------------------------
+
+
+        Route::get('/checkout',[CheckoutController::class,'indexCheckout']);
+
+        Route::get('/checkout/getAllIteams',[CheckoutController::class,'getAllIteams']);
+
+        // ------------------------ Shipping ---------------------------------        
+
+        Route::post('/shipping',[CheckoutController::class,'dataShipping'])->name('client.shipping');
+
+        Route::get('/getCities/{id}',[CheckoutController::class,'getCounties']);
+    });
 });
-
-
 

@@ -8,8 +8,8 @@
             <ul class="list-unstyled">
               <li><a href="{{route('client.profile')}}"><i class="icon fa fa-user"></i>My Account</a></li>
               <li><a href="#"><i class="icon fa fa-heart"></i>Wishlist</a></li>
-              <li><a href="#"><i class="icon fa fa-shopping-cart"></i>My Cart</a></li>
-              <li><a href="#"><i class="icon fa fa-check"></i>Checkout</a></li>
+              <li><a href="{{url('client/display/shopping-cart')}}"><i class="icon fa fa-shopping-cart"></i>My Cart</a></li>
+              <li><a href="{{url('client/checkout')}}"><i class="icon fa fa-check"></i>Checkout</a></li>
             
               @if(Auth::check())
               <li><form method="POST" action="{{route('logout')}}">
@@ -18,6 +18,9 @@
               </form></li>
               @else
               <li><a href="{{route('login')}}"><i class="icon fa fa-lock"></i>Login/Register</a></li>
+              @endif
+              @if($admin == true)
+                <li><a href="{{url('admin/dashboard')}}">Dashboard</a> </li>
               @endif
             </ul>
           </div>
@@ -106,31 +109,24 @@
             <div class="dropdown dropdown-cart"> <a href="#" class="dropdown-toggle lnk-cart" data-toggle="dropdown">
               <div class="items-cart-inner">
                 <div class="basket"> <i class="glyphicon glyphicon-shopping-cart"></i> </div>
-                <div class="basket-item-count"><span class="count">2</span></div>
-                <div class="total-price-basket"> <span class="lbl">cart -</span> <span class="total-price"> <span class="sign">$</span><span class="value">600.00</span> </span> </div>
+                <div class="basket-item-count"><span class="count" id="countMiniCart"></span></div>
+                <div class="total-price-basket"> <span class="lbl">cart -</span> <span class="total-price"> <span class="sign">$</span><span class="value" id="totalMiniCart1"></span> </span> </div>
               </div>
               </a>
               <ul class="dropdown-menu">
                 <li>
-                  <div class="cart-item product-summary">
-                    <div class="row">
-                      <div class="col-xs-4">
-                        <div class="image"> <a href="detail.html"><img src="assets/images/cart.jpg" alt=""></a> </div>
-                      </div>
-                      <div class="col-xs-7">
-                        <h3 class="name"><a href="index.php?page-detail">Simple Product</a></h3>
-                        <div class="price">$600.00</div>
-                      </div>
-                      <div class="col-xs-1 action"> <a href="#"><i class="fa fa-trash"></i></a> </div>
-                    </div>
-                  </div>
-                  <!-- /.cart-item -->
-                  <div class="clearfix"></div>
-                  <hr>
+                  <!-- ----ajax--- -->
+
+  <div id="miniCart">
+    
+  </div>
+
+
+                  <!-- end ajax -->
                   <div class="clearfix cart-total">
-                    <div class="pull-right"> <span class="text">Sub Total :</span><span class='price'>$600.00</span> </div>
+                    <div class="pull-right"> <span class="text">Sub Total :</span><span class='price' id="totalMiniCart2">$</span> </div>
                     <div class="clearfix"></div>
-                    <a href="checkout.html" class="btn btn-upper btn-primary btn-block m-t-20">Checkout</a> </div>
+                    <a href="{{url('client/checkout')}}" class="btn btn-upper btn-primary btn-block m-t-20">Checkout</a> </div>
                   <!-- /.cart-total--> 
                   
                 </li>
@@ -172,7 +168,7 @@
                     @else
                     {{$category->category_name_en}}
                     @endif
-                    <span class="menu-label new-menu hidden-xs">new</span></a>
+                    </a>
                     <ul class="dropdown-menu container">
                       <li>
                         <div class="yamm-content ">
