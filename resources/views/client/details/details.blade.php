@@ -344,21 +344,46 @@
 											@endif
 										</p>
 									</div>	
-								</div><!-- /.tab-pane -->
+								</div>
+								<!-- /.tab-pane -->
+								@if(Auth::check())
 
 								<div id="review" class="tab-pane">
 									<div class="product-tab">
-																				
+									<form action="{{route('client.review')}}" method="post">
+	@csrf			
 										<div class="product-reviews">
 											<h4 class="title">Customer Reviews</h4>
-
+					@foreach($reviews as $review)
 											<div class="reviews">
 												<div class="review">
-													<div class="review-title"><span class="summary">We love this product</span><span class="date"><i class="fa fa-calendar"></i><span>1 days ago</span></span></div>
-													<div class="text">"Lorem ipsum dolor sit amet, consectetur adipiscing elit.Aliquam suscipit."</div>
-																										</div>
-											
-											</div><!-- /.reviews -->
+									
+												<div class="card mb-3" style="max-width: 540px;">
+	<div class="row g-0">
+				<div class="col-md-4">
+					@php
+						$id_user = $review->user_id;
+						$user = App\Models\User::where('id',$id_user)->first();
+						$profile_picture = $user->profile_photo_path;
+						$username=$user->name;
+					@endphp
+					<img src="{{asset('upload/clientPhoto/'.$profile_picture)}}" class="img-fluid rounded-start" alt="...">
+				</div>
+				<div class="col-md-8">
+					<div class="card-body">
+						<h4 class="card-title"><strong>{{$username}}</strong></h4>
+						<h5 class="card-title">{{$review->summary}}</h5>
+						<p class="card-text">{{$review->comment}}</p>
+						<p class="card-text"><small class="text-muted">Last updated {{$review->created_at}} ago</small></p>
+					</div>
+					</div>
+				</div>
+	</div>
+
+												</div>
+											</div>
+					@endforeach
+											<!-- /.reviews -->
 										</div><!-- /.product-reviews -->
 										
 
@@ -414,21 +439,19 @@
 														
 														<div class="row">
 															<div class="col-sm-6">
-																<div class="form-group">
-																	<label for="exampleInputName">Your Name <span class="astk">*</span></label>
-																	<input type="text" class="form-control txt" id="exampleInputName" placeholder="">
-																</div><!-- /.form-group -->
+																<!-- /.form-group -->
 																<div class="form-group">
 																	<label for="exampleInputSummary">Summary <span class="astk">*</span></label>
-																	<input type="text" class="form-control txt" id="exampleInputSummary" placeholder="">
+																	<input type="text" class="form-control txt" name="summary" id="exampleInputSummary" placeholder="">
 																</div><!-- /.form-group -->
 															</div>
 
 															<div class="col-md-6">
 																<div class="form-group">
 																	<label for="exampleInputReview">Review <span class="astk">*</span></label>
-																	<textarea class="form-control txt txt-review" id="exampleInputReview" rows="4" placeholder=""></textarea>
+																	<textarea class="form-control txt txt-review" name="comment" id="exampleInputReview" rows="4" placeholder=""></textarea>
 																</div><!-- /.form-group -->
+																<input type="hidden" name="product_id" value="{{$product->id}}">
 															</div>
 														</div><!-- /.row -->
 														
@@ -441,9 +464,13 @@
 											</div><!-- /.review-form -->
 
 										</div><!-- /.product-add-review -->										
-										
+										</form>
+@else
+<a href="/login">Login</a>
+@endif	
 							        </div><!-- /.product-tab -->
 								</div><!-- /.tab-pane -->
+
 
 								<div id="tags" class="tab-pane">
 									<div class="product-tag">

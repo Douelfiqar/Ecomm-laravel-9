@@ -83,7 +83,7 @@
                             <div class="form-group">
                                 <h5>SubCategory Select <span class="text-danger">*</span></h5>
                                 <div class="controls">
-                                  <select name="subcategory_id" id="optionSubCateg" class="form-control">
+                                  <select name="subcategory_id" id="optionSubCateg" class="form-control" required>
                                       <option disabled selected>Select a Sub Categ</option>
                                    </select>
                                 </div>
@@ -100,7 +100,7 @@
                             <div class="form-group">
                                 <h5>Sub SubCategory Select <span class="text-danger">*</span></h5>
                                 <div class="controls">
-                                  <select name="subsubcategory_id" id="optionSubSubCateg" class="form-control">
+                                  <select name="subsubcategory_id" id="optionSubSubCateg" class="form-control" required>
                                     <option disabled selected>Select a Sub Categ</option>
                                    </select>
                                 </div>
@@ -112,7 +112,7 @@
                             <div class="form-group">
                                 <h5>Product Name En <span class="text-danger">*</span></h5>
                                 <div class="controls">
-                                    <input type="text" name="product_name_en" class="form-control">
+                                    <input type="text" name="product_name_en" class="form-control" required>
                                 </div>
                             </div>
                             
@@ -122,7 +122,7 @@
                             <div class="form-group">
                                 <h5>Product Name Fr <span class="text-danger">*</span></h5>
                                 <div class="controls">
-                                    <input type="text" name="product_name_fr" class="form-control">
+                                    <input type="text" name="product_name_fr" class="form-control" required>
                                 </div>
                             </div>
                         </div>
@@ -138,7 +138,7 @@
                                 <div class="form-group">
                                     <h5>product_code <span class="text-danger">*</span></h5>
                                     <div class="controls">
-                                        <input type="text" name="product_code" class="form-control">
+                                        <input type="text" name="product_code" class="form-control" required>
                                     </div>
                                 </div>
                             </div>
@@ -148,7 +148,7 @@
                             <div class="form-group">
                                 <h5>product_qty<span class="text-danger">*</span></h5>
                                 <div class="controls">
-                                    <input type="number" name="product_qty" class="form-control">
+                                    <input type="number" name="product_qty" class="form-control" required>
                                 </div>
                             </div>
                             
@@ -224,7 +224,7 @@
                             <div class="form-group">
                                 <h5>selling_price <span class="text-danger">*</span></h5>
                                 <div class="controls">
-                                    <input type="number" name="selling_price" name="selling_price" class="form-control">
+                                    <input type="number" name="selling_price" name="selling_price" class="form-control" required>
                                 </div>
                             </div>
                         </div>
@@ -239,7 +239,7 @@
                             <div class="form-group">
                                 <h5>discount_price <span class="text-danger">*</span></h5>
                                 <div class="controls">
-                                    <input type="number" name="discount_price" class="form-control">
+                                    <input type="number" name="discount_price" class="form-control" >
                                 </div>
                             </div>
                         </div>
@@ -248,7 +248,7 @@
                             <div class="form-group">
                                 <h5 class="col-form-label">Main Thambnail <span class="text-danger">*</span></label>
                                 <div>
-                                    <input type="file" class="form-control" name="product_thambnail">
+                                    <input type="file" class="form-control" name="product_thambnail" required>
                                 </div>
                             </div>
                         </div>
@@ -257,7 +257,7 @@
                             <div class="form-group">
                                 <h5 class="col-form-label">Multi Image <span class="text-danger">*</span></label>
                                 <div>
-                                    <input type="file" class="form-control" name="multi_img[]" multiple>
+                                    <input type="file" class="form-control" name="multi_img[]" multiple required>
                                 </div>
                             </div>
                         </div>
@@ -272,7 +272,7 @@
                             <div class="form-group">
                                 <h5>Short Description En <span class="text-danger">*</span></h5>
                                 <div class="controls">
-                                    <input type="textarea" name="short_desc_en" class="form-control">
+                                    <input type="textarea" name="short_desc_en" class="form-control" required>
                                 </div>
                             </div>
                         </div>
@@ -281,7 +281,7 @@
                             <div class="form-group">
                                 <h5 class="col-form-label">Short Description Fr <span class="text-danger">*</span></label>
                                 <div>
-                                    <input type="textarea" class="form-control" name="short_desc_fr">
+                                    <input type="textarea" class="form-control" name="short_desc_fr" required>
                                 </div>
                             </div>
                         </div>
@@ -296,7 +296,7 @@
                             <div class="form-group">
                                 <h5>Long Description En <span class="text-danger">*</span></h5>
                                 <div class="controls">
-                                    <input type="textarea" name="long_desc_en" class="form-control">
+                                    <input type="textarea" name="long_desc_en" class="form-control" required>
                                 </div>
                             </div>
                         </div>
@@ -305,7 +305,7 @@
                             <div class="form-group">
                                 <h5 class="col-form-label">Long Description Fr <span class="text-danger">*</span></label>
                                 <div>
-                                    <input type="textarea" class="form-control" name="long_desc_fr">
+                                    <input type="textarea" class="form-control" name="long_desc_fr" required>
                                 </div>
                             </div>
                         </div>

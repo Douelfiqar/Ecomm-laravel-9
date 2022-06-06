@@ -8,7 +8,7 @@
 <meta name="author" content="">
 <meta name="keywords" content="MediaCenter, Template, eCommerce">
 <meta name="robots" content="all">
-<meta name="csrf" content="{{csrf_token()}}">
+<meta name="csrf-token" content="{{ csrf_token() }}">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
 
 <title>@yield('title')</title>
@@ -144,7 +144,7 @@
 <script type="text/javascript">
   $.ajaxSetup({
     headers: {
-      'X-CSRF-TOKEN': $('meta[name="csrf"]').attr('content')
+      'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
     }
   })
 
@@ -414,6 +414,7 @@ getTotal()
 
   getIteamsShippingPage()
 </script>
+
 
 
 

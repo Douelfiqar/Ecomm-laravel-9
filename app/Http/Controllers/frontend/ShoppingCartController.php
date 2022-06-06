@@ -6,18 +6,28 @@ use App\Models\User;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use Gloudemans\Shoppingcart\Facades\Cart;
 
 class ShoppingCartController extends Controller
 {
     //
 
-    public function indexShopping(){
+    public function indexShopping(Request $request){
 
         $users = User::all();
         $categories = Category::all();
         $carts = Cart::content();
-        return view('client.shoppingCart.shopping-cart',compact('users','categories','carts'));
+
+        $admin = false;
+        if(Auth::check()){
+            if($request->user()->roles()->first()->name == 'admin'){
+                $admin = true;
+            };
+        }
+
+
+        return view('client.shoppingCart.shopping-cart',compact('users','categories','carts','admin'));
     }
 
     public function getCart(){

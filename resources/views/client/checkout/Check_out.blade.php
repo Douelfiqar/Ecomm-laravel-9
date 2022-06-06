@@ -49,24 +49,24 @@
 
 				<!-- guest-login -->
 				<div class="col-md-6 col-sm-6 guest-login">
-                <form class="register-form" role="form" method='POST' action='{{route('client.shipping')}}'>
+                <form class="register-form" role="form" method='POST' action='{{route('client.orderInformation')}}'>
 					@csrf
 					    <div class="radio radio-checkout-unicase">
                             <table>
                                 <tr>
 
 					  <div class="form-group">
-					    <label class="info-title" for="exampleInputEmail1">First name: <span>*</span></label>
+					    <label class="info-title" for="exampleInputEmail1">First name:	 <span>*</span></label>
 					    <input type="name" class="form-control unicase-form-control text-input" name="first_name" id="exampleInputEmail1" placeholder="">
 					  </div>
 
 					  <div class="form-group">
-					    <label class="info-title" for="exampleInputPassword1">Last name: <span>*</span></label>
+					    <label class="info-title" for="exampleInputPassword1">Last name:<span>*</span></label>
 					    <input type="name" class="form-control unicase-form-control text-input" name="last_name" id="exampleInputPassword1" placeholder="">
 					  </div>
 
 					  <div class="form-group">
-					    <label class="info-title" for="exampleInputPassword1">Email: <span>*</span></label>
+					    <label class="info-title" for="exampleInputPassword1">Email:<span>*</span></label>
 					    <input type="sdvsvsdvs@gmail.com" class="form-control unicase-form-control text-input" id="" name="email" placeholder="">
 					  </div>
 
@@ -117,9 +117,151 @@
 					    <label class="info-title" for="exampleInputPassword1">Phone number: <span>*</span></label>
 					    <input type="number" class="form-control unicase-form-control text-input" name="phone_number" id="exampleInputPassword1" placeholder="">
 					  </div>
-					  <button type="submit" class='btn btn-primary'>Checkout</button>
 
-				</div	>
+					  <div class="row">
+						<div class="col-sm-6">
+							<label for="">Card</label>
+							<input type="radio" name="Payement" value="Card" id="Card" onclick="display()" checked>
+						</div>
+
+						<div class="col-sm-6">
+							<label for="">Cash on Delivery</label>			
+							<input type="radio" name="Payement" value="Cash" onclick="hide()">
+			
+ 						</div>
+					  </div>
+					  <br>
+<div id="cardData" >
+					  <div class="row">
+						  <div class="col-sm-12">
+								<label for="">Card number</label>
+								<input 	class="form-control unicase-form-control text-input" type="tel" inputmode="numeric" pattern="[0-9\s]{13,19}" autocomplete="cc-number" maxlength="19" placeholder="xxxx xxxx xxxx xxxx">
+						  </div>
+						 
+					  </div>
+						<div class="row">
+								<div class="col-sm-12">
+								<label for="Expirate date">Expirate date</label>
+								</div>
+						</div>
+
+					<div class="row" style="margin-left: -25px;">
+						  
+						 
+							<style>
+								.exp-wrapper {
+									position: relative;
+									border: 1px solid #aaa;
+									display: flex;
+									width: 300px;
+									justify-content: space-around;
+									height: 36px;
+									line-height: 36px;
+									font-size: 24px;
+									}
+
+								.exp-wrapper:after {
+								content: '/';
+								position: absolute;
+								left: 50%;
+								margin-left: -4px;
+								color: #aaa;
+								}
+
+								input.exp {
+								float: left;
+								font-family: monospace;
+								border: 0;
+								width: 18px;
+								outline: none;
+								appearance: none;
+								font-size: 14px;
+								}
+							</style>
+							
+
+							<div class="exp-wrapper col-sm-12" style="margin-left: 28px;">
+							<input autocomplete="off" class="exp" id="month" maxlength="2" pattern="[0-9]*" inputmode="numerical" placeholder="MM" type="text" data-pattern-validate />
+							<input autocomplete="off" class="exp" id="year" maxlength="2" pattern="[0-9]*" inputmode="numerical" placeholder="YY" type="text" data-pattern-validate />
+							</div>
+							<br>
+							<script>
+										const monthInput = document.querySelector('#month');
+									const yearInput = document.querySelector('#year');
+
+									const focusSibling = function(target, direction, callback) {
+									const nextTarget = target[direction];
+									nextTarget && nextTarget.focus();
+									// if callback is supplied we return the sibling target which has focus
+									callback && callback(nextTarget);
+									}
+
+									// input event only fires if there is space in the input for entry. 
+									// If an input of x length has x characters, keyboard press will not fire this input event.
+									monthInput.addEventListener('input', (event) => {
+
+									const value = event.target.value.toString();
+									// adds 0 to month user input like 9 -> 09
+									if (value.length === 1 && value > 1) {
+										event.target.value = "0" + value;
+									}
+									// bounds
+									if (value === "00") {
+										event.target.value = "01";
+									} else if (value > 12) {
+										event.target.value = "12";
+									}
+									// if we have a filled input we jump to the year input
+									2 <= event.target.value.length && focusSibling(event.target, "nextElementSibling");
+									event.stopImmediatePropagation();
+									});
+
+									yearInput.addEventListener('keydown', (event) => {
+									// if the year is empty jump to the month input
+									if (event.key === "Backspace" && event.target.selectionStart === 0) {
+										focusSibling(event.target, "previousElementSibling");
+										event.stopImmediatePropagation();
+									}
+									});
+
+									const inputMatchesPattern = function(e) {
+									const { 
+										value, 
+										selectionStart, 
+										selectionEnd, 
+										pattern 
+									} = e.target;
+									
+									const character = String.fromCharCode(e.which);
+									const proposedEntry = value.slice(0, selectionStart) + character + value.slice(selectionEnd);
+									const match = proposedEntry.match(pattern);
+									
+									return e.metaKey || // cmd/ctrl
+										e.which <= 0 || // arrow keys
+										e.which == 8 || // delete key
+										match && match["0"] === match.input; // pattern regex isMatch - workaround for passing [0-9]* into RegExp
+									};
+
+									document.querySelectorAll('input[data-pattern-validate]').forEach(el => el.addEventListener('keypress', e => {
+									if (!inputMatchesPattern(e)) {
+										return e.preventDefault();
+									}
+									}));
+							</script>
+								
+ 
+					</div>
+
+					  <div class="row" style="margin-left: -15px;">
+						  <div class="col-sm-12">
+								<label for="">Card number</label>
+								<input 	class="form-control unicase-form-control text-input" type="tel" inputmode="numeric" autocomplete="cc-number" maxlength="3" placeholder="123">
+						  </div>
+					  </div>
+
+						  </div>	
+					  <button type="submit" class='btn btn-primary'>Checkout</button>
+				</div>
 				<!-- already-registered-login -->
 
 			</div>
@@ -266,13 +408,26 @@ document.getElementById("contry").addEventListener('change',function(){
 				$.each(data.cities,function(key,value){
 						$('#cityId').append($('<option>').text(value.name).attr('value',value.id));
 				})
-				// console.log(myCities)
-
-				//  $('#contry').html(myCities);
       }
     });
 
 });
 </script>
+
+
+<script>
+	var card = document.getElementById('Card');
+
+	// card.addEventListener('click',function(){
+	// 	document.getElementById('cardData').style.display = 'none';	
+	// })
+	function hide(){
+		document.getElementById('cardData').style.display = 'none';
+	}
+	function display(){
+		document.getElementById('cardData').style.display = 'block';
+	}
+</script>
+
 @endsection
 

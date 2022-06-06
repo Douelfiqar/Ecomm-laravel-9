@@ -41,10 +41,17 @@ class ClientController extends Controller
         return view('client.index',compact('categories','slides','products','HotDeals','SpecialOffers','Featureds','Electroniques','SpecialDeals','admin'));
     }
 
-    public function account(){
+    public function account(Request $request){
+        
         $user = Auth::user();
         $categories = Category::all();
-        return view('client.profile.account',compact('user','categories'));
+        $admin = false;
+        if(Auth::check()){
+            if($request->user()->roles()->first()->name == 'admin'){
+                $admin = true;
+            };
+        }
+        return view('client.profile.account',compact('user','categories','admin'));
     }
     
     public function updateProfile(Request $request){
@@ -52,7 +59,13 @@ class ClientController extends Controller
 
         $user->name = $request->name;
         $user->email = $request->email;
-         
+
+        $admin = false;
+        if(Auth::check()){
+            if($request->user()->roles()->first()->name == 'admin'){
+                $admin = true;
+            };
+        }
         if($request->file('profilePicture')){
 
             $file = $request->file('profilePicture');
@@ -63,7 +76,7 @@ class ClientController extends Controller
         }
 
         $user->save();
-        return redirect()->route('client.profile')->with('success','Profile updated');
+        return redirect()->route('client.profile')->with('success','Profile updated','admin');
     }
     
     public function editPassword(Request $request){

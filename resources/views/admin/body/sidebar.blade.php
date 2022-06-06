@@ -22,17 +22,20 @@
   <!-- sidebar menu-->
   <ul class="sidebar-menu" data-widget="tree">  
       
-    <li class="{{$route == 'dashboard'? 'active':''}}">
+    <li class="{{$route == 'dashboard' ? 'active':''}}">
       <a href="{{route('dashboard')}}">
       <i class="ti-pie-chart"></i>
               <span>Dashboard</span>
       </a>
     </li>  
     
-    <li class="{{$route == 'home'? 'active':''}}">
+    <li class="{{$route == 'home' ? 'active':''}}">
       <a href="{{route('home')}}">
-      <i class="ti-layers-alt"></i>
+      <i class="ti-home"></i>
                               <span>Home</span>
+                              <span class="pull-right-container">
+          <i class="fa fa-angle-right pull-right"></i>
+        </span>
       </a>
     </li>  
 
@@ -64,7 +67,7 @@
       </ul>
     </li>
     
-    <li class="treeview {{$route == 'admin.allProduct' ? 'active':''}}">
+    <li class="treeview C">
       <a href="#">
         <i data-feather="file"></i>
         <span>Products</span>
@@ -98,10 +101,42 @@
       <i class="ti-write"></i>
         <span>Shipping</span>
         <span class="pull-right-container">
+          <i class="fa fa-angle-right pull-right"></i>
         </span>
+       
       </a>
       <ul class="treeview-menu">
         <li><a href="{{route('admin.allOrder')}}"><i class="ti-more"></i>All Order</a></li>
+      </ul>
+    </li>
+
+   
+
+    <li class="treeview {{$route == 'admin.manageUser' ? 'active':''}}">
+      <a href="#">
+      <i class="ti-user"></i>
+        <span>Users</span>
+        <span class="pull-right-container">
+          <i class="fa fa-angle-right pull-right"></i>
+        </span>
+       
+      </a>
+      <ul class="treeview-menu">
+        <li><a href="{{route('admin.manageUser')}}"><i class="ti-more"></i>Manage Users</a></li>
+      </ul>
+    </li>
+
+    <li class="treeview {{$route == 'admin.manageReview' ? 'active':''}}">
+      <a href="#">
+      <i class="ti-filter"></i>
+        <span>Reviews</span>
+        <span class="pull-right-container">
+          <i class="fa fa-angle-right pull-right"></i>
+        </span>
+       
+      </a>
+      <ul class="treeview-menu">
+        <li><a href="{{route('admin.manageReview')}}"><i class="ti-more"></i>Manage Reviews</a></li>
       </ul>
     </li>
   </ul>

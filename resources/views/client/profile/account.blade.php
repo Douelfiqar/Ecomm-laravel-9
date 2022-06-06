@@ -76,7 +76,7 @@
                  
                                 
                      
-                                 <div class="d-flex justify-content-center col-md-11    " style="height: 35px">  
+                                 <div class="d-flex justify-content-center col-md-11" style="height: 35px">  
                                  <span class="input-group-text" id="basic-addon1">Profile picture *</span>      
                                  <input type="file" class="form-control" id="image" value="{{(empty($user->profile_photo_path)?url('upload/adminPhoto/no_image.jpg'):url('upload/adminPhoto/'.$user->profile_photo_path))}}" name="profilePicture">
                                  </div>
@@ -92,7 +92,7 @@
                         <div class="row" style="margin-top:45px">
 
                          <div class="col-md-4"></div>
-                         <button type="submit" class="btn btn-success col-md-3" style="">Update</button>
+                         <button type="submit" class="btn btn-success col-md-3" >Update</button>
                      </div>  
                  </div>  
                     </form>
@@ -160,14 +160,86 @@
             
                        </form>
             
+
+
+                       
                     </div>
             
+
+
+                    
             </section>
             </div>
         </div>
     </div>
 </div>
+<div id="brands-carousel" class="logo-slider wow fadeInUp">
 
+		<div class="logo-slider-inner">	
+			<div id="brand-slider" class="owl-carousel brand-slider custom-carousel owl-theme">
+				<div class="item m-t-15">
+					<a href="#" class="image">
+						<img data-echo="{{asset('client/assets/images/brands/brand1.png')}}" src="{{asset('client/assets/images/blank.gif')}}" alt="">
+					</a>	
+				</div><!--/.item-->
+
+				<div class="item m-t-10">
+					<a href="#" class="image">
+						<img data-echo="{{asset('client/assets/images/brands/brand2.png')}}" src="{{asset('client/assets/images/blank.gif')}}" alt="">
+					</a>	
+				</div><!--/.item-->
+
+				<div class="item">
+					<a href="#" class="image">
+						<img data-echo="{{asset('client/assets/images/brands/brand3.png')}}" src="{{asset('clientassets/images/blank.gif')}}" alt="">
+					</a>	
+				</div><!--/.item-->
+
+				<div class="item">
+					<a href="#" class="image">
+						<img data-echo="{{asset('client/assets/images/brands/brand4.png')}}" src="{{('client/assets/images/blank.gif')}}" alt="">
+					</a>	
+				</div><!--/.item-->
+
+				<div class="item">
+					<a href="#" class="image">
+						<img data-echo="{{asset('client/assets/images/brands/brand5.png')}}" src="{{asset('client/assets/images/blank.gif')}}" alt="">
+					</a>	
+				</div><!--/.item-->
+
+				<div class="item">
+					<a href="#" class="image">
+						<img data-echo="{{asset('client/assets/images/brands/brand6.png')}}" src="{{asset('client/assets/images/blank.gif')}}" alt="">
+					</a>	
+				</div><!--/.item-->
+
+				<div class="item">
+					<a href="#" class="image">
+						<img data-echo="{{asset('client/assets/images/brands/brand2.png')}}" src="{{asset('client/assets/images/blank.gif')}}" alt="">
+					</a>	
+				</div><!--/.item-->
+
+				<div class="item">
+					<a href="#" class="image">
+						<img data-echo="{{asset('assets/images/brands/brand4.png')}}" src="{{asset('frontend/assets/images/blank.gif')}}" alt="">
+					</a>	
+				</div><!--/.item-->
+
+				<div class="item">
+					<a href="#" class="image">
+						<img data-echo="{{asset('client/assets/images/brands/brand1.png')}}" src="{{asset('client/assets/images/blank.gif')}}" alt="">
+					</a>	
+				</div><!--/.item-->
+
+				<div class="item">
+					<a href="#" class="image">
+						<img data-echo="{{asset('client/assets/images/brands/brand5.png')}}" src="{{asset('client/assets/images/blank.gif')}}" alt="">
+					</a>	
+				</div><!--/.item-->
+		    </div><!-- /.owl-carousel #logo-slider -->
+		</div><!-- /.logo-slider-inner -->
+	
+</div>
 
 <script>
     $(document).ready(function(){

@@ -30,33 +30,12 @@
                             <tr role="row"><th class="sorting" tabindex="0" aria-controls="complex_header" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 105px;">Product Image</th><th class="sorting" tabindex="0" aria-controls="complex_header" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 105px;">Product En</th><th class="sorting" tabindex="0" aria-controls="complex_header" rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending" style="width: 58px;">Product Fr</th><th class="sorting" tabindex="0" aria-controls="complex_header" rowspan="1" colspan="1" aria-label="Office: activate to sort column ascending" style="width: 40px;">Product Qty</th><th class="sorting" tabindex="0" aria-controls="complex_header" rowspan="1" colspan="1" aria-label="Office: activate to sort column ascending" style="width: 40px;">Status</th><th class="sorting" tabindex="0" aria-controls="complex_header" rowspan="1" colspan="1" aria-label="Extn.: activate to sort column ascending" style="width: 62px;">Action</th></tr>
                         </thead>
                       
-                        <tbody>
-                        @foreach ($products as $product)
-                        <tr>
-                            <td><img src="{{asset('upload/ProductPhoto/'.$product->product_thambnail)}}" alt="{{$product->product_name_en}}" width="100px" height="100px" style="object-fit: contain"></td>
-                            <td>{{$product->product_name_en}}</td>
-                            <td>{{$product->product_name_fr}}</td>
-                            <td>{{$product->product_qty}}</td>
-                            <td> @if ($product->status == '1')
-                                <a href="{{url('/admin/statusProduct/'.$product->id)}}" class="btn btn-success">Active</a>
-                            @else
-                            <a href="{{url('/admin/statusProduct/'.$product->id)}}"  class="btn btn-danger">Inactive</a>
-                            @endif</td>
-                            <td>
-                                <div class="d-flex d-flex justify-content-center align-items-center">
-
-                                    <a href="{{url('/admin/updateProduct/'.$product->id)}}" class="btn btn-success"><img src="https://img.icons8.com/fluency/48/000000/approve-and-update.png" width="55px"/></a>
-
-                                    <a id="deleteee" href="{{url('/admin/deleteProduct/'.$product->id)}}" class="btn btn-danger"><img src="https://img.icons8.com/plasticine/100/000000/filled-trash.png" width="55px"/></a>
-                                </div>
-                            </td>
-                        </tr>
-                        @endforeach
+                        <tbody id="products">
+                      
                         </tbody>      
 
                         
                     </table>
-                    {{$products->links();}}
 
                 </div>
             </div>
@@ -80,5 +59,110 @@
 
 </div>
 
+<script>
+
+
+function getProds(){
+    $.ajax({
+    type:'get',
+    url:'/admin/getProduct',
+    dataType:'json',
+    success:function(data){
+        var myTr = ""
+
+        $.each(data.data.data, function(key,value){
+        myTr += `        <tr>
+                            <td><img src="{{asset('upload/productPhoto/${value.product_thambnail}')}}" alt="" width="100px" height="100px" style="object-fit: contain"></td>
+                            <td>${value.product_name_en}</td>
+                            <td>${value.product_name_fr}</td>
+                            <td>${value.product_qty}</td>
+                            <td> `
+                            if(value.status == 0)
+                            myTr += `<button onclick='updateStatus(${value.id})' class="btn btn-danger">Invalid</button>`
+                                else{
+                            myTr +=     ` <button onclick='updateStatus(${value.id})' class="btn btn-success">Valid</button>`
+                                }
+                                myTr += ` </td>
+                            <td>
+                            
+                                <div class="d-flex d-flex justify-content-center align-items-center">
+                            
+                                    <a href='#' class="btn btn-success"><img src="https://img.icons8.com/fluency/48/000000/approve-and-update.png" width="55px"/></a>
+                            
+                                    <button onclick='deleteProduct(${value.id})' id="del" class="btn btn-danger"><img src="https://img.icons8.com/plasticine/100/000000/filled-trash.png" width="55px"/></button>
+                                </div>
+                            </td>
+                        </tr> `
+        })
+
+        $('#products').html(myTr)
+
+    }
+
+})
+}
+
+getProds()
+
+function updateStatus(id){
+    $.ajax({
+        type:'get',
+        url:'/admin/statusProduct/'+id,
+        dataType:'json',
+        success:function(data){
+            
+            getProds()
+
+            Swal.fire({
+  position: 'top-end',
+  icon: 'success',
+  title: 'Status updated',
+  showConfirmButton: false,
+  timer: 1500
+})
+        }
+    })
+}
+
+function deleteProduct(id){
+   
+    Swal.fire({
+  title: 'Are you sure?',
+  text: "You won't be able to revert this!",
+  icon: 'warning',
+  showCancelButton: true,
+  confirmButtonColor: '#3085d6',
+  cancelButtonColor: '#d33',
+  confirmButtonText: 'Yes, delete it!'
+}).then((result) => {
+  if (result.isConfirmed) {
+
+    $.ajax({
+        type:'get',
+        url:'/admin/deleteProduct/'+id,
+        dataType:'json',
+        success:function(data){
+            
+            getProds()
+
+            Swal.fire({
+  position: 'top-end',
+  icon: 'success',
+  title: 'Producted deleted',
+  showConfirmButton: false,
+  timer: 1500
+})
+        }
+    })
+  }
+
+
+})
+
+}
+
+
+
+</script>
 
 @endsection

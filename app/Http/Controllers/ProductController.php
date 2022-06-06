@@ -41,7 +41,6 @@ class productController extends Controller
             'product_color_en' => 'required',
             'product_color_fr' => 'required',
             'selling_price' => 'required',
-            'discount_price' => 'required',
             'product_thambnail' => 'required',
             'multi_img' => 'required',
             'short_desc_en' => 'required',
@@ -160,18 +159,27 @@ return redirect()->back();
         $Categories = Category::latest()->get();
         $SubCategories = SubCategory::latest()->get();
         $SubSubCategories = SubSubCategory::latest()->get(); 
-        $products = Product::paginate(5);
+        $products = Product::latest()->get();
+
+        
         return view('admin.Product.manageProduct',compact('user','Categories','Brands','SubCategories','SubSubCategories','products'));
     }
 
 
+    public function getProduct(){
 
+       
+        $products = Product::paginate(5);
+
+        return response()->json(['data'=>$products]);
+    }
 
     public function deleteProduct($id){
 
         $product = Product::find($id);
         $product->delete();
-        return redirect()->back();
+        return response()->json(['data','deleted']);
+
     }
 
 
@@ -318,6 +326,6 @@ return redirect()->back();
                 'status' => $prodStatus
         ]);
 
-        return redirect()->back();
+        return response()->json(['status','status updated successfully']);
     }
 }

@@ -336,3 +336,28 @@ jQuery("[data-toggle='tooltip']").tooltip();
 
 
 })
+
+
+    const site_url = "http://127.0.0.1:8000/";
+
+    $("body").on("keyup", "#search", function(){
+
+        let text = $("#search").val();
+        // console.log(text);
+if(text.length >= 1 ){
+
+    $.ajax({
+        data: {search: text},
+        url : site_url + "search-product", 
+        method : 'get',
+        success:function(result){
+            $("#searchProducts").html(result);            }
+
+    }); // end ajax 
+
+}
+
+if(text.length == 0)
+$("#searchProducts").html("");
+
+    }); // end ajax 

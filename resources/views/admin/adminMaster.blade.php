@@ -65,7 +65,6 @@
         
         e.preventDefault();
 
-console.log("first")
         Swal.fire('Any fool can use a computer');
 
         var link = $(this).attr("href");
@@ -93,6 +92,8 @@ console.log("first")
       })
       
     })
+
+    
 
     
   </script>

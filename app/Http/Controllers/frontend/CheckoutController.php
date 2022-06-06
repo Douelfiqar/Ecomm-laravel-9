@@ -56,8 +56,8 @@ class CheckoutController extends Controller
     }
 
     public function getCounties($id){
+
             $cities = City::where('country_id',$id)->get();
         return response()->json(['cities'=>$cities]);
-
     }
 }

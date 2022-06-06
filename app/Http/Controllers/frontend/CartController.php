@@ -64,10 +64,8 @@ class CartController extends Controller
 
     public function removeMiniCart($rowId){
 
-
         Cart::remove($rowId);
 
         return response()->json(['success'=>'remove success']);
-
     }
 }

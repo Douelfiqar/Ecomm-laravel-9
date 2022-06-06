@@ -555,7 +555,7 @@
             <div class="products">
               <div class="product">
                 <div class="product-image">
-                  <div class="image"> <a href="{{url('/client/home/details/'.$Featured->id)}}"><img  src="{{asset('/upload/productPhoto/'.$Featured->product_thambnail)}}" alt=""></a> </div>
+                  <div class="image"> <a href="{{url('/client/home/details/'.$Featured->id)}}" ><img style='height:150px;object-fit:contain'  src="{{asset('/upload/productPhoto/'.$Featured->product_thambnail)}}" alt=""></a> </div>
                   <!-- /.image -->
                   
                   <div class="tag hot"><span>hot</span></div>
@@ -618,7 +618,7 @@
             <div class="row">
               <div class="col-md-12">
                 <div class="wide-banner cnt-strip">
-                  <div class="image"> <img class="img-responsive" src="assets/images/banners/home-banner.jpg" alt=""> </div>
+                  <div class="image"> <img class="img-responsive" style='height:150px;object-fit:contain' src="assets/images/banners/home-banner.jpg" alt=""> </div>
                   <div class="strip strip-text">
                     <div class="strip-inner">
                       <h2 class="text-right">New Mens Fashion<br>
@@ -656,7 +656,7 @@
             <div class="products">
               <div class="product">
                 <div class="product-image">
-                  <div class="image"> <a href="{{url('/client/home/details/'.$Electronique->id)}}"><img  src="{{asset('/upload/productPhoto/'.$Electronique->product_thambnail)}}" alt=""></a> </div>
+                  <div class="image"> <a href="{{url('/client/home/details/'.$Electronique->id)}}"><img style='height:150px;object-fit:contain'e  src="{{asset('/upload/productPhoto/'.$Electronique->product_thambnail)}}" alt=""></a> </div>
                   <!-- /.image -->
                   
                   <div class="tag hot"><span>hot</span></div>

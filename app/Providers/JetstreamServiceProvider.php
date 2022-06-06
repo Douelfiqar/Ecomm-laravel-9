@@ -2,9 +2,13 @@
 
 namespace App\Providers;
 
+use App\Models\Category;
+use Illuminate\Http\Request;
+use Laravel\Fortify\Fortify;
+use Laravel\Jetstream\Jetstream;
+use Illuminate\Support\Facades\Auth;
 use App\Actions\Jetstream\DeleteUser;
 use Illuminate\Support\ServiceProvider;
-use Laravel\Jetstream\Jetstream;
 
 class JetstreamServiceProvider extends ServiceProvider
 {
@@ -28,6 +32,19 @@ class JetstreamServiceProvider extends ServiceProvider
         $this->configurePermissions();
 
         Jetstream::deleteUsersUsing(DeleteUser::class);
+
+        Fortify::loginView(function (Request $request) {
+
+            $admin = false;
+            if(Auth::check()){
+                if($request->user()->roles()->first()->name == 'admin'){
+                    $admin = true;
+                };
+            }
+            $categories = Category::all();
+
+            return view('auth.login',compact('admin','categories'));
+        });
     }
 
     /**
