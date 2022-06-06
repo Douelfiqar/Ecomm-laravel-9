@@ -160,7 +160,10 @@
 									</div>
 									<div class="col-sm-8">
 										<div class="reviews">
-											<a href="#" class="lnk">(13 Reviews)</a>
+											@php
+					$totalReview = App\Models\Review::where('product_id',$product->id)->count();
+											@endphp
+											<a href="#" class="lnk">({{$totalReview}} Reviews)</a>
 										</div>
 									</div>
 								</div><!-- /.row -->		
@@ -238,7 +241,7 @@
 										<div class="cart-quantity">
 											<div class="quant-input">
 								               
-								                <input type="number" id="qty" value="1" min="1" max="{{$product->product_qty}}">
+								                <input type="number" id="qty" name="qty" value="1" min="1" max="{{$product->product_qty}}">
 												
 
 							              </div>
@@ -246,11 +249,10 @@
 									</div>
 
 									<div class="col-sm-7">
-										<a href="#" class="btn btn-primary"><i class="fa fa-shopping-cart inner-right-vs"></i> ADD TO CART</a>
+									<button id="{{$product->id}}" onclick="addToCartDetails(this.id)" class="btn btn-primary"><i class="fa fa-shopping-cart inner-right-vs"></i> ADD TO CART</button>
 									</div>
 
-									
-								</div><!-- /.row -->
+																	</div><!-- /.row -->
 
 							</div><!-- /.quantity-container -->
 
@@ -268,13 +270,13 @@
 										@endphp
 
 											@if (session()->get('lang')=='francais')
-											<select name="size" id="">
+											<select name="size" id="dsize">
 												@foreach ($arraySizeFr as $size)
 													<option value="{{$size}}">{{$size}}</option>
 												@endforeach
 											 </select>
 											 @else
-											 <select name="color" id="">
+											 <select name="color" id="dsize">
 												@foreach ($arraySizeEn as $size)
 													<option value="{{$size}}">{{$size}}</option>
 												@endforeach
@@ -292,13 +294,13 @@
 										@endphp
 
 											@if (session()->get('lang')=='francais')
-											<select name="color" id="">
+											<select name="color" id="dcolor">
 												@foreach ($arrayColorFr as $color)
 													<option value="{{$color}}">{{$color}}</option>
 												@endforeach
 											 </select>
 											 @else
-											 <select name="color" id="">
+											 <select name="color" id="dcolor">
 												@foreach ($arrayColorEn as $color)
 													<option value="{{$color}}">{{$color}}</option>
 												@endforeach
@@ -516,7 +518,7 @@
 		<div class="product">		
 			<div class="product-image">
 				<div class="image">
-					<a href="{{url('/client/home/details/'.$productCateg->id)}}"><img  src="{{asset('upload/productPhoto/'.$productCateg->product_thambnail)}}" alt=""></a>
+					<a href="{{url('/client/home/details/'.$productCateg->id)}}"><img style="height:150px;object-fit:contain" src="{{asset('upload/productPhoto/'.$productCateg->product_thambnail)}}" alt=""></a>
 				</div><!-- /.image -->			
 	
 							<div class="tag sale"><span>sale</span></div>            		   
@@ -550,9 +552,7 @@
 					<div class="action">
 						<ul class="list-unstyled">
 							<li class="add-cart-button btn-group">
-								<button class="btn btn-primary icon" data-toggle="dropdown" type="button">
-									<i class="fa fa-shopping-cart"></i>													
-								</button>
+								<button class="btn btn-primary icon" type="button" title="Add Cart" data-toggle="modal" data-target="#exampleModal" onClick="viewProduct(this.id)" id='{{$productCateg->id}}'> <i class="fa fa-shopping-cart"></i> </button>
 								<button class="btn btn-primary cart-btn" type="button">Add to cart</button>
 														
 							</li>
@@ -590,5 +590,30 @@
 
 <!-- == = BRANDS CAROUSEL : END = -->	</div><!-- /.container -->
 </div><!-- /.body-content -->
+
+
+<script>
+										
+	var qty = $('#qty').val()
+	var size = $('#dsize').val()
+	var color = $('#dcolor').val()
+
+function addToCartDetails(id){
+$.ajax({
+type:'get',
+url: '/client/addcart/detail/'+id,
+dataType: 'json',
+data:{
+  color:color,size:size,qty:qty
+				},
+success:function(data){
+miniCart()
+}
+})
+
+
+}
+</script>
+
 
 @endsection

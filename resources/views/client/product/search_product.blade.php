@@ -1,9 +1,3 @@
-<!-- <ul>
-    @foreach($products as $item)
-    <li><img src="{{asset('upload/productPhoto/'.$item->product_thambnail)}}" style="witdh:30px;height:30px" alt="">{{$item->product_name_en}}</li>
-    @endforeach
-</ul> -->
-
 
 
 <style>
@@ -69,7 +63,7 @@ body {
 
 
             @foreach($products as $item)
-   <a href="{{ url('product/details/'.$item->id.'/'.$item->product_slug_en ) }}">
+   <a href="{{url('/client/home/details/'.$item->id)}}">
                 <div class="list border-bottom">  <img src="{{asset('upload/productPhoto/'.$item->product_thambnail)}}" style="width: 30px; height: 30px;"> 
 
    <div class="d-flex flex-column ml-3" style="margin-left: 10px;"> <span>{{ $item->product_name_en }} </span> </div>

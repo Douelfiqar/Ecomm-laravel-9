@@ -169,7 +169,7 @@ return redirect()->back();
     public function getProduct(){
 
        
-        $products = Product::paginate(5);
+        $products = Product::paginate(15);
 
         return response()->json(['data'=>$products]);
     }

@@ -8,6 +8,7 @@ use App\Http\Controllers\OrderController;
 use App\Http\Controllers\UsersController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\SliderController;
+use App\Http\Controllers\ContactController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ShippingController;
@@ -258,6 +259,16 @@ Route::prefix('client')->group(function () {
         //-------------------------AJAX--------------------------------
 
         Route::post('/review',[ReviewController::class,'review'])->name('client.review');
+
+        //------------------------ ADD TO CART DETAILS -----------------------
+        
+        Route::get('/addcart/detail/{id}',[CartController::class,'addToCartDetails']);
+
+        // -------------------------- Contact -------------------------------------
+
+        Route::get('/contact',[ContactController::class,'index'])->name('client.contact');
+        
+        Route::get('/commentContact',[ContactController::class,'contact'])->name('client.comment');
 
     });
 });

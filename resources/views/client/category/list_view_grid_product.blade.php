@@ -5,14 +5,14 @@
                             <div class="row product-list-row">
                               <div class="col col-sm-4 col-lg-4">
                                 <div class="product-image">
-                                  <div class="image"> <img src="{{asset('upload/productPhoto/'.$ProductFiltred->product_thambnail)}}" alt=""> </div>
+                                  <div class="image"><a href="{{url('/client/home/details/'.$ProductFiltred->id)}}"> <img src="{{asset('upload/productPhoto/'.$ProductFiltred->product_thambnail)}}" alt=""> </a></div>
                                 </div>
                                 <!-- /.product-image --> 
                               </div>
                               <!-- /.col -->
                               <div class="col col-sm-8 col-lg-8">
                                 <div class="product-info">
-                                  <h3 class="name"><a href="detail.html">
+                                  <h3 class="name"><a href="{{url('/client/home/details/'.$ProductFiltred->id)}}">
                                     @if (session()->get('lang')=='francais')
                                     {{$ProductFiltred->product_name_fr}}
                                     @else

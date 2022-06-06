@@ -3,7 +3,7 @@
                             <div class="products">
                               <div class="product">
                                 <div class="product-image">
-                                  <div class="image"> <a href="detail.html"><img  src="{{asset('upload/productPhoto/'.$ProductFiltred->product_thambnail)}}" alt=""></a> </div>
+                                  <div class="image"> <a href="{{url('/client/home/details/'.$ProductFiltred->id)}}"><img  src="{{asset('upload/productPhoto/'.$ProductFiltred->product_thambnail)}}" alt=""></a> </div>
                                   <!-- /.image -->
                                   
                                   <div class="tag new"><span>new</span></div>
@@ -11,7 +11,7 @@
                                 <!-- /.product-image -->
                                 
                                 <div class="product-info text-left">
-                                  <h3 class="name"><a href="detail.html"> @if (session()->get('lang')=='francais')
+                                  <h3 class="name"><a href="{{url('/client/home/details/'.$ProductFiltred->id)}}"> @if (session()->get('lang')=='francais')
                                     {{$ProductFiltred->product_name_fr}}
                                     @else
                                     {{$ProductFiltred->product_name_en}}

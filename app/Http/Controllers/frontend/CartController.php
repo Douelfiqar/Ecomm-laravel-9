@@ -68,4 +68,34 @@ class CartController extends Controller
 
         return response()->json(['success'=>'remove success']);
     }
+
+    public function addToCartDetails($id,Request $request){
+
+
+        $produit = Product::find($id);
+
+       
+            Cart::add([
+                'id'=>$id,
+                'name'=>$produit->product_name_en,
+                'qty' => $request->qty,
+                // $request->qty
+                'price'=> $produit->selling_price,
+                'weight'=>1,
+                'options'=>[
+                    'image'=>$produit->product_thambnail,
+                    'color'=>$request->color,
+                    // $request->color
+                    'size'=>$request->size
+                    // $request->size
+                ]
+                ]);
+      
+
+            return response()->json(['success'=>$produit]);
+
+            
+                                            
+    }
+
 }

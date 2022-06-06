@@ -1,4 +1,4 @@
-<footer id="footer" class="footer color-bg">
+<footer id="footer" class="footer color-bg" style="margin-top: 150px">
     <div class="footer-bottom">
       <div class="container">
         <div class="row">
@@ -83,7 +83,7 @@
                 <li><a href="#" title="Blog">Blog</a></li>
                 <li><a href="#" title="Company">Company</a></li>
                 <li><a href="#" title="Investor Relations">Investor Relations</a></li>
-                <li class=" last"><a href="contact-us.html" title="Suppliers">Contact Us</a></li>
+                <li class=" last"><a href="{{route('client.contact')}}" title="Suppliers">Contact Us</a></li>
               </ul>
             </div>
             <!-- /.module-body --> 
@@ -107,11 +107,11 @@
         <div class="col-xs-12 col-sm-6 no-padding">
           <div class="clearfix payment-methods">
             <ul>
-              <li><img src="{{asset('assets/images/payments/1.png')}}" alt=""></li>
-              <li><img src="{{asset('assets/images/payments/2.png')}}" alt=""></li>
-              <li><img src="{{asset('assets/images/payments/3.png')}}" alt=""></li>
-              <li><img src="{{asset('assets/images/payments/4.png')}}" alt=""></li>
-              <li><img src="{{asset('assets/images/payments/5.png')}}" alt=""></li>
+              <li><img src="{{asset('client/assets/images/payments/1.png')}}" alt=""></li>
+              <li><img src="{{asset('client/assets/images/payments/2.png')}}" alt=""></li>
+              <li><img src="{{asset('client/assets/images/payments/3.png')}}" alt=""></li>
+              <li><img src="{{asset('client/assets/images/payments/4.png')}}" alt=""></li>
+              <li><img src="{{asset('client/assets/images/payments/5.png')}}" alt=""></li>
             </ul>
           </div>
           <!-- /.payment-methods --> 

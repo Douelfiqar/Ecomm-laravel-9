@@ -20,6 +20,7 @@ class ClientController extends Controller
         $slides = Slider::where('status','1')->orderBy('id','DESC')->limit(3)->get();
         $products = Product::where('status','1')->orderBy('id','DESC')->limit(6)->get();
         $HotDeals = Product::where('hot_deals','1')->whereNotNull('discount_price')->orderBy('id','DESC')->limit(3)->get();
+
         $SpecialOffers = Product::where('special_offer','1')->whereNotNull('discount_price')->orderBy('id','DESC')->limit(3)->get();
        
         $admin = false;
@@ -38,7 +39,27 @@ class ClientController extends Controller
         $Electroniques =  Product::inRandomOrder()->where('category_id',8)
         ->limit(6)
         ->get();
-        return view('client.index',compact('categories','slides','products','HotDeals','SpecialOffers','Featureds','Electroniques','SpecialDeals','admin'));
+
+        $bestSeller1 = Product::inRandomOrder()
+        ->limit(2)
+        ->get();
+
+        $bestSeller2 = Product::inRandomOrder()
+        ->limit(2)
+        ->get();
+
+        $bestSeller3 = Product::inRandomOrder()
+        ->limit(2)
+        ->get();
+
+        $bestSeller4 = Product::inRandomOrder()
+        ->limit(2)
+        ->get();
+
+        $beauties = Product::inRandomOrder()->where('category_id',11)->limit(6)->get();
+
+
+        return view('client.index',compact('categories','slides','products','HotDeals','SpecialOffers','Featureds','Electroniques','SpecialDeals','admin','bestSeller1','bestSeller2','bestSeller3','bestSeller4','beauties'));
     }
 
     public function account(Request $request){

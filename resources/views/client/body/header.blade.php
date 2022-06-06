@@ -28,13 +28,7 @@
           
           <div class="cnt-block">
             <ul class="list-unstyled list-inline">
-              <li class="dropdown dropdown-small"> <a href="#" class="dropdown-toggle" data-hover="dropdown" data-toggle="dropdown"><span class="value">USD </span><b class="caret"></b></a>
-                <ul class="dropdown-menu">
-                  <li><a href="#">USD</a></li>
-                  <li><a href="#">INR</a></li>
-                  <li><a href="#">GBP</a></li>
-                </ul>
-              </li>
+             
 
               <li class="dropdown dropdown-small"> <a href="#" class="dropdown-toggle" data-hover="dropdown" data-toggle="dropdown"><span class="value">
               @if (session()->get('lang')=='francais')
@@ -113,7 +107,7 @@
               <div class="items-cart-inner">
                 <div class="basket"> <i class="glyphicon glyphicon-shopping-cart"></i> </div>
                 <div class="basket-item-count"><span class="count" id="countMiniCart"></span></div>
-                <div class="total-price-basket"> <span class="lbl">cart -</span> <span class="total-price"> <span class="sign">$</span><span class="value" id="totalMiniCart1"></span> </span> </div>
+                <div class="total-price-basket"> <span class="lbl">cart -</span> <span class="total-price"> <span class="sign">DH</span><span class="value" id="totalMiniCart1"></span> </span> </div>
               </div>
               </a>
               <ul class="dropdown-menu">
@@ -127,7 +121,7 @@
 
                   <!-- end ajax -->
                   <div class="clearfix cart-total">
-                    <div class="pull-right"> <span class="text">Sub Total :</span><span class='price' id="totalMiniCart2">$</span> </div>
+                    <div class="pull-right"> <span class="text">Sub Total :</span><span class='price' id="totalMiniCart2">DH</span> </div>
                     <div class="clearfix"></div>
                     <a href="{{url('client/checkout')}}" class="btn btn-upper btn-primary btn-block m-t-20">Checkout</a> </div>
                   <!-- /.cart-total--> 
@@ -194,7 +188,7 @@
                                   $SubSubs = App\Models\SubSubCategory::where('sub_category_id',$SubCategory->id)->get();
                                 @endphp
                                 @foreach ($SubSubs as $SubSub)
-                                <li><a href="#">
+                                <li><a href="{{url('client/category/'.$SubSub->id)}}">
                                   @if (session()->get('lang')=='francais')
                                   {{$SubSub->SubSubCategory_name_fr}}
                                   @else

@@ -93,7 +93,7 @@
                 <div class="col-md-4">
                       <ul class="list-group">
                         <li class="list-group-item">Product Price: <strong id="pprice" style="color:red"></strong> </li>
-                        <li class="list-group-item">Product Code: <strong id="ccode" style="color:red"></strong></li>
+                       
                         <li class="list-group-item">Stock: <strong id="sstock" style="color:red"></strong></li>
                         <li class="list-group-item">Category: <strong id="ccategory" style="color:red"></strong></li>
                         <li class="list-group-item">Brand: <strong id="bbrand" style="color:red"></strong></li>
@@ -161,7 +161,6 @@ $.ajax({
 
     if(data.sizeARRAY.length > 1){
       $('#sizeR').show();
-      $('#psize').append($('<option selected disabled>').text('Select Size'));
     $.each(data.sizeARRAY, function(i, value) {
              $('#psize').append($('<option>').text(value).attr('value',value));
     });
@@ -171,7 +170,6 @@ $.ajax({
 
     $('#ptitle').text(data.product.product_name_en);
     $('#pprice').text(data.price);
-    $('#ccode').text(data.product.product_code);
     $('#sstock').text(data.product.product_qty);
     $('#ccategory').text(data.category_name);
     $('#bbrand').text(data.brand_name);
@@ -179,7 +177,6 @@ $.ajax({
     $('#pimg').attr('src','/upload/productPhoto/'+data.product.product_thambnail)
 
     $('#pcolor').empty();
-    $('#pcolor').append($('<option selected disabled>').text('Select Color'));
     $.each(data.colorARRAY, function(i, value) {
              $('#pcolor').append($('<option>').text(value).attr('value',value));
     });
@@ -414,6 +411,8 @@ getTotal()
 
   getIteamsShippingPage()
 </script>
+
+
 
 
 
