@@ -288,14 +288,14 @@ success:function(data){
   var trow = ""
   
   $.each(data.response, function(key,value){
-      var total =value.price*value.qty ;
+      var total = value.price*value.qty ;
     trow += `
     <tr>
     
     <td class="romove-item"><button title="cancel" class="icon" id="${value.rowId}" onclick="removeIteam(this.id)"><i class="fa fa-trash-o"></i></button></td>
 					<td class="cart-image">
 						<a class="entry-thumbnail" href="detail.html">
-						    <img src="/upload/productPhoto/${value.options.image}" alt="">
+						    <img src="/upload/productPhoto/${value.options.image}" style='height:90px;object-fit:contain' alt="">
 						</a>
 					</td>
 					<td class="cart-product-name-info">
@@ -334,7 +334,9 @@ success:function(data){
           `
   })
 
-  $('#subTotal').html(subTotal + '$')
+
+
+  $('#subTotal').html(data.total + '$')
 
   $('#trow').html(trow);
 
@@ -403,7 +405,16 @@ getTotal()
 									<hr>
 									</div>`
 				})
-				
+        var shippingTotal = `
+        <hr>
+        <div class='row' >
+         <div class='col-md-4'>
+          </div>
+          <div>
+           Total: ${data.total} DH
+            </div>
+          </div>`
+				$('#totalShipping').html(shippingTotal)
 				$('#iteams').html(myPara);
 			}
 	})

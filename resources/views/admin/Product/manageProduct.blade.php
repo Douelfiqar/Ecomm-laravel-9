@@ -87,9 +87,9 @@ function getProds(){
                             
                                 <div class="d-flex d-flex justify-content-center align-items-center">
                             
-                                    <a href='#' class="btn btn-success"><img src="https://img.icons8.com/fluency/48/000000/approve-and-update.png" width="55px"/></a>
+                                    <a href='#' class="btn btn-success"><i class='ti-reload'></i></a>
                             
-                                    <button onclick='deleteProduct(${value.id})' id="del" class="btn btn-danger"><img src="https://img.icons8.com/plasticine/100/000000/filled-trash.png" width="55px"/></button>
+                                    <button onclick='deleteProduct(${value.id})' id="del" class="btn btn-danger ml-2"><i class='ti-trash'></i></button>
                                 </div>
                             </td>
                         </tr> `

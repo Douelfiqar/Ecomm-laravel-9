@@ -13,24 +13,13 @@ use Illuminate\Support\Facades\Auth;
 
 class CategoryClientController extends Controller
 {
-    //
-
-    // public function indexCategory(Request $request){
-    //     $categories = Category::all();
-    //     $admin = false;
-    //     if(Auth::check()){
-    //         if($request->user()->roles()->first()->name == 'admin'){
-    //             $admin = true;
-    //         };
-    //     }
-
-    //     return view('client.category.category',compact('categories','admin'));
-    // }
+    
 
     public function filterCategory($id,Request $request){
         $categories = Category::all();
         $ProductFiltreds = Product::where('subsubcategory_id',$id)->paginate(3);
         $subCategories = SubCategory::all();
+        $subsubCategorties = $id;
         $admin = false;
         if(Auth::check()){
             if($request->user()->roles()->first()->name == 'admin'){
@@ -39,8 +28,6 @@ class CategoryClientController extends Controller
         }
 
         if ($request->ajax()) {
-
-            // $grid_view = view('client.category.list_view_grid_product',compact('ProductFiltreds'))->render();
          
 
             $list_view = view('client.category.list_view_product',compact('ProductFiltreds'))->render();
@@ -49,15 +36,21 @@ class CategoryClientController extends Controller
             $grid_view = view('client.category.list_view_grid_product',compact('ProductFiltreds'))->render();
 
 
-
-            // $list_view = view('client.category.list_view_product',compact('ProductFiltreds'))->render();
-
              return response()->json(['grid_view' => $grid_view,'list_view'=>$list_view]);	
          
                  }
 
-        return view('client.category.category',compact('ProductFiltreds','categories','subCategories','admin'));
+        return view('client.category.category',compact('ProductFiltreds','categories','subCategories','admin','subsubCategorties'));
     }
+
+    public function order($orderBy,$subsub){
+
+        if($orderBy == 'byName'){
+            $ProductFiltreds = Product::where('subsubcategory_id',$subsub)->orderBy('product_name_en','ASC')->paginate(3);
+        }
+        return response()->json(['ProductFiltreds'=>$ProductFiltreds]);
+    }
+
 
     public function modelCategory($id){
         $product = Product::find($id);

@@ -107,7 +107,7 @@
               <div class="items-cart-inner">
                 <div class="basket"> <i class="glyphicon glyphicon-shopping-cart"></i> </div>
                 <div class="basket-item-count"><span class="count" id="countMiniCart"></span></div>
-                <div class="total-price-basket"> <span class="lbl">cart -</span> <span class="total-price"> <span class="sign">DH</span><span class="value" id="totalMiniCart1"></span> </span> </div>
+                <div class="total-price-basket"> <span class="lbl"></span> <span class="total-price"> <span class="sign">DH </span><span class="value" id="totalMiniCart1"></span> </span> </div>
               </div>
               </a>
               <ul class="dropdown-menu">
@@ -155,11 +155,11 @@
             <div class="navbar-collapse collapse" id="mc-horizontal-menu-collapse">
               <div class="nav-outer">
                 <ul class="nav navbar-nav">
-                  <li class="active dropdown yamm-fw"> <a href="home.html" data-hover="dropdown" class="dropdown-toggle" data-toggle="dropdown">Home</a> </li>
+                  <li class="active dropdown yamm-fw"> <a href="{{route('home')}}" data-hover="dropdown" class="dropdown-toggle" data-toggle="dropdown">Home</a> </li>
 
                       @foreach ($categories as $category)
                           
-                  <li class="dropdown yamm mega-menu"> <a href="home.html" data-hover="dropdown" class="dropdown-toggle" data-toggle="dropdown">
+                  <li class="dropdown yamm mega-menu"> <a href="#" data-hover="dropdown" class="dropdown-toggle" data-toggle="dropdown">
                     @if (session()->get('lang')=='francais')
                     {{$category->category_name_fr}}
                     @else

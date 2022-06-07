@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use App\Models\Review;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ReviewAdminController extends Controller
 {
@@ -12,8 +13,8 @@ class ReviewAdminController extends Controller
 
     public function displayReview(){
 
-        $users = User::all();
-        return view('admin.review.manageReview',compact('users'));
+        $user = Auth::user();
+        return view('admin.review.manageReview',compact('user'));
     }
 
 

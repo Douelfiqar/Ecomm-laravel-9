@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Order;
+use App\Models\Category;
 use Illuminate\Http\Request;
 use App\Models\CommandeLigne;
 use Illuminate\Support\Facades\Auth;
@@ -51,5 +52,24 @@ class OrderController extends Controller
         Cart::destroy();
 
         return redirect()->route('home');
+    }
+
+    public function trackOrder(Request $request){
+
+
+        $user = Auth::user();
+
+        $admin = false;
+        if(Auth::check()){
+            if($request->user()->roles()->first()->name == 'admin'){
+                $admin = true;
+            };
+        }
+
+        $categories = Category::all();
+        $orders = Order::where('id_client',Auth::user()->id)->latest()->paginate(7);
+
+
+        return view('client.order.trackOrder',compact('user','admin','categories','orders'));
     }
 }

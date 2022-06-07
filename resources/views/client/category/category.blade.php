@@ -165,10 +165,9 @@
                         <div class="dropdown dropdown-small dropdown-med dropdown-white inline">
                           <button data-toggle="dropdown" type="button" class="btn dropdown-toggle"> Position <span class="caret"></span> </button>
                           <ul role="menu" class="dropdown-menu">
-                            <li role="presentation"><a href="#">position</a></li>
-                            <li role="presentation"><a href="#">Price:Lowest first</a></li>
-                            <li role="presentation"><a href="#">Price:HIghest first</a></li>
-                            <li role="presentation"><a href="#">Product Name:A to Z</a></li>
+                            <li role="presentation"><button id="low" onclick="order(this.id)">Price:Lowest first</button</li>
+                            <li role="presentation"><button id="hight" onclick="order(this.id)">Price:Highest first</button></li>
+                            <li role="presentation"><button id="byName" onclick="order(this.id)">Product Name: A to Z</button></li>
                           </ul>
                         </div>
                       </div>
@@ -237,47 +236,12 @@
           <div class="ajax-loadmore-product text-center" style="display:none;">
                 <img src="{{asset('/client/Spinner-1s-200px.svg')}}" alt="" style="width: 120px;height:120px">
           </div>
+
         </div>
+        <input type="hidden" id="subsub" value="{{$subsubCategorties}}">
         <!-- /.row --> 
         <!-- ============================================== BRANDS CAROUSEL ============================================== -->
-        <div id="brands-carousel" class="logo-slider wow fadeInUp">
-          <div class="logo-slider-inner">
-            <div id="brand-slider" class="owl-carousel brand-slider custom-carousel owl-theme">
-              <div class="item m-t-15"> <a href="#" class="image"> <img data-echo="assets/images/brands/brand1.png" src="assets/images/blank.gif" alt=""> </a> </div>
-              <!--/.item-->
-              
-              <div class="item m-t-10"> <a href="#" class="image"> <img data-echo="assets/images/brands/brand2.png" src="assets/images/blank.gif" alt=""> </a> </div>
-              <!--/.item-->
-              
-              <div class="item"> <a href="#" class="image"> <img data-echo="assets/images/brands/brand3.png" src="assets/images/blank.gif" alt=""> </a> </div>
-              <!--/.item-->
-              
-              <div class="item"> <a href="#" class="image"> <img data-echo="assets/images/brands/brand4.png" src="assets/images/blank.gif" alt=""> </a> </div>
-              <!--/.item-->
-              
-              <div class="item"> <a href="#" class="image"> <img data-echo="assets/images/brands/brand5.png" src="assets/images/blank.gif" alt=""> </a> </div>
-              <!--/.item-->
-              
-              <div class="item"> <a href="#" class="image"> <img data-echo="assets/images/brands/brand6.png" src="assets/images/blank.gif" alt=""> </a> </div>
-              <!--/.item-->
-              
-              <div class="item"> <a href="#" class="image"> <img data-echo="assets/images/brands/brand2.png" src="assets/images/blank.gif" alt=""> </a> </div>
-              <!--/.item-->
-              
-              <div class="item"> <a href="#" class="image"> <img data-echo="assets/images/brands/brand4.png" src="assets/images/blank.gif" alt=""> </a> </div>
-              <!--/.item-->
-              
-              <div class="item"> <a href="#" class="image"> <img data-echo="assets/images/brands/brand1.png" src="assets/images/blank.gif" alt=""> </a> </div>
-              <!--/.item-->
-              
-              <div class="item"> <a href="#" class="image"> <img data-echo="assets/images/brands/brand5.png" src="assets/images/blank.gif" alt=""> </a> </div>
-              <!--/.item--> 
-            </div>
-            <!-- /.owl-carousel #logo-slider --> 
-          </div>
-          <!-- /.logo-slider-inner --> 
-          
-        </div>
+
         <!-- /.logo-slider --> 
         <!-- ============================================== BRANDS CAROUSEL : END ============================================== --> </div>
       <!-- /.container --> 
@@ -289,7 +253,9 @@
 
 
 <script>
-    function loadmoreProduct(page){
+    var tst = 1100
+
+     function loadmoreProduct(page){
       $.ajax({
         type: "get",
         url: "?page="+page,
@@ -298,13 +264,14 @@
         }
       })
       .done(function(data){
-
         if (data.grid_view == " " || data.list_view == " ") {
           return;
         }
          $('.ajax-loadmore-product').hide();
          $('#grid_view_product').append(data.grid_view);
          $('#list_view_product').append(data.list_view);
+         if(data.grid_view == '')
+          tst = 20000   
       })
       .fail(function(){
         alert('Something Went Wrong');
@@ -318,14 +285,149 @@
 
     var page = 1;
     $(window).scroll(function (){
-      if ($(window).scrollTop() + $(window).height() >= $(document).height()){
-
+      
+      if ($(window).scrollTop() + $(window).height() >= tst ){
         page ++;
         loadmoreProduct(page);
       }
     });
 
 
+
+
+
+    function order(id){
+      
+      var subsub = $('#subsub').val();
+
+      $.ajax({
+        type:'get',
+        url:'/client/orderBy/'+id+'/'+subsub,
+        dataType:'json',
+        success:function(data){
+
+          $('#list_view_product').empty();
+          $('#grid_view_product').empty();
+          tst = 1100
+
+          var list = ""
+          var grid = ""
+          $.each(data.ProductFiltreds.data, function(key,value){
+            list += `
+            <div class="col-sm-6 col-md-4 wow fadeInUp">
+                            <div class="products">
+                              <div class="product">
+                                <div class="product-image">
+                                  <div class="image"> <a href="/client/home/details/${value.id}"><img  src="{{asset('upload/productPhoto/${value.product_thambnail}')}}" alt=""></a> </div>
+                                  <!-- /.image -->
+                                  
+                                  <div class="tag new"><span>new</span></div>
+                                </div>
+                                <!-- /.product-image -->
+                                
+                                <div class="product-info text-left">
+                                  <h3 class="name"><a href="/client/home/details/${value.id}">
+                                    ${value.product_name_en}
+                                  </a></h3>
+                                  <div class="rating rateit-small"></div>
+                                  <div class="description"></div>
+                                  <div class="product-price">
+                                  
+                                    <span class="price">${value.selling_price} DH </span> 
+                                   </div>
+                                  <!-- /.product-price --> 
+                                  
+                                </div>
+                                <!-- /.product-info -->
+                                <div class="cart clearfix animate-effect">
+                                  <div class="action">
+                                    <ul class="list-unstyled">
+                                      <li class="add-cart-button btn-group">
+                                        <button class="btn btn-primary icon" data-toggle="dropdown" type="button"> <i class="fa fa-shopping-cart"></i> </button>
+                                        <button class="btn btn-primary cart-btn" type="button">Add to cart</button>
+                                      </li>
+                                      <li class="lnk wishlist"> <a class="add-to-cart" href="detail.html" title="Wishlist"> <i class="icon fa fa-heart"></i> </a> </li>
+                                      <li class="lnk"> <a class="add-to-cart" href="detail.html" title="Compare"> <i class="fa fa-signal"></i> </a> </li>
+                                    </ul>
+                                  </div>
+                                  <!-- /.action --> 
+                                </div>
+                                <!-- /.cart --> 
+                              </div>
+                              <!-- /.product --> 
+                              
+                            </div>
+                            <!-- /.products --> 
+                          </div>
+            `
+
+            grid += `
+             <div class="category-product-inner wow fadeInUp">
+                        <div class="products">
+                          <div class="product-list product">
+                            <div class="row product-list-row">
+                              <div class="col col-sm-4 col-lg-4">
+                                <div class="product-image">
+                                  <div class="image"><a href="/client/home/details/${value.id}"'> <img src="{{asset('upload/productPhoto/${value.product_thambnail}')}}" alt=""> </a></div>
+                                </div>
+                                <!-- /.product-image --> 
+                              </div>
+                              <!-- /.col -->
+                              <div class="col col-sm-8 col-lg-8">
+                                <div class="product-info">
+                                  <h3 class="name"><a href="/client/home/details/${value.id}'">
+                                   
+                                    ${value.product_name_en}
+                                    </a></h3>
+                                  <div class="rating rateit-small"></div>
+                                  <div class="product-price"> 
+                                    
+                                    <span class="price">${value.selling_price} DH </span> 
+                
+                                    </div>
+                                  <!-- /.product-price -->
+                                  <div class="description m-t-10">      
+                                    ${value.short_desc_en}
+                                  </div>
+                                  <div class="cart clearfix animate-effect">
+                                    <div class="action">
+                                      <ul class="list-unstyled">
+                                        <li class="add-cart-button btn-group">
+                                          <button class="btn btn-primary icon" data-toggle="dropdown" type="button"> <i class="fa fa-shopping-cart"></i> </button>
+                                          <button class="btn btn-primary cart-btn" type="button">Add to cart</button>
+                                        </li>
+                                        <li class="lnk wishlist"> <a class="add-to-cart" href="detail.html" title="Wishlist"> <i class="icon fa fa-heart"></i> </a> </li>
+                                        <li class="lnk"> <a class="add-to-cart" href="detail.html" title="Compare"> <i class="fa fa-signal"></i> </a> </li>
+                                      </ul>
+                                    </div>
+                                    <!-- /.action --> 
+                                  </div>
+                                  <!-- /.cart --> 
+                                  
+                                </div>
+                                <!-- /.product-info --> 
+                              </div>
+                              <!-- /.col --> 
+                            </div>
+                            <!-- /.product-list-row -->
+                            <div class="tag new"><span>new</span></div>
+                          </div>
+                          <!-- /.product-list --> 
+                        </div>
+                        <!-- /.products --> 
+                      </div>     
+            `
+
+          })
+
+
+          
+          $('#list_view_product').html(list)
+          $('#grid_view_product').html(grid)
+
+        }
+      })
+    }
 
 </script>
 

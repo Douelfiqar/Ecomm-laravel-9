@@ -36,7 +36,16 @@
 </x-guest-layout> --}}
 
 
+@php
+      $admin = false;
+        if(Auth::check()){
+            if($request->user()->roles()->first()->name == 'admin'){
+                $admin = true;
+            };
+        }
 
+        $categories = App\Models\Category::all();
+@endphp
 
 
 

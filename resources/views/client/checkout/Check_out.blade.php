@@ -280,16 +280,21 @@
 
 					</div><!-- /.checkout-steps -->
 				</div>
+				
 				<div class="col-md-4">
 					<!-- checkout-progress-sidebar -->
 <div class="checkout-progress-sidebar ">
 	<div class="panel-group">
 		<div class="panel panel-default">
+			
 			<div class="panel-heading">
 		    	<h4 class="unicase-checkout-title">Your Checkout Progress</h4>
 		    </div>
 			<div id='iteams'>
-				div
+				
+			</div>
+			<div id="totalShipping">
+				
 			</div>
 		    <div class="">
 				<ul class="nav nav-checkout-progress list-unstyled">
@@ -306,73 +311,7 @@
 			</div><!-- /.row -->
 		</div><!-- /.checkout-box -->
 		<!-- ============================================== BRANDS CAROUSEL ============================================== -->
-<div id="brands-carousel" class="logo-slider wow fadeInUp">
-
-		<div class="logo-slider-inner">
-			<div id="brand-slider" class="owl-carousel brand-slider custom-carousel owl-theme">
-				<div class="item m-t-15">
-					<a href="#" class="image">
-						<img data-echo="assets/images/brands/brand1.png" src="assets/images/blank.gif" alt="">
-					</a>
-				</div><!--/.item-->
-
-				<div class="item m-t-10">
-					<a href="#" class="image">
-						<img data-echo="assets/images/brands/brand2.png" src="assets/images/blank.gif" alt="">
-					</a>
-				</div><!--/.item-->
-
-				<div class="item">
-					<a href="#" class="image">
-						<img data-echo="assets/images/brands/brand3.png" src="assets/images/blank.gif" alt="">
-					</a>
-				</div><!--/.item-->
-
-				<div class="item">
-					<a href="#" class="image">
-						<img data-echo="assets/images/brands/brand4.png" src="assets/images/blank.gif" alt="">
-					</a>
-				</div><!--/.item-->
-
-				<div class="item">
-					<a href="#" class="image">
-						<img data-echo="assets/images/brands/brand5.png" src="assets/images/blank.gif" alt="">
-					</a>
-				</div><!--/.item-->
-
-				<div class="item">
-					<a href="#" class="image">
-						<img data-echo="assets/images/brands/brand6.png" src="assets/images/blank.gif" alt="">
-					</a>
-				</div><!--/.item-->
-
-				<div class="item">
-					<a href="#" class="image">
-						<img data-echo="assets/images/brands/brand2.png" src="assets/images/blank.gif" alt="">
-					</a>
-				</div><!--/.item-->
-
-				<div class="item">
-					<a href="#" class="image">
-						<img data-echo="assets/images/brands/brand4.png" src="assets/images/blank.gif" alt="">
-					</a>
-				</div><!--/.item-->
-
-				<div class="item">
-					<a href="#" class="image">
-						<img data-echo="assets/images/brands/brand1.png" src="assets/images/blank.gif" alt="">
-					</a>
-				</div><!--/.item-->
-
-				<div class="item">
-					<a href="#" class="image">
-						<img data-echo="assets/images/brands/brand5.png" src="assets/images/blank.gif" alt="">
-					</a>
-				</div><!--/.item-->
-		    </div><!-- /.owl-carousel #logo-slider -->
-		</div><!-- /.logo-slider-inner -->
-
-</div><!-- /.logo-slider -->
+@include('client.body.brand')<!-- /.logo-slider -->
 <!-- ============================================== BRANDS CAROUSEL : END ============================================== -->	</div><!-- /.container -->
 </div><!-- /.body-content -->
 

@@ -33,7 +33,8 @@ class ShoppingCartController extends Controller
     public function getCart(){
         $carts = Cart::content();
         
-        return response()->json(['response'=>$carts]);
+        $subTotal = Cart::total();
+        return response()->json(['response'=>$carts,'total'=>$subTotal]);
     }
 
     public function totalCart(){

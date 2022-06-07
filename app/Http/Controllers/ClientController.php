@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Brand;
 use App\Models\Slider;
 use App\Models\Product;
 use App\Models\Category;
+use App\Models\RoleUser;
 use App\Models\SubCategory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -16,12 +18,29 @@ class ClientController extends Controller
 {
     //
     public function index(Request $request){
+
         $categories = Category::all();
+        $brands = Brand::all();
         $slides = Slider::where('status','1')->orderBy('id','DESC')->limit(3)->get();
         $products = Product::where('status','1')->orderBy('id','DESC')->limit(6)->get();
         $HotDeals = Product::where('hot_deals','1')->whereNotNull('discount_price')->orderBy('id','DESC')->limit(3)->get();
 
         $SpecialOffers = Product::where('special_offer','1')->whereNotNull('discount_price')->orderBy('id','DESC')->limit(3)->get();
+
+if(Auth::check()){
+    $roleUserId = Auth::user()->id;
+
+    $role =  RoleUser::where('user_id', $roleUserId)->first();
+
+    
+    if($role == NULL){
+        $roleDB = new RoleUser();
+        $roleDB->user_id = Auth::user()->id;
+        $roleDB->role_id = 2;
+        $roleDB->save();
+    }
+    
+}
        
         $admin = false;
         if(Auth::check()){
@@ -59,7 +78,7 @@ class ClientController extends Controller
         $beauties = Product::inRandomOrder()->where('category_id',11)->limit(6)->get();
 
 
-        return view('client.index',compact('categories','slides','products','HotDeals','SpecialOffers','Featureds','Electroniques','SpecialDeals','admin','bestSeller1','bestSeller2','bestSeller3','bestSeller4','beauties'));
+        return view('client.index',compact('categories','slides','products','HotDeals','SpecialOffers','Featureds','Electroniques','SpecialDeals','admin','bestSeller1','bestSeller2','bestSeller3','bestSeller4','beauties','brands'));
     }
 
     public function account(Request $request){

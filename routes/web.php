@@ -7,6 +7,7 @@ use App\Http\Controllers\BrandController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\UsersController;
 use App\Http\Controllers\ClientController;
+use App\Http\Controllers\GoogleController;
 use App\Http\Controllers\SliderController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\ProductController;
@@ -47,6 +48,7 @@ Route::get('/forgotPassword', function (Request $request) {
 Route::middleware(['auth', 'role:admin'])->group(function () {
 
     Route::prefix('admin')->group(function () {
+        
         Route::get('/dashboard', [AdminController::class,'index'] )->name('dashboard');
 
         Route::get('/profile', [AdminController::class,'infoProfile'] )->name('profile');
@@ -270,6 +272,14 @@ Route::prefix('client')->group(function () {
         
         Route::get('/commentContact',[ContactController::class,'contact'])->name('client.comment');
 
+        // ---------------------------- Order by ------------------------------------
+
+        Route::get('/orderBy/{orderBy}/{subsub}',[CategoryClientController::class,'order']);
+
+        // ----------------------------- Track Orders ---------------------------------
+
+        Route::get('/trackOrder',[OrderController::class,'trackOrder'])->name('profile.trackOrder');
+
     });
 });
 
@@ -286,3 +296,10 @@ Route::get('search-product', [SearchController::class, 'SearchProduct']);
 
 Route::get('/auth/facebook/redirect', [FacebookController::class, 'handleFacebookRedirect']);
 Route::get('/auth/facebook/callback', [FacebookController::class, 'handleFacebookCallback']);
+
+
+
+Route::prefix('google')->name('google.')->group( function(){
+    Route::get('login', [GoogleController::class, 'loginWithGoogle'])->name('login');
+    Route::any('callback', [GoogleController::class, 'callbackFromGoogle'])->name('callback');
+});

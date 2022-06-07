@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\City;
+use App\Models\User;
+use App\Models\Order;
 use App\Models\Country;
 use App\Models\Shipping;
 use Illuminate\Http\Request;
-use App\Models\City;
-use App\Models\Order;
-use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 
 class ShippingController extends Controller
 {
@@ -16,8 +17,7 @@ class ShippingController extends Controller
         $orders = Order::latest()->paginate(7);
         $countries = Country::all();
         $cities = City::all();
-        $users = User::all();
-        return view('admin.shipping.shippingIndex',compact('orders','countries','cities','users'));
+        $user = Auth::user();        return view('admin.shipping.shippingIndex',compact('orders','countries','cities','user'));
     }
 
     public function addCountry(Request $request){

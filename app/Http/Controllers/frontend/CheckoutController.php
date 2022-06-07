@@ -32,8 +32,11 @@ class CheckoutController extends Controller
 
         $carts = Cart::content();
 
+        $total = Cart::total();
+        
         return response()->json([
             'carts' => $carts,
+            'total'=>$total
         ]);
 
 

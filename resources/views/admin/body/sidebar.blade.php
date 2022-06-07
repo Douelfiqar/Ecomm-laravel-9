@@ -52,7 +52,7 @@
       </ul>
     </li>
       
-    <li class="treeview {{$route == 'admin.allCategory' ? 'active':''}}">
+    <li class="treeview {{$route == 'admin.allCategory' ? 'active':''}} {{$route == 'admin.allSubCategory' ? 'active':''}} {{$route == 'admin.allSubSubCategory' ? 'active':''}}">
       <a href="#">
         <i data-feather="mail"></i> <span>Category</span>
         <span class="pull-right-container">
@@ -67,7 +67,7 @@
       </ul>
     </li>
     
-    <li class="treeview C">
+    <li class="treeview C {{$route == 'admin.manageProduct' ? 'active':''}} {{$route == 'admin.addProduct' ? 'active':''}}">
       <a href="#">
         <i data-feather="file"></i>
         <span>Products</span>
@@ -91,8 +91,6 @@
       </a>
       <ul class="treeview-menu">
         <li><a href="{{route('admin.allSlider')}}"><i class="ti-more"></i>All Slider</a></li>
-
-        <li><a href="{{route('admin.addSlider')}}"><i class="ti-more"></i>Add Slider</a></li>
       </ul>
     </li>
 
