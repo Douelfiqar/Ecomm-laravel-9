@@ -76,8 +76,6 @@
 
 
 
-      
-
         </div>
 
 </div>
@@ -94,16 +92,13 @@
                                             <table class="table">
                                                     <thead>
                                                         <tr>
+                                                        <th scope="col">Country ID</th>
                                                         <th scope="col">Country Name</th>
+                                                        <th>Action</th>
                                                         </tr>
                                                     </thead>
-                                                    <tbody>
-                                                    @foreach($countries as $country)
-                                                        <tr>
-                                                        
-                                                                <td>{{$country->name}}</td>
-                                                        </tr>
-                                                        @endforeach
+                                                    <tbody id="plz">
+                                                    
                                                     
                                                     </tbody>
                                                     </table>
@@ -112,22 +107,150 @@
 
 
 
+                                        
+                                        <script>
+                                            function getCountries(){
+
+
+$.ajax({
+url:'/admin/getCountries',
+type:'get',
+dataType:'json',
+success:function(data){
+
+var countries = "";
+var cities = "";
+var option = ""
+$.each(data.countries,function(key,value){
+
+    countries +=
+                 `<tr>            
+                      <td>${value.id}</td>
+                      <td>${value.name}</td>
+                      <td><button onclick='removeCountry(${value.id})' style='background-color: transparent;
+    background-repeat: no-repeat;
+    border: none;
+    cursor: pointer;
+    overflow: hidden;
+    outline: none;' ><i class='ti-trash'></i></button></td>
+                  </tr>`
+
+    option += ` <option value='${value.id}'>${value.name}</option> `
+    
+})
+
+
+$.each(data.cities,function(key,value){
+
+cities +=
+             `<tr>  
+                <td>${value.country_id}</td>
+                <td>${value.name}</td>
+                <td><button onclick='removeCity(${value.id})' style='background-color: transparent;
+    background-repeat: no-repeat;
+    border: none;
+    cursor: pointer;
+    overflow: hidden;
+    outline: none;' ><i class='ti-trash'></i></button></td>
+              </tr>`
+})
+
+
+$('#plz').html(countries)
+$('#citiess').html(cities)
+$('#selectMENU').html(option)
+
+}
+})
+
+
+}
+
+getCountries()
+
+
+function removeCountry(id){
+
+
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "You won't be able to revert this!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, delete it!'
+                }).then((result) => {
+                if (result.isConfirmed) {
+                    Swal.fire(
+                    'Deleted!',
+                    'Your file has been deleted.',
+                    'success'
+                    )
+
+                    $.ajax({
+                url:'/admin/removeCountry/'+id,
+                type:'get',
+                dataType:'json',
+                success:function(data){
+                    getCountries()
+                }
+            }
+                )
+                }
+                })
+        }
+
+
+
+
+        function removeCity(id){
+            console.log('first')
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "You won't be able to revert this!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, delete it!'
+                }).then((result) => {
+                if (result.isConfirmed) {
+                    Swal.fire(
+                    'Deleted!',
+                    'Your file has been deleted.',
+                    'success'
+                    )
+
+                    $.ajax({
+                url:'/admin/removeCity/'+id,
+                type:'get',
+                dataType:'json',
+                success:function(data){
+                    getCountries()
+                }
+            }
+                )
+                }
+                })
+        }
+
+
+                                        </script>
+
+
                                         <div class="col-4">
                                                                 <div class="box">
                                                                 <table class="table">
                                                 <thead>
                                                     <tr>
-                                                    <th scope="col">Country Name</th>
+                                                    <th scope="col">Country ID</th>
                                                     <th scope="col">City Name</th>
+                                                    <th scope="col">Action</th>
                                                     </tr>
                                                 </thead>
-                                                <tbody>
-                                                @foreach($cities as $city)
-                                                    <tr>
-                                                            <td>{{$city->countries()->first()->name}}</td>
-                                                            <td>{{$city->name}}</td>
-                                                    </tr>
-                                                    @endforeach
+                                                <tbody id="citiess">
+                                                
                                                 
                                                 </tbody>
                                                 </table>
@@ -141,14 +264,13 @@
                                                         <div>
                                                             <h3>Add Country</h3>
                                                         </div>
-                                                    <form method='post' action="{{route('admin.addCount')}}">
-                                                        @csrf
-                                                <div class="mb-3">
+
+                                                        <div class="mb-3">
                                                     <label for="exampleInputEmail1" class="form-label">Add Country</label>
-                                                    <input type="name" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="name" require>
+                                                    <input type="name" class="form-control"  aria-describedby="emailHelp" name="name" id="countryy" require>
                                                 </div>
-                                                <button type="submit" class="btn btn-primary">Submit</button>
-                                                </form>
+                                                <button type="submit" class="btn btn-primary" onclick="addCountryF()">Submit</button>
+                                               
                                                     </div>
                                                 </div>
                                                             </div>
@@ -158,24 +280,20 @@
                                                     <div class="box">
                                                         <div class="container">
                                                             <h3>Add City</h3>
-                                                        <form method='POST' action="{{route('admin.addCity')}}">
-                                                            @csrf
+                                                      
+                                                            
                                                     <div class="mb-3">
                                                         <label for="exampleInputEmail1" class="form-label">Select Country</label>
-                                                        <select class="form-select" aria-label="Default select example" name="country_id" required>
-                                                            <option selected disable>Open this select menu</option>
-                                                            @foreach($countries as $country)
-                                                            <option value="{{$country->id}}">{{$country->name}}</option>
-                                                            @endforeach
+                                                        <select class="form-select" aria-label="Default select example" name="country_id" id="selectMENU" required>
                                                         </select>
+                                                    
                                                     </div>
 
                                                     <div class="mb-3">
                                                         <label for="exampleInputPassword1" class="form-label">Add City</label>
-                                                        <input type="text" class="form-control" id="exampleInputPassword1" name="name" required>
+                                                        <input type="text" id="cityy" class="form-control" id="exampleInputPassword1" name="name" required>
                                                     </div>
-                                                    <button type="submit" class="btn btn-primary">Submit</button>
-                                                    </form>
+                                                    <button type="submit" onclick="addCityF()" class="btn btn-primary">Submit</button>
                                                         </div>
 
                                                     </div>
@@ -187,11 +305,83 @@
                                 </div>
 
             </div>
+            <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
+            <script>
+                function addCityF(){
+                    $.ajax({
+                        url:'/admin/addCity',
+                        type:'get',
+                        dataType:'json',
+                        data:{Country:$('#selectMENU').val(),City:$('#cityy').val()},
+                        success:function(data){
+                            Swal.fire({
+                                title: 'City has been added',
+                                width: 600,
+                                padding: '3em',
+                                color: '#716add',
+                                background: '#fff url(/images/trees.png)',
+                                backdrop: `
+                                    rgba(0,0,123,0.4)
+                                    url("/images/nyan-cat.gif")
+                                    left top
+                                    no-repeat
+                                `
+                                })
+                            getCountries()
+                            $('#cityy').empty()
+                        }
+                    })
+                }
+
+
+console.log('first')
+
+                function addCountryF(){
+console.log('first')
+
+                    $.ajax({
+                        url:'/admin/addCountry',
+                        type:'get',
+                        dataType:'json',
+                        data:{Country:$('#countryy').val()},
+                        success:function(data){
+                            Swal.fire({
+  position: 'top-end',
+  icon: 'success',
+  title: 'Country has been added',
+  showConfirmButton: false,
+  timer: 1500
+})           
+                 getCountries()
+                            $('#countryy').empty()
+                        }
+                    })
+                }
+
+                console.log('first')
+//                 function getShipping(){
+// console.log('first')
+//     // $.ajax({
+//     //                     url:'/admin/getOrders',
+//     //                     type:'get',
+//     //                     dataType:'json',
+//     //                     success:function(data){
+
+//     //                             console.log(data)
+
+//     //                     }}
+//     //                     )
+// }
+
+// getShipping()
+
+            </script>
+
+          
 </section>
     </div>
     </div>
     </div>
 
     @endsection
-

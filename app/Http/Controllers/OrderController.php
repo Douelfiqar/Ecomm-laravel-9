@@ -67,9 +67,23 @@ class OrderController extends Controller
         }
 
         $categories = Category::all();
+      
+
+        return view('client.order.trackOrder',compact('user','admin','categories'));
+    }
+
+    public function getorders(){
+
         $orders = Order::where('id_client',Auth::user()->id)->latest()->paginate(7);
 
+        return response()->json(['order' => $orders]);
+    }
 
-        return view('client.order.trackOrder',compact('user','admin','categories','orders'));
+    public function cancelOrder($id){
+
+        $order = Order::find($id);
+        $order->delete();
+
+        return response()->json(['cancel','successfully']);
     }
 }

@@ -146,6 +146,8 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
         
     Route::get('/allSlider', [SliderController::class,'allSlider'] )->name('admin.allSlider');   
 
+    Route::get('/getSliders', [SliderController::class,'getSliders'] );   
+
     Route::post('/addSlider', [SliderController::class,'addSlider'] )->name('admin.addSlider');
 
     Route::get('/updateSlider/{id}', [SliderController::class,'updateSlider'])->name('admin.updateslider');
@@ -154,7 +156,7 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
 
     Route::get('/deleteSlider/{id}', [SliderController::class,'deleteSlider'] );
 
-    Route::get('/status/{id}', [SliderController::class,'statusUpdate'] )->name('admin.statusSldier');
+    // Route::get('/status/{id}', [SliderController::class,'statusUpdate'] )->name('admin.statusSldier');
         
     Route::get('/statusSlider/{id}', [SliderController::class,'statusUpdate'] )->name('admin.statusSlider');
 
@@ -186,12 +188,19 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
 
     Route::get('/allOrder',[ShippingController::class,'allOrder'])->name('admin.allOrder');
 
-    Route::post('/addCountry',[ShippingController::class,'addCountry'])->name('admin.addCount');
+    Route::get('/admin/addCountry',[ShippingController::class,'addCountry'])->name('admin.addCount');
 
-    Route::post('/addCity',[ShippingController::class,'addCity'])->name('admin.addCity');
+    Route::get('/admin/addCity',[ShippingController::class,'addCity']);
 
     Route::get('/admin/statusOrder/{id}',[ShippingController::class,'status']);
 
+    Route::get('/admin/getCountries',[ShippingController::class,'getCountries']);
+    
+    Route::get('/admin/removeCountry/{id}',[ShippingController::class,'removeCountry']);
+
+    Route::get('/admin/removeCity/{id}',[ShippingController::class,'removeCity']);
+
+    Route::get('/admin/getOrders',[ShippingController::class,'getOrders']);
 });
 
 Route::post('/ajax', [SubSubCategoryController::class,'testAjax'] );
@@ -245,6 +254,8 @@ Route::prefix('client')->group(function () {
         
         Route::post('/editPassword', [ClientController::class,'editPassword'])->name('client.editPassword');
 
+        Route::get('/delteAccount',[ClientController::class,'deleteAccount'])->name('profile.delteAccount');
+
         //------------------------ end profile---------------------------
 
 
@@ -276,10 +287,14 @@ Route::prefix('client')->group(function () {
 
         Route::get('/orderBy/{orderBy}/{subsub}',[CategoryClientController::class,'order']);
 
+        
         // ----------------------------- Track Orders ---------------------------------
 
         Route::get('/trackOrder',[OrderController::class,'trackOrder'])->name('profile.trackOrder');
+        
+        Route::get('/getOrders',[OrderController::class,'getorders']);
 
+        Route::get('/cancelOrder/{id}',[OrderController::class,'cancelOrder'])->name('profile.cancelOrder');
     });
 });
 

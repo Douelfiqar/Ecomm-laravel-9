@@ -14,4 +14,5 @@ class Shipping extends Model
     public function users(){
         return $this->belongsTo(User::class,'id_user','id');
     }
+    
 }

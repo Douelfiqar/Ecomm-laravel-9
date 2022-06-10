@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\Role;
+use App\Models\Order;
 use Laravel\Sanctum\HasApiTokens;
 use Laravel\Jetstream\HasProfilePhoto;
 use Illuminate\Notifications\Notifiable;
@@ -63,5 +64,9 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function roles(){
         return $this->belongsToMany(Role::class);
+    }
+
+    public function orders(){
+        return $this->belongsToMany(Order::class);
     }
 }

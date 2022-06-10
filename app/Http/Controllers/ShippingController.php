@@ -17,28 +17,28 @@ class ShippingController extends Controller
         $orders = Order::latest()->paginate(7);
         $countries = Country::all();
         $cities = City::all();
-        $user = Auth::user();        return view('admin.shipping.shippingIndex',compact('orders','countries','cities','user'));
+        $user = Auth::user();   
+             return view('admin.shipping.shippingIndex',compact('orders','user'));
     }
 
     public function addCountry(Request $request){
         
         $country = new Country();
-
-        $country->name = $request->name;
+        $country->name = $request->Country;
         $country->save();
 
-        return redirect()->back();
+        return response()->json(['country',$request->Country]);
     }
 
     public function addCity(Request $request){
 
         $city = new City();
 
-        $city->name = $request->name;
-        $city->country_id = $request->country_id;
+        $city->name = $request->City;
+        $city->country_id = $request->Country;
         $city->save();
 
-        return redirect()->back();
+        return response()->json(['added','succcessfully']);
     }
 
     public function status($id){
@@ -59,4 +59,34 @@ class ShippingController extends Controller
         return redirect()->back();
     }
 
+    public function getCountries(){
+
+        $countries = Country::all();
+        $cities = City::all();
+
+        return response()->json(['countries'=>$countries,'cities'=>$cities]);
+    }
+
+    public function removeCity($id){
+
+        $city = City::find($id);
+        $city->delete();
+
+        return response()->json(['success','deleted']);
+    }
+    
+    public function removeCountry($id){
+
+        $city = Country::find($id);
+        $city->delete();
+
+        return response()->json(['success','deleted']);
+    }
+
+    public function getOrders(){
+        $orders = Order::latest();
+
+        return response()->json(['orders'=>$orders]);
+    }
+   
 }

@@ -130,4 +130,12 @@ if(Auth::check()){
                   
         return redirect()->route('client.profile')->with('error','Please verify your information');
     }
+
+    public function deleteAccount(){
+
+        $user = Auth::user();
+        $user->delete();
+
+        return redirect()->route('home');
+    }
 }

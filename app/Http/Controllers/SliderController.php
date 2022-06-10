@@ -11,8 +11,14 @@ class SliderController extends Controller
     
     public function allSlider(){
         $user = Auth::user();
-        $Sliders = Slider::paginate(5);
-        return view('admin.Slider.allSlider',compact('user','Sliders'));
+        return view('admin.Slider.allSlider',compact('user'));
+    }
+
+    public function getSliders(){
+
+        $Sliders = Slider::all();
+
+        return response()->json(['sliders'=>$Sliders]);
     }
 
     public function addSlider(Request $request){
@@ -44,7 +50,7 @@ class SliderController extends Controller
                 'status' => $sliderStatus
         ]);
 
-        return redirect()->back();
+        return response()->json(['data','status has been updated']);
     }
 
 
@@ -52,7 +58,7 @@ class SliderController extends Controller
 
         $slider = Slider::find($id);
         $slider->delete();
-        return redirect()->back();
+        return response()->json(['data','deleted']);
     }
 
     public function updateSlider($id){

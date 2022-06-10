@@ -13,4 +13,9 @@ class Order extends Model
         'id_client',
         'date_send',
     ];
+
+    public function users(){
+        return $this->belongsTo(User::class,'id_user','id');
+    }
+    
 }

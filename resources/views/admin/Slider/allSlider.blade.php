@@ -32,33 +32,115 @@
                             <tr role="row"><th class="sorting" tabindex="0" aria-controls="complex_header" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 105px;">Slider Image</th><th class="sorting" tabindex="0" aria-controls="complex_header" rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending" style="width: 58px;">Title</th><th class="sorting" tabindex="0" aria-controls="complex_header" rowspan="1" colspan="1" aria-label="Office: activate to sort column ascending" style="width: 40px;">Desc</th><th class="sorting" tabindex="0" aria-controls="complex_header" rowspan="1" colspan="1" aria-label="Extn.: activate to sort column ascending" style="width: 62px;">Status</th><th class="sorting" tabindex="0" aria-controls="complex_header" rowspan="1" colspan="1" aria-label="Extn.: activate to sort column ascending" style="width: 62px;">Action</th></tr>
                         </thead>
                       
-                        <tbody>
-                        @foreach ($Sliders as $Slider)
-                        <tr>
-                            <td><img src="{{asset('/upload/slider/'.$Slider->slider_img)}}" alt="$Slider->title"></td>
-                            <td>{{$Slider->title}}</td>
-                            <td>{{$Slider->description}}</td>
-                            <td> @if ($Slider->status == 1)
-                                <a href="{{url('/admin/statusSlider/'.$Slider->id)}}" class="btn btn-success">Active</a>
-                            @else
-                            <a href="{{url('/admin/statusSlider/'.$Slider->id)}}"  class="btn btn-danger">Inactive</a>
-                            @endif</td>
-                            <td>
-                                <div class="d-flex d-flex justify-content-center align-items-center">
-
-                                    <a href="{{url('/admin/updateSlider/'.$Slider->id)}}" class="btn btn-success"><img src="https://img.icons8.com/fluency/48/000000/approve-and-update.png" width="55px"/></a>
-
-                                    <a id="deleteee" href="{{url('/admin/deleteSlider/'.$Slider->id)}}" class="btn btn-danger"><img src="https://img.icons8.com/plasticine/100/000000/filled-trash.png" width="55px"/></a>
-                                </div>
-                            </td>
-                        </tr>
-                        @endforeach
+                        <tbody id="MySliders">
+                        
                         </tbody>      
 
                         
                     </table>
-                    {{$Sliders->links();}}
+                    <script>
+                        function myFunction(){
+                    
+                            $.ajax({
+                                url:'/admin/getSliders',
+                                type:'get',
+                                dataType:'json',
+                                success:function(data){
+                                    var sliders = ""
+                                    $.each(data.sliders,function(key,value){
+                                       
+                                        sliders += `<tr>
+                            <td><img src="{{asset('/upload/slider/${value.slider_img}')}}" alt="${value.title}"></td>
+                            <td>${value.title}</td>
+                            <td>${value.description}</td>
+                            <td>`
+                                if(value.status == 0)
+                                
+                sliders += `    <button onclick='updateStatus(${value.id})'  class="btn btn-danger">Inactive</button>`
+                                else{
+                sliders += `<button onclick='updateStatus(${value.id})'class="btn btn-success">Active</button>`
+                                }
+                sliders += `    </td>
+                            <td>
+                                <div class="d-flex d-flex justify-content-center align-items-center">
 
+                                    <a href="{{url('/admin/updateSlider/${value.id}')}}" class="btn btn-success mr-2"><i class='ti-reload'></i></a>
+
+                                    <button onclick='deleteSlider(${value.id})' class="btn btn-danger"><i class='ti-trash'></i></button>
+                                </div>
+                            </td>
+                        </tr>`
+                                    })
+                                    $('#MySliders').html(sliders)
+                                }
+                            })
+                        }
+                        myFunction()
+
+
+
+                        function deleteSlider(id){
+                            Swal.fire({
+  title: 'Are you sure?',
+  text: "You won't be able to revert this!",
+  icon: 'warning',
+  showCancelButton: true,
+  confirmButtonColor: '#3085d6',
+  cancelButtonColor: '#d33',
+  confirmButtonText: 'Yes, delete it!'
+}).then((result) => {
+  if (result.isConfirmed) {
+    Swal.fire(
+      'Deleted!',
+      'Your file has been deleted.',
+      'success'
+    )
+
+
+    $.ajax({
+                        type:'get',
+                        url: '/admin/deleteSlider/'+id,
+                        dataType: 'json',
+                        success:function(data){
+                            Swal.fire({
+            position: 'top-end',
+            icon: 'success',
+            title: 'Slider is deleted',
+            showConfirmButton: false,
+            timer: 1500
+            })
+
+            myFunction()
+                                    
+                        }
+                    })
+
+  }
+})
+                        }
+
+
+function updateStatus(id){
+    $.ajax({
+                        type:'get',
+                        url: '/admin/statusSlider/'+id,
+                        dataType: 'json',
+                        success:function(data){
+                            Swal.fire({
+            position: 'top-end',
+            icon: 'success',
+            title: 'Slider is deleted',
+            showConfirmButton: false,
+            timer: 1500
+            })
+
+            myFunction()
+                                    
+                        }
+                    })
+}
+
+               </script>
                 </div>
 
                 <div class="col-4">
@@ -113,5 +195,7 @@
         </section>   
          </div>
 </div>
+
+
 
 @endsection

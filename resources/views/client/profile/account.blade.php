@@ -15,23 +15,43 @@
             
                     
                     <ul class="mr-5" style="margin-top: 10px" >
+
                         <div class="row">
                             <div class="col-md-1"></div>
                             <li><a href="{{route('home')}}" class="btn btn-success col-md-7" style="margin-top: 10px">Home</a></li>
                         </div>
+
                         <div class="row">
                             <div class="col-md-1"></div>
                             <li><button class="btn btn-warning col-md-7" style="margin-top: 10px" id="profileInfoBtn">Profile Update</button></li>
                         </div>
+
                         <div class="row">
                             <div class="col-md-1"></div>
                             <li><a href="{{route('profile.trackOrder')}}" class="btn btn-info col-md-7" style="margin-top: 10px">Track Order</a></li>
                         </div>
+                        
                         <div class="row">
                             <div class="col-md-1"></div>
                             <li><button class="btn btn-primary col-md-7 text-center" style="margin-top: 10px" id="passwordInfoBtn">Change Password</button></li>
                         </div>
-                        
+
+                        <div class="row">
+                            <div class="col-md-1"></div>
+                            <li>
+                                
+
+                                <form action="{{route('logout')}}" method="post">
+                                    @csrf
+                                   
+
+                                    <button type="submit" id="deletebtn" class="btn btn-danger col-md-7" style="margin-top: 10px"">Delete Account</button>
+
+                                </form>
+
+                            </li>
+                        </div>
+
                         <div class="row">
                             <div class="col-md-1"></div>
                             
@@ -276,5 +296,51 @@ $('#passwordInfoBtn').on('click',function(){
     $('#profileInfo').hide()
 })
 
+</script>
+
+
+<script>
+     
+  
+        $('#deletebtn').on('click',function(e){
+            e.preventDefault()
+        const swalWithBootstrapButtons = Swal.mixin({
+  customClass: {
+    confirmButton: 'btn btn-success',
+    cancelButton: 'btn btn-danger'
+  },
+  buttonsStyling: false
+})
+
+swalWithBootstrapButtons.fire({
+  title: 'Are you sure?',
+  text: "You won't be able to revert this!",
+  icon: 'warning',
+  showCancelButton: true,
+  confirmButtonText: 'Yes, delete it!',
+  cancelButtonText: 'No, cancel!',
+  reverseButtons: true
+}).then((result) => {
+  if (result.isConfirmed) {
+    swalWithBootstrapButtons.fire(
+      'Deleted!',
+      'Your Account has been deleted.',
+      'success'
+    )
+    window.location.href = 'http://127.0.0.1:8000/client/delteAccount';
+  } else if (
+    /* Read more about handling dismissals below */
+    result.dismiss === Swal.DismissReason.cancel
+  ) {
+    swalWithBootstrapButtons.fire(
+      'Cancelled',
+      'Your imaginary file is safe :)',
+      'error'
+    )
+  }
+})
+        })
+       
+    
 </script>
 @endsection
