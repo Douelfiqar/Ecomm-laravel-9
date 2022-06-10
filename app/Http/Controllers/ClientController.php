@@ -41,12 +41,16 @@ if(Auth::check()){
     }
     
 }
-       
+
+    $user = $request->user()->roles()->get();
+
         $admin = false;
         if(Auth::check()){
-            if($request->user()->roles()->first()->name == 'admin'){
-                $admin = true;
-            };
+            foreach($user as $u){
+                if($u->name == 'admin' || $u->name == 'SUPERADMIN'){
+                    $admin = true;
+                }  
+            }
         }
 
         $Featureds = Product::inRandomOrder()

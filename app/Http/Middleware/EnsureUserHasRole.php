@@ -17,9 +17,16 @@ class EnsureUserHasRole
     public function handle(Request $request, Closure $next, string $role)
     {
 
-        if($request->user()->roles()->first()->name != $role)
-            return redirect()->back();
+        $user = $request->user()->roles()->get();
 
-        return $next($request);
+        foreach($user as $u){
+            if($u->name == $role){
+                return $next($request);
+            }  
+        }
+
+    return redirect()->back();
+
+        
     }
 }

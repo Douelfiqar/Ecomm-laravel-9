@@ -50,137 +50,137 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
 
     Route::prefix('admin')->group(function () {
         
-        Route::get('/dashboard', [AdminController::class,'index'] )->name('dashboard');
+                Route::get('/dashboard', [AdminController::class,'index'] )->name('dashboard');
 
-        Route::get('/profile', [AdminController::class,'infoProfile'] )->name('profile');
+                Route::get('/profile', [AdminController::class,'infoProfile'] )->name('profile');
 
-        Route::get('/editProfile', [AdminController::class,'editProfile'] )->name('admin.editProfile');
+                Route::get('/editProfile', [AdminController::class,'editProfile'] )->name('admin.editProfile');
 
-        Route::post('/updateProfile', [AdminController::class,'updateProfile'] )->name('admin.updateProfile');
+                Route::post('/updateProfile', [AdminController::class,'updateProfile'] )->name('admin.updateProfile');
 
-        Route::get('/updatePassword', [AdminController::class,'updatePassword'] )->name('update.password');
+                Route::get('/updatePassword', [AdminController::class,'updatePassword'] )->name('update.password');
 
-        Route::post('/editPassword', [AdminController::class,'editPassword'] )->name('admin.editPassword');
+                Route::post('/editPassword', [AdminController::class,'editPassword'] )->name('admin.editPassword');
+                
+                    //   -----------------------------------  Brand  --------------------------------
+
+                Route::get('/allBrands', [BrandController::class,'allBrands'] )->name('admin.allBrands');
+                
+                Route::post('/addBrand', [BrandController::class,'addBrand'] )->name('admin.addBrand');
+
+                // Route::get('/updateBrand/{id}', [BrandController::class,'updateBrand'] )->name('admin.updateBrand');
+
+                Route::get('/deleteBrand/{id}', [BrandController::class,'deleteBrand'] )->name('admin.deleteBrand');
+
+                Route::get('/update/{id}', [BrandController::class,'updateBrand'] )->name('admin.updateBrand');
+                
+                Route::post('/editeBrand', [BrandController::class,'editBrand'] )->name('admin.editBrand');
+
+
+
+            //   -----------------------------------  Category  --------------------------------
+            
+            Route::get('/allCategory', [CategoryController::class,'allCategory'] )->name('admin.allCategory');
+
+            Route::post('/addCategory', [CategoryController::class,'addCategory'] )->name('admin.addCategory');
+
+            Route::get('/updateCategory/{id}', [CategoryController::class,'updateCategory'] )->name('admin.updateCategory');
+            
+            Route::POST('/edite', [CategoryController::class,'editCategory'] )->name('admin.editCategory');
+
+            Route::get('/deleteCategory/{id}', [CategoryController::class,'deleteCategory'] )->name('admin.deleteCategory');
+
+            //   -----------------------------------  subCategory  --------------------------------
+
+            
+            Route::get('/allSubCategory', [SubCategoryController::class,'allSubCategory'] )->name('admin.allSubCategory');   
+
+            Route::post('/addSubCategory', [SubCategoryController::class,'addSubCategory'] )->name('admin.addSubCategory');
+
+            Route::get('/updateSubCategory/{id}', [SubCategoryController::class,'updateSubCategory'] )->name('admin.updateSubCategory');
+            
+            Route::POST('/editeSubCategory', [SubCategoryController::class,'editSubCategory'] )->name('admin.editSubCategory');
+
+            Route::get('/deleteSubCategory/{id}', [SubCategoryController::class,'deleteSubCategory'] )->name('admin.deleteSubCategory');
+
+            //   ----------------------------------- Sub subCategory  --------------------------------
+
+            
+            Route::get('/allSubSubCategory', [SubSubCategoryController::class,'allSubSubCategory'] )->name('admin.allSubSubCategory');   
+
+            Route::post('/addSubSubCategory', [SubSubCategoryController::class,'addSubSubCategory'] )->name('admin.addSubSubCategory');
         
-            //   -----------------------------------  Brand  --------------------------------
-
-        Route::get('/allBrands', [BrandController::class,'allBrands'] )->name('admin.allBrands');
+            Route::get('/updateSubSubCategory/{id}', [SubSubCategoryController::class,'updateSubSubCategory'] )->name('admin.updateSubSubCategory');
+            
+            Route::POST('/editeSubSubCategory', [SubSubCategoryController::class,'editSubSubCategory'] )->name('admin.editSubSubCategory');
         
-        Route::post('/addBrand', [BrandController::class,'addBrand'] )->name('admin.addBrand');
+            Route::get('/deleteSubSubCategory/{id}', [SubSubCategoryController::class,'deleteSubSubCategory'] )->name('admin.deleteSubSubCategory');
 
-        // Route::get('/updateBrand/{id}', [BrandController::class,'updateBrand'] )->name('admin.updateBrand');
+            // Route::post('/ajax', [SubSubCategoryController::class,'testAjax'] )->name('admin.deleteSubSubCategory');
 
-        Route::get('/deleteBrand/{id}', [BrandController::class,'deleteBrand'] )->name('admin.deleteBrand');
+            //   ----------------------------------- Products  --------------------------------
 
-        Route::get('/update/{id}', [BrandController::class,'updateBrand'] )->name('admin.updateBrand');
-        
-        Route::post('/editeBrand', [BrandController::class,'editBrand'] )->name('admin.editBrand');
+                //route pour ajouter un produit!!!!
+            Route::get('/addProduct', [ProductController::class,'addProductGet'] )->name('admin.allProduct');   
 
+            Route::post('/addProduct', [ProductController::class,'addProduct'] )->name('admin.addProduct');
 
+            Route::get('/updateProduct/{id}', [ProductController::class,'updateProduct'] );
 
-    //   -----------------------------------  Category  --------------------------------
-    
-    Route::get('/allCategory', [CategoryController::class,'allCategory'] )->name('admin.allCategory');
-
-    Route::post('/addCategory', [CategoryController::class,'addCategory'] )->name('admin.addCategory');
-
-    Route::get('/updateCategory/{id}', [CategoryController::class,'updateCategory'] )->name('admin.updateCategory');
-    
-    Route::POST('/edite', [CategoryController::class,'editCategory'] )->name('admin.editCategory');
-
-    Route::get('/deleteCategory/{id}', [CategoryController::class,'deleteCategory'] )->name('admin.deleteCategory');
-
-    //   -----------------------------------  subCategory  --------------------------------
-
-    
-    Route::get('/allSubCategory', [SubCategoryController::class,'allSubCategory'] )->name('admin.allSubCategory');   
-
-    Route::post('/addSubCategory', [SubCategoryController::class,'addSubCategory'] )->name('admin.addSubCategory');
-
-    Route::get('/updateSubCategory/{id}', [SubCategoryController::class,'updateSubCategory'] )->name('admin.updateSubCategory');
-    
-    Route::POST('/editeSubCategory', [SubCategoryController::class,'editSubCategory'] )->name('admin.editSubCategory');
-
-    Route::get('/deleteSubCategory/{id}', [SubCategoryController::class,'deleteSubCategory'] )->name('admin.deleteSubCategory');
-
-     //   ----------------------------------- Sub subCategory  --------------------------------
-
-    
-     Route::get('/allSubSubCategory', [SubSubCategoryController::class,'allSubSubCategory'] )->name('admin.allSubSubCategory');   
-
-     Route::post('/addSubSubCategory', [SubSubCategoryController::class,'addSubSubCategory'] )->name('admin.addSubSubCategory');
- 
-     Route::get('/updateSubSubCategory/{id}', [SubSubCategoryController::class,'updateSubSubCategory'] )->name('admin.updateSubSubCategory');
-     
-     Route::POST('/editeSubSubCategory', [SubSubCategoryController::class,'editSubSubCategory'] )->name('admin.editSubSubCategory');
- 
-     Route::get('/deleteSubSubCategory/{id}', [SubSubCategoryController::class,'deleteSubSubCategory'] )->name('admin.deleteSubSubCategory');
-
-    // Route::post('/ajax', [SubSubCategoryController::class,'testAjax'] )->name('admin.deleteSubSubCategory');
-
-    //   ----------------------------------- Products  --------------------------------
-
-        //route pour ajouter un produit!!!!
-    Route::get('/addProduct', [ProductController::class,'addProductGet'] )->name('admin.allProduct');   
-
-    Route::post('/addProduct', [ProductController::class,'addProduct'] )->name('admin.addProduct');
-
-    Route::get('/updateProduct/{id}', [ProductController::class,'updateProduct'] );
-
-    Route::post('/editeProduct', [ProductController::class,'editProduct'])->name('admin.editProduct');
+            Route::post('/editeProduct', [ProductController::class,'editProduct'])->name('admin.editProduct');
 
 
-    Route::get('/manageProduct', [ProductController::class,'manageProduct'] )->name('admin.manageProduct');
+            Route::get('/manageProduct', [ProductController::class,'manageProduct'] )->name('admin.manageProduct');
 
-    Route::get('/getProduct', [ProductController::class,'getProduct'] );
+            Route::get('/getProduct', [ProductController::class,'getProduct'] );
 
-    Route::get('/deleteProduct/{id}', [ProductController::class,'deleteProduct'] );
+            Route::get('/deleteProduct/{id}', [ProductController::class,'deleteProduct'] );
 
-    Route::post('/product/SubCategoryajax', [ProductController::class,'ajaxCategoryProduct'] )->name('admin.ajaxCategoryProduct');
+            Route::post('/product/SubCategoryajax', [ProductController::class,'ajaxCategoryProduct'] )->name('admin.ajaxCategoryProduct');
 
-    Route::post('/product/SubSubCategoryajax', [ProductController::class,'ajaxSubCategoryProduct'] )->name('admin.ajaxCategoryProduct');
+            Route::post('/product/SubSubCategoryajax', [ProductController::class,'ajaxSubCategoryProduct'] )->name('admin.ajaxCategoryProduct');
 
-    Route::get('/statusProduct/{id}', [ProductController::class,'statusUpdate'] );
+            Route::get('/statusProduct/{id}', [ProductController::class,'statusUpdate'] );
 
-    //   ----------------------------------- Slider  --------------------------------
+            //   ----------------------------------- Slider  --------------------------------
 
-        
-    Route::get('/allSlider', [SliderController::class,'allSlider'] )->name('admin.allSlider');   
+                
+            Route::get('/allSlider', [SliderController::class,'allSlider'] )->name('admin.allSlider');   
 
-    Route::get('/getSliders', [SliderController::class,'getSliders'] )->name('admin.allSlider');   
+            Route::get('/getSliders', [SliderController::class,'getSliders'] )->name('admin.allSlider');   
 
-    Route::post('/addSlider', [SliderController::class,'addSlider'] )->name('admin.addSlider');
+            Route::post('/addSlider', [SliderController::class,'addSlider'] )->name('admin.addSlider');
 
-    Route::get('/updateSlider/{id}', [SliderController::class,'updateSlider'])->name('admin.updateslider');
+            Route::get('/updateSlider/{id}', [SliderController::class,'updateSlider'])->name('admin.updateslider');
 
-    Route::post('/editeSlider', [SliderController::class,'editSlider'])->name('admin.editSlider');
+            Route::post('/editeSlider', [SliderController::class,'editSlider'])->name('admin.editSlider');
 
-    Route::get('/deleteSlider/{id}', [SliderController::class,'deleteSlider'] );
+            Route::get('/deleteSlider/{id}', [SliderController::class,'deleteSlider'] );
 
-    Route::get('/status/{id}', [SliderController::class,'statusUpdate'] )->name('admin.statusSldier');
-        
-    Route::get('/statusSlider/{id}', [SliderController::class,'statusUpdate'] )->name('admin.statusSlider');
+            Route::get('/status/{id}', [SliderController::class,'statusUpdate'] )->name('admin.statusSldier');
+                
+            Route::get('/statusSlider/{id}', [SliderController::class,'statusUpdate'] )->name('admin.statusSlider');
 
-    //-------------------------------------------- Users -----------------------------------
-    
-    Route::get('/manageUsers', [UsersController::class,'IndexUsers'] )->name('admin.manageUser');
-    
-    Route::get('/getUsers', [UsersController::class,'getUsers'] );
+            //-------------------------------------------- Users -----------------------------------
+            
+            Route::get('/manageUsers', [UsersController::class,'IndexUsers'] )->name('admin.manageUser');
+            
+            Route::get('/getUsers', [UsersController::class,'getUsers'] );
 
-    Route::get('/deleteUser/{id}', [UsersController::class,'deleteUsers'] );
+            Route::get('/deleteUser/{id}', [UsersController::class,'deleteUsers'] );
 
-    
-    // ------------------------------------------- Review -----------------------------------
+            
+            // ------------------------------------------- Review -----------------------------------
 
-    Route::get('/manageReview', [ReviewAdminController::class,'displayReview'] )->name('admin.manageReview');
-    
-    Route::get('/getReview', [ReviewAdminController::class,'getReviews'] );
+            Route::get('/manageReview', [ReviewAdminController::class,'displayReview'] )->name('admin.manageReview');
+            
+            Route::get('/getReview', [ReviewAdminController::class,'getReviews'] );
 
-    Route::get('/userData/{id}', [ReviewAdminController::class,'getUsersData'] );
+            Route::get('/userData/{id}', [ReviewAdminController::class,'getUsersData'] );
 
-    Route::get('/updateStatusReview/{id}', [ReviewAdminController::class,'status'] );
+            Route::get('/updateStatusReview/{id}', [ReviewAdminController::class,'status'] );
 
-    Route::get('/deleteReview/{id}', [ReviewAdminController::class,'deleteReview'] );
+            Route::get('/deleteReview/{id}', [ReviewAdminController::class,'deleteReview'] );
 
     });
 
@@ -205,7 +205,7 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
 
     // ------------------------------- Manage Admin --------------------------
     
-    Route::get('/admin/manageAdmin',[ManageAdminController::class,'index'])->name('admin.manageAdmin');
+   
 
 });
 
@@ -328,4 +328,14 @@ Route::get('/auth/facebook/callback', [FacebookController::class, 'handleFaceboo
 Route::prefix('google')->name('google.')->group( function(){
     Route::get('login', [GoogleController::class, 'loginWithGoogle'])->name('login');
     Route::any('callback', [GoogleController::class, 'callbackFromGoogle'])->name('callback');
+});
+
+
+
+Route::middleware(['auth','role:SUPERADMIN'])->group(function (){
+
+Route::get('/admin/manageAdmin',[ManageAdminController::class,'index'])->name('admin.manageAdmin');
+
+Route::get('/admin/getAdmins',[ManageAdminController::class,'getAdmins']);
+
 });

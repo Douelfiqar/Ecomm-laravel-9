@@ -137,8 +137,8 @@
         <li><a href="{{route('admin.manageReview')}}"><i class="ti-more"></i>Manage Reviews</a></li>
       </ul>
     </li>
-{{-- @if($user->roles()->first()->name == 'SUPERADMIN') --}}
 
+    
     <li class="treeview {{$route == 'admin.manageAdmin' ? 'active':''}}">
       <a href="#">
       <i class="ti-filter"></i>
@@ -153,7 +153,6 @@
       </ul>
     </li>
     
-{{-- @endif --}}
   </ul>
 </section>
 
