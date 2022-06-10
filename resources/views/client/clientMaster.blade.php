@@ -306,17 +306,17 @@ success:function(data){
 							<div class="col-sm-4">
 								<div class="rating rateit-small"></div>
 							</div>
-							<div class="col-sm-8">
-								<div class="reviews">
-									(06 Reviews)
-								</div>
-							</div>
+							
 						</div><!-- /.row -->
 						<div class="cart-product-info">
 											<span class="product-color">COLOR:<span>${value.options.color}</span></span>
 						</div>
 					</td>
-					<td class="cart-product-edit"><a href="#" class="product-edit">Edit</a></td>
+					<td class="cart-product-edit"><a href="#" class="product-edit">
+            
+            <button class="btn btn-primary icon" type="button" title="Add Cart" data-toggle="modal" data-target="#exampleModal1" onClick="viewProductCartPage(this.id)" id='${value.id}'> <i class="fa fa-shopping-cart"></i> </button>
+
+            </a></td>
 					<td class="cart-product-quantity">
 						<div class="quant-input">
             <input type="hidden" name="itemId" value="${value.id}">

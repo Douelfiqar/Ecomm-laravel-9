@@ -137,6 +137,23 @@
         <li><a href="{{route('admin.manageReview')}}"><i class="ti-more"></i>Manage Reviews</a></li>
       </ul>
     </li>
+{{-- @if($user->roles()->first()->name == 'SUPERADMIN') --}}
+
+    <li class="treeview {{$route == 'admin.manageAdmin' ? 'active':''}}">
+      <a href="#">
+      <i class="ti-filter"></i>
+        <span>Manage Admins</span>
+        <span class="pull-right-container">
+          <i class="fa fa-angle-right pull-right"></i>
+        </span>
+       
+      </a>
+      <ul class="treeview-menu">
+        <li><a href="{{route('admin.manageAdmin')}}"><i class="ti-more"></i>Manage Admins</a></li>
+      </ul>
+    </li>
+    
+{{-- @endif --}}
   </ul>
 </section>
 

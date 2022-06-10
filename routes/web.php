@@ -13,6 +13,7 @@ use App\Http\Controllers\ContactController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ShippingController;
+use App\Http\Controllers\ManageAdminController;
 use App\Http\Controllers\ReviewAdminController;
 use App\Http\Controllers\SubCategoryController;
 use App\Http\Controllers\Auth\FacebookController;
@@ -146,7 +147,7 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
         
     Route::get('/allSlider', [SliderController::class,'allSlider'] )->name('admin.allSlider');   
 
-    Route::get('/getSliders', [SliderController::class,'getSliders'] );   
+    Route::get('/getSliders', [SliderController::class,'getSliders'] )->name('admin.allSlider');   
 
     Route::post('/addSlider', [SliderController::class,'addSlider'] )->name('admin.addSlider');
 
@@ -156,7 +157,7 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
 
     Route::get('/deleteSlider/{id}', [SliderController::class,'deleteSlider'] );
 
-    // Route::get('/status/{id}', [SliderController::class,'statusUpdate'] )->name('admin.statusSldier');
+    Route::get('/status/{id}', [SliderController::class,'statusUpdate'] )->name('admin.statusSldier');
         
     Route::get('/statusSlider/{id}', [SliderController::class,'statusUpdate'] )->name('admin.statusSlider');
 
@@ -201,6 +202,11 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::get('/admin/removeCity/{id}',[ShippingController::class,'removeCity']);
 
     Route::get('/admin/getOrders',[ShippingController::class,'getOrders']);
+
+    // ------------------------------- Manage Admin --------------------------
+    
+    Route::get('/admin/manageAdmin',[ManageAdminController::class,'index'])->name('admin.manageAdmin');
+
 });
 
 Route::post('/ajax', [SubSubCategoryController::class,'testAjax'] );
@@ -216,7 +222,6 @@ Route::prefix('client')->group(function () {
 
     Route::get('/home/lang/fr', [LangClientController::class,'langFr']);
 
-    Route::get('/home/details/{id}', [DetailController::class,'index']);
 
     // Route::get('/category', [CategoryClientController::class,'indexCategory']);
 
@@ -225,6 +230,8 @@ Route::prefix('client')->group(function () {
     Route::get('/product/view/modal/{id}', [CategoryClientController::class,'modelCategory']);
 
     Route::post('/cart/data/store/{id}', [CartController::class,'addCart']);
+
+    Route::get('/cart/data/update/{id}', [CartController::class,'updateCart']);
 
     Route::get('/product/mini/cart', [CartController::class,'getMiniCart']);
     
@@ -271,7 +278,11 @@ Route::prefix('client')->group(function () {
 
         //-------------------------AJAX--------------------------------
 
-        Route::post('/review',[ReviewController::class,'review'])->name('client.review');
+        Route::get('/home/details/{id}', [ReviewController::class,'index']);
+        
+        Route::get('/getReviews/{id}', [ReviewController::class,'getReviews']);
+        
+        Route::get('/addReview/{id}', [ReviewController::class,'addReview']);
 
         //------------------------ ADD TO CART DETAILS -----------------------
         

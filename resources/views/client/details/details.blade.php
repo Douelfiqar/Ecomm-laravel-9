@@ -173,7 +173,7 @@
 								<div class="row">
 									<div class="col-sm-2">
 										<div class="stock-box">
-											<span class="label">Availability :</span>
+											<span class="label">Availability<i class="ti-folder"></i> :</span>
 										</div>	
 									</div>
 									<div class="col-sm-9">
@@ -352,121 +352,125 @@
 
 								<div id="review" class="tab-pane">
 									<div class="product-tab">
-									<form action="{{route('client.review')}}" method="post">
 	@csrf			
 										<div class="product-reviews">
 											<h4 class="title">Customer Reviews</h4>
-					@foreach($reviews as $review)
-											<div class="reviews">
-												<div class="review">
-									
-												<div class="card mb-3" style="max-width: 540px;">
-	<div class="row g-0">
-				<div class="col-md-4">
-					@php
-						$id_user = $review->user_id;
-						$user = App\Models\User::where('id',$id_user)->first();
-						$profile_picture = $user->profile_photo_path;
-						$username=$user->name;
-					@endphp
-					<img src="{{asset('upload/clientPhoto/'.$profile_picture)}}" class="img-fluid rounded-start" alt="...">
-				</div>
-				<div class="col-md-8">
-					<div class="card-body">
-						<h4 class="card-title"><strong>{{$username}}</strong></h4>
-						<h5 class="card-title">{{$review->summary}}</h5>
-						<p class="card-text">{{$review->comment}}</p>
-						<p class="card-text"><small class="text-muted">Last updated {{$review->created_at}} ago</small></p>
-					</div>
-					</div>
-				</div>
-	</div>
+					
+											<div id="reviewsAjax">
 
-												</div>
 											</div>
-					@endforeach
 											<!-- /.reviews -->
 										</div><!-- /.product-reviews -->
 										
+<script>
+	function getAllReviews(id){
+		$.ajax({
+    type:'get',
+    url:'/client/getReviews/'+id,
+    dataType:'json',
+    success:function(data){
+		console.log(data)
+		var reviews = ""
 
+		$.each(data.reviews,function(key,value){
+
+			reviews += `<div class="reviews">
+												<div class="review">
+									
+												<div class="card mb-3" style="max-width: 540px;">
+							<div class="row g-0">
+										<div class="col-md-4">
+											
+											<img src="{{asset('upload/clientPhoto/${value.picture_path}')}}" class="img-fluid rounded-start" alt="...">
+											
+										</div>
+										
+										<div class="col-md-8">
+											<div class="card-body">
+												<i class="ti-folder" style='color:red'></i>
+												
+												<h4 class="card-title"><strong>${value.user_name}</strong></h4>
+												<h5 class="card-title">${value.summary}</h5>
+												<p class="card-text">${value.comment}</p>
+												<p class="card-text"><small class="text-muted">Last updated ${value.created_at} ago</small></p>
+											</div>
+											</div>
+										</div>
+							</div>
+
+																		</div>
+																	</div>`
+
+		})
+
+		$('#reviewsAjax').html(reviews)
+	}
+})
+	}
+	getAllReviews({{$product->id}})
+
+	function addReview(id){
+		Swal.fire({
+  position: 'top-end',
+  icon: 'success',
+  title: 'Your work has been saved',
+  showConfirmButton: false,
+  timer: 1500
+})
+
+		$.ajax({
+			type:'get',
+			url:'/client/addReview/'+id,
+			dataType:'json',
+			data:{comment:$('#comment').val(),summary:$('#summary').val()},
+			success:function(data){
+				$('#comment').reset()
+				$('#summary').reset()
+				
+				getAllReviews({{$product->id}})
+			}
+	})
+}
+</script>
 										
 										<div class="product-add-review">
 											<h4 class="title">Write your own review</h4>
 											<div class="review-table">
 												<div class="table-responsive">
-													<table class="table">	
-														<thead>
-															<tr>
-																<th class="cell-label">&nbsp;</th>
-																<th>1 star</th>
-																<th>2 stars</th>
-																<th>3 stars</th>
-																<th>4 stars</th>
-																<th>5 stars</th>
-															</tr>
-														</thead>	
-														<tbody>
-															<tr>
-																<td class="cell-label">Quality</td>
-																<td><input type="radio" name="quality" class="radio" value="1"></td>
-																<td><input type="radio" name="quality" class="radio" value="2"></td>
-																<td><input type="radio" name="quality" class="radio" value="3"></td>
-																<td><input type="radio" name="quality" class="radio" value="4"></td>
-																<td><input type="radio" name="quality" class="radio" value="5"></td>
-															</tr>
-															<tr>
-																<td class="cell-label">Price</td>
-																<td><input type="radio" name="quality" class="radio" value="1"></td>
-																<td><input type="radio" name="quality" class="radio" value="2"></td>
-																<td><input type="radio" name="quality" class="radio" value="3"></td>
-																<td><input type="radio" name="quality" class="radio" value="4"></td>
-																<td><input type="radio" name="quality" class="radio" value="5"></td>
-															</tr>
-															<tr>
-																<td class="cell-label">Value</td>
-																<td><input type="radio" name="quality" class="radio" value="1"></td>
-																<td><input type="radio" name="quality" class="radio" value="2"></td>
-																<td><input type="radio" name="quality" class="radio" value="3"></td>
-																<td><input type="radio" name="quality" class="radio" value="4"></td>
-																<td><input type="radio" name="quality" class="radio" value="5"></td>
-															</tr>
-														</tbody>
-													</table><!-- /.table .table-bordered -->
+													<!-- /.table .table-bordered -->
 												</div><!-- /.table-responsive -->
 											</div><!-- /.review-table -->
 											
 											<div class="review-form">
 												<div class="form-container">
-													<form role="form" class="cnt-form">
 														
 														<div class="row">
 															<div class="col-sm-6">
 																<!-- /.form-group -->
 																<div class="form-group">
 																	<label for="exampleInputSummary">Summary <span class="astk">*</span></label>
-																	<input type="text" class="form-control txt" name="summary" id="exampleInputSummary" placeholder="">
+																	<input type="text" class="form-control txt" name="summary" id="summary">
 																</div><!-- /.form-group -->
 															</div>
 
 															<div class="col-md-6">
 																<div class="form-group">
 																	<label for="exampleInputReview">Review <span class="astk">*</span></label>
-																	<textarea class="form-control txt txt-review" name="comment" id="exampleInputReview" rows="4" placeholder=""></textarea>
+																	<textarea class="form-control txt txt-review" id="comment" rows="4" placeholder=""></textarea>
 																</div><!-- /.form-group -->
-																<input type="hidden" name="product_id" value="{{$product->id}}">
+															
 															</div>
 														</div><!-- /.row -->
 														
 														<div class="action text-right">
-															<button class="btn btn-primary btn-upper">SUBMIT REVIEW</button>
+															<button onclick="addReview({{$product->id}})" class="btn btn-primary btn-upper">SUBMIT REVIEW</button>
 														</div><!-- /.action -->
 
-													</form><!-- /.cnt-form -->
 												</div><!-- /.form-container -->
 											</div><!-- /.review-form -->
 
 										</div><!-- /.product-add-review -->										
-										</form>
+																			
 @else
 <a href="/login">Login</a>
 @endif	
@@ -603,9 +607,7 @@ $.ajax({
 type:'get',
 url: '/client/addcart/detail/'+id,
 dataType: 'json',
-data:{
-  color:color,size:size,qty:qty
-				},
+data:{color:color,size:size,qty:qty},
 success:function(data){
 miniCart()
 }

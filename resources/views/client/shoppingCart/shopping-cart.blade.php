@@ -191,5 +191,157 @@
 
 <!-- ============================================================= FOOTER ============================================================= -->
     </body>
+	<div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+		  <div class="modal-content">
+			<div class="modal-header">
+			  <h5 class="modal-title" id="exampleModalLabel"><span id="ptitle"></span></h5>
+			  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+				<span aria-hidden="true">&times;</span>
+			  </button>
+			</div>
+			<div class="modal-body">
+			  
+				<div class="row">
+	
+					<div class="col-md-4">
+						<div class="card" style="width: 18rem;">
+							<img src="" class="card-img-top" alt="..." id="pimg" style="height:200px;width:200px;object-fit: contain;" >
+						  </div>
+					</div>
+	
+	
+					<div class="col-md-4">
+						  <ul class="list-group">
+							<li class="list-group-item">Product Price: <strong id="pprice" style="color:red"></strong> </li>
+						   
+							<li class="list-group-item">Stock: <strong id="sstock" style="color:red"></strong></li>
+							<li class="list-group-item">Category: <strong id="ccategory" style="color:red"></strong></li>
+							<li class="list-group-item">Brand: <strong id="bbrand" style="color:red"></strong></li>
+						  </ul>
+					</div>
+	
+	
+					<div class="col-md-4">
+						<div class="form-group">
+	
+							<label for="exampleFormControlSelect1">Select Color</label>
+							<select class="form-control" id="pcolor">
+							 
+							</select>
+						  </div>
+	
+						
+						  <div class="form-group" id="sizeR">
+							<label for="exampleFormControlSelect1">Select Size</label>
+							<select class="form-control" id="psize">
+							  
+							</select>
+						  </div>
+	
+						  <div class="form-group">
+							<label for="exampleFormControlInput1">Qty</label>
+							<input type="number" class="form-control" id="pqty" min="1" value="1">
+						  </div>
+	
+	
+					</div>
+	
+				</div>
+	
+	
+	
+	
+			</div>
+			<div class="modal-footer">
+			  <button type="button" class="btn btn-secondary" id="close-btn-model" data-dismiss="modal">Close</button>
+			  <input type="hidden" id="pprod_id" >
+			  <button type="button" class="btn btn-primary" onclick="updateCart()">UPDATE CART</button>
+			</div>
+		  </div>
+		</div>
+	  </div>
 
+<script>
+function viewProductCartPage(id){
+	
+$.ajax({
+  type: 'GET',
+  url: '/client/product/view/modal/'+id,
+  dataType: 'json', 
+  success:function(data){
+
+    $('#pprod_id').attr('value',id);
+    $('#psize').empty();
+
+    if(data.sizeARRAY.length > 1){
+      $('#sizeR').show();
+    $.each(data.sizeARRAY, function(i, value) {
+		if(data.cart.options.size == value)
+             $('#psize').append($('<option selected>').text(value).attr('value',value));
+				else{
+					$('#psize').append($('<option>').text(value).attr('value',value));
+
+				}
+    });
+    }else{
+      $('#sizeR').hide();
+    }
+
+    $('#ptitle').text(data.product.product_name_en);
+    $('#pprice').text(data.price);
+    $('#sstock').text(data.product.product_qty);
+    $('#ccategory').text(data.category_name);
+    $('#bbrand').text(data.brand_name);
+    $('#pqty').attr('max',data.product.product_qty).attr('value',data.cart.qty)
+    $('#pimg').attr('src','/upload/productPhoto/'+data.product.product_thambnail)
+
+    $('#pcolor').empty();
+    $.each(data.colorARRAY, function(i, value) {
+		if(data.cart.options.color == value)
+             $('#pcolor').append($('<option selected>').text(value).attr('value',value));
+				else{
+					$('#pcolor').append($('<option>').text(value).attr('value',value));
+				}
+    });
+
+
+         }
+});
+}
+
+
+function updateCart(){
+
+	var product_name = $('#ptitle').text();
+  var product_id = $('#pprod_id').val();
+  var color = $('#pcolor option:selected').text();
+  var size = $('#psize option:selected').text();
+  var qty = $('#pqty').val();
+
+  $.ajax({
+    type:'get',
+    dataType: 'json',
+    data:{
+      product_name:product_name,product_id:product_id,color:color,size:size,qty:qty
+    },
+    url: "/client/cart/data/update/"+product_id,
+    success:function(data){
+      console.log(data)
+	  Swal.fire({
+  position: 'top-end',
+  icon: 'success',
+  title: 'Your update has been saved',
+  showConfirmButton: false,
+  timer: 1500
+})
+      miniCart()
+	  getCart()
+      $('#close-btn-model').click();
+    }
+  })
+
+}
+
+</script>
 @endsection

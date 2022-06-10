@@ -47,6 +47,21 @@ class CartController extends Controller
             return response()->json(['success'=>$produit->selling_price]);
     }
 
+    public function updateCart($id,Request $request){
+
+        $carts = Cart::content();
+        foreach($carts as $cart){
+            if($cart->id == $id){
+                $iteam = $cart;
+            }
+        }
+        $product = Product::find($id);
+        Cart::update($iteam->rowId, ['qty' => $request->qty]);
+        Cart::update($iteam->rowId, ['options' => ['color' => $request->color,'size'=>$request->size,'image'=>$product->product_thambnail]]);
+
+        return response()->json(['success'=> $request]);
+
+    }
 
     public function getMiniCart(){
 

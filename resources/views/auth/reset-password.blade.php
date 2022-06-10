@@ -112,6 +112,6 @@
 	</div>
 		</div>
 			</div>
-
+@include('client.body.brand')
 
 @endsection

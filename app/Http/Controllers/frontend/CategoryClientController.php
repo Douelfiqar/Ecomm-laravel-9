@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use App\Models\SubSubCategory;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Gloudemans\Shoppingcart\Facades\Cart;
 
 class CategoryClientController extends Controller
 {
@@ -68,14 +69,25 @@ class CategoryClientController extends Controller
         if($product->discount_price){
             $price = $product->discount_price;
         }
+        $iteam = 'NULL';
+        $carts = Cart::content();
+        foreach($carts as $cart){
+            if($cart->id == $id){
+                $iteam = $cart;
+            }
+        }
+        //$selectedColor = $cart->options->color;
+        // $selectedSize = $cart->options->size;
+        // $selectedqty = $cart->qty;
+
         return response()->json(array(
             'product' => $product,
             'colorARRAY' => $colorARRAY,
             'sizeARRAY' => $sizeARRAY,
             'brand_name' => $brand->brand_name_en,
             'category_name' => $category->category_name_en,
-            'price' => $price
-
+            'price' => $price,
+            'cart'=>$iteam
         ));
     }
 }
