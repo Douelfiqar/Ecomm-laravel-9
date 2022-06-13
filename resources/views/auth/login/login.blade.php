@@ -3,7 +3,7 @@
 	<p class="">Hello, Welcome to your account.</p>
 	<div class="social-sign-in outer-top-xs">
 		<a href="{{url('/auth/facebook/redirect')}}" class="facebook-sign-in"><i class="fa fa-facebook"></i> Sign In with Facebook</a>
-		<a href="{{route('google.login')}}" class="twitter-sign-in"><i class="fa fa-twitter"></i> Sign In with Twitter</a>
+		<a href="{{route('google.login')}}" style="background-color:red"><i class="fa fa-google"></i> Sign In with Google</a>
 	</div>
 	@if (session('status'))
             <div class="mb-4 font-medium text-sm text-green-600">

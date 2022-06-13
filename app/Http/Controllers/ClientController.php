@@ -23,9 +23,9 @@ class ClientController extends Controller
         $brands = Brand::all();
         $slides = Slider::where('status','1')->orderBy('id','DESC')->limit(3)->get();
         $products = Product::where('status','1')->orderBy('id','DESC')->limit(6)->get();
-        $HotDeals = Product::where('hot_deals','1')->whereNotNull('discount_price')->orderBy('id','DESC')->limit(3)->get();
+        $HotDeals = Product::where('hot_deals','1')->whereNotNull('discount_price')->where('status','1')->orderBy('id','DESC')->limit(3)->get();
 
-        $SpecialOffers = Product::where('special_offer','1')->whereNotNull('discount_price')->orderBy('id','DESC')->limit(3)->get();
+        $SpecialOffers = Product::where('special_offer','1')->whereNotNull('discount_price')->where('status','1')->orderBy('id','DESC')->limit(3)->get();
 
 if(Auth::check()){
     $roleUserId = Auth::user()->id;
@@ -57,33 +57,33 @@ if(Auth::check()){
             }
         }
 
-        $Featureds = Product::inRandomOrder()
+        $Featureds = Product::inRandomOrder()->where('status','1')
                     ->limit(6)
                     ->get();
 
-        $SpecialDeals = Product::where('special_deals','1')->whereNotNull('discount_price')->orderBy('id','DESC')->limit(3)->get();
+        $SpecialDeals = Product::where('special_deals','1')->where('status','1')->whereNotNull('discount_price')->orderBy('id','DESC')->limit(3)->get();
 
-        $Electroniques =  Product::inRandomOrder()->where('category_id',8)
+        $Electroniques =  Product::inRandomOrder()->where('category_id',8)->where('status','1')->where('status','1')
         ->limit(6)
         ->get();
 
-        $bestSeller1 = Product::inRandomOrder()
+        $bestSeller1 = Product::inRandomOrder()->where('status','1')
         ->limit(2)
         ->get();
 
-        $bestSeller2 = Product::inRandomOrder()
+        $bestSeller2 = Product::inRandomOrder()->where('status','1')
         ->limit(2)
         ->get();
 
-        $bestSeller3 = Product::inRandomOrder()
+        $bestSeller3 = Product::inRandomOrder()->where('status','1')
         ->limit(2)
         ->get();
 
-        $bestSeller4 = Product::inRandomOrder()
+        $bestSeller4 = Product::inRandomOrder()->where('status','1')
         ->limit(2)
         ->get();
 
-        $beauties = Product::inRandomOrder()->where('category_id',11)->limit(6)->get();
+        $beauties = Product::inRandomOrder()->where('category_id',11)->where('status','1')->limit(6)->get();
 
 
         return view('client.index',compact('categories','slides','products','HotDeals','SpecialOffers','Featureds','Electroniques','SpecialDeals','admin','bestSeller1','bestSeller2','bestSeller3','bestSeller4','beauties','brands'));

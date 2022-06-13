@@ -683,7 +683,7 @@
                                 {{$bestSeller->product_name_fr}}
                                 @else
                                 {{$bestSeller->product_name_en}}
-                                @endif/a></h3>
+                                @endif</a></h3>
                               <div class="rating rateit-small"></div>
                               <div class="product-price"> @if ($bestSeller->discount_price)
                                 <span class="price-before-discount">{{$bestSeller->selling_price}} </span>
@@ -730,7 +730,7 @@
                                 {{$bestSeller->product_name_fr}}
                                 @else
                                 {{$bestSeller->product_name_en}}
-                                @endif/a></h3>
+                                @endif</a></h3>
                               <div class="rating rateit-small"></div>
                               <div class="product-price"> @if ($bestSeller->discount_price)
                                 <span class="price-before-discount">{{$bestSeller->selling_price}} </span>
@@ -777,7 +777,7 @@
                                 {{$bestSeller->product_name_fr}}
                                 @else
                                 {{$bestSeller->product_name_en}}
-                                @endif/a></h3>
+                                @endif</a></h3>
                               <div class="rating rateit-small"></div>
                               <div class="product-price"> @if ($bestSeller->discount_price)
                                 <span class="price-before-discount">{{$bestSeller->selling_price}} </span>

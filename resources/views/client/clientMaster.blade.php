@@ -314,7 +314,7 @@ success:function(data){
 					</td>
 					<td class="cart-product-edit"><a href="#" class="product-edit">
             
-            <button class="btn btn-primary icon" type="button" title="Add Cart" data-toggle="modal" data-target="#exampleModal1" onClick="viewProductCartPage(this.id)" id='${value.id}'> <i class="fa fa-shopping-cart"></i> </button>
+            <button class="btn btn-primary icon" type="button" title="Add Cart" data-toggle="modal" data-target="#exampleModal1" onClick="viewProductCartPage(this.id)" id='${value.id}'> <i class="fa-solid fa-pen"></i></button>
 
             </a></td>
 					<td class="cart-product-quantity">
