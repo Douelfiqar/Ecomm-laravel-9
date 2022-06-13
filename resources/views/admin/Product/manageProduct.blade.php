@@ -68,9 +68,10 @@ function getProds(){
     url:'/admin/getProduct',
     dataType:'json',
     success:function(data){
+
         var myTr = ""
 
-        $.each(data.data.data, function(key,value){
+        $.each(data.data, function(key,value){
         myTr += `        <tr>
                             <td><img src="{{asset('upload/productPhoto/${value.product_thambnail}')}}" alt="" width="100px" height="100px" style="object-fit: contain"></td>
                             <td>${value.product_name_en}</td>

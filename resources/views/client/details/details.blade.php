@@ -26,7 +26,7 @@
                 <div class="products">
                   <div class="hot-deal-wrapper">
                     <div class="image"> <img src="{{asset('upload/productPhoto/'.$HotDeal->product_thambnail)}}" alt=""> </div>
-                    <div class="sale-offer-tag"><span>$ {{$HotDeal->discount_price}}<br>
+                    <div class="sale-offer-tag"><span>DH {{$HotDeal->discount_price}}<br>
                       </span></div>
                     <div class="timing-wrapper">
                       <div class="box-wrapper">
@@ -55,9 +55,9 @@
                     <div class="rating rateit-small"></div>
                     <div class="product-price"> @if ($HotDeal->discount_price)
 						<span class="price-before-discount">{{$HotDeal->selling_price}} </span>
-						<span class="price">${{$HotDeal->discount_price}} </span> 
+						<span class="price">DH {{$HotDeal->discount_price}} </span> 
 						@else
-						<span class="price">${{$HotDeal->selling_price}} </span> 
+						<span class="price">DH {{$HotDeal->selling_price}} </span> 
 	
 						@endif </div>
                     <!-- /.product-price --> 
@@ -201,11 +201,11 @@
 										<div class="price-box">
 											@if($product->discount_price)
 											<span class="price">
-												${{$product->discount_price}}</span>
-											<span class="price-strike">${{$product->selling_price}}  </span>
+												DH {{$product->discount_price}}</span>
+											<span class="price-strike">DH {{$product->selling_price}}  </span>
 											@else
 											<span class="price">
-												${{$product->selling_price}} </span>
+												DH {{$product->selling_price}} </span>
 											@endif
 										</div>
 									</div>

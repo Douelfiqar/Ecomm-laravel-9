@@ -47,7 +47,7 @@
                             <div class="product-info">
                               <h3 class="name"><a href="{url('/client/home/details/'.$SpecialOffer->id)}}">{{$SpecialOffer->product_name_en}}</a></h3>
                               <div class="rating rateit-small"></div>
-                              <div class="product-price"> <span class="price"> $ {{$SpecialOffer->discount_price}} </span> </div>
+                              <div class="product-price"> <span class="price"> DH {{$SpecialOffer->discount_price}} </span> </div>
                               <!-- /.product-price --> 
                               
                             </div>
@@ -268,7 +268,7 @@
                         <h4 class="info-box-heading green">free shipping</h4>
                       </div>
                     </div>
-                    <h6 class="text">Shipping on orders over $99</h6>
+                    <h6 class="text">Shipping on orders over DH 99</h6>
                   </div>
                 </div>
                 <!-- .col -->
@@ -280,7 +280,7 @@
                         <h4 class="info-box-heading green">Special Sale</h4>
                       </div>
                     </div>
-                    <h6 class="text">Extra $5 off on all items </h6>
+                    <h6 class="text">Extra 5 DH off on all items </h6>
                   </div>
                 </div>
                 <!-- .col --> 
@@ -336,9 +336,9 @@
                           <div class="description"></div>
                           <div class="product-price"> @if ($product->discount_price)
                             <span class="price-before-discount">{{$product->selling_price}} </span>
-                            <span class="price">${{$product->discount_price}} </span> 
+                            <span class="price">DH {{$product->discount_price}} </span> 
                             @else
-                            <span class="price">${{$product->selling_price}} </span> 
+                            <span class="price">DH {{$product->selling_price}} </span> 
 
                             @endif </div>
                           <!-- /.product-price --> 
@@ -382,7 +382,7 @@
                 <div class="product-slider">
                   <div class="owl-carousel home-owl-carousel custom-carousel owl-theme" data-item="4">
                   @php
-                      $Prod = App\Models\Product::where('category_id', $category->id)->get();
+                      $Prod = App\Models\Product::where('category_id', $category->id)->where('status',1)->get();
                   @endphp
                   @foreach ($Prod as $P)
                   <div class="item item-carousel">

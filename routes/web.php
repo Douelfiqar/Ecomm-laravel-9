@@ -147,7 +147,7 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
                 
             Route::get('/allSlider', [SliderController::class,'allSlider'] )->name('admin.allSlider');   
 
-            Route::get('/getSliders', [SliderController::class,'getSliders'] )->name('admin.allSlider');   
+            Route::get('/getSliders', [SliderController::class,'getSliders'] );   
 
             Route::post('/addSlider', [SliderController::class,'addSlider'] )->name('admin.addSlider');
 

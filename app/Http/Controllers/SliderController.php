@@ -10,6 +10,7 @@ class SliderController extends Controller
 {
     
     public function allSlider(){
+        
         $user = Auth::user();
         return view('admin.Slider.allSlider',compact('user'));
     }
