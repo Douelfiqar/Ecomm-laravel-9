@@ -92,19 +92,7 @@
                 </div>
                 <!-- /.sidebar-widget --> 
                 <!-- ============================================== PRICE SILDER : END ============================================== --> 
-                <!-- ============================================== MANUFACTURES============================================== -->
-              
-                <!-- /.sidebar-widget --> 
-                <!-- ============================================== MANUFACTURES: END ============================================== --> 
-                <!-- ============================================== COLOR============================================== -->
-               
-                <!-- /.sidebar-widget --> 
-                <!-- ============================================== COLOR: END ============================================== --> 
-                <!-- ============================================== COMPARE============================================== -->
-               
-                <!-- /.sidebar-widget --> 
-                <!-- ============================================== COMPARE: END ============================================== --> 
-                <!-- ============================================== PRODUCT TAGS ============================================== -->
+
                 @php
               $productTagsEn = App\Models\Product::groupBy('product_tags_en')->select('product_tags_en')->get();
               $productTagsFr = App\Models\Product::groupBy('product_tags_fr')->select('product_tags_fr')->get();
@@ -312,13 +300,14 @@
 
           var list = ""
           var grid = ""
+          console.log(data)
           $.each(data.ProductFiltreds.data, function(key,value){
             list += `
             <div class="col-sm-6 col-md-4 wow fadeInUp">
                             <div class="products">
                               <div class="product">
                                 <div class="product-image">
-                                  <div class="image"> <a href="/client/home/details/${value.id}"><img  src="{{asset('upload/productPhoto/${value.product_thambnail}')}}" alt=""></a> </div>
+                                  <div class="image"> <a href="/client/home/details/${value.id}"><img src="{{asset('upload/productPhoto/${value.product_thambnail}')}}" alt=""></a> </div>
                                   <!-- /.image -->
                                   
                                   <div class="tag new"><span>new</span></div>
@@ -331,9 +320,16 @@
                                   </a></h3>
                                   <div class="rating rateit-small"></div>
                                   <div class="description"></div>
-                                  <div class="product-price">
-                                  
-                                    <span class="price">${value.selling_price} DH </span> 
+                                  <div class="product-price">`
+                                  if(!value.discount_price)
+                                  list += `<span class="price">DH ${value.selling_price} </span> `
+                                    else{
+                                      list +=     
+                                       ` <span class="price-before-discount">${value.selling_price} </span>
+                                         <span class="price">DH ${value.discount_price} </span>  ` 
+                                    }
+                                    list +=    
+                                    `
                                    </div>
                                   <!-- /.product-price --> 
                                   
@@ -381,9 +377,15 @@
                                     </a></h3>
                                   <div class="rating rateit-small"></div>
                                   <div class="product-price"> 
-                                    
-                                    <span class="price">${value.selling_price} DH </span> 
-                
+                                    `
+                                    if(!value.discount_price)
+                                    grid += `<span class="price">DH ${value.selling_price} </span> `
+                                    else{
+                                      grid +=
+                                       ` <span class="price-before-discount">${value.selling_price} </span>
+                                         <span class="price">DH ${value.discount_price} </span>  ` 
+                                    }                
+                                    grid += `
                                     </div>
                                   <!-- /.product-price -->
                                   <div class="description m-t-10">      

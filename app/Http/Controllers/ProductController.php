@@ -75,7 +75,13 @@ class productController extends Controller
         $product->selling_price = $request->selling_price;
         $product->discount_price = $request->discount_price;
 
+        if($product->discount_price == NULL){
+            $product->price = $request->selling_price;
+        }else{
+            $product->price = $request->discount_price;
+        }
 // images
+
         $file = $request->file('product_thambnail');
         $filename = date('YmdHi').$file->getClientOriginalName();
         $file->move(public_path('upload/productPhoto'),$filename);
@@ -253,7 +259,11 @@ return redirect()->back();
             $special_dealsVAR = 0;
         }
 
-
+        if($request->discount_price == NULL){
+            $price = $request->selling_price;
+        }else{
+            $price = $request->discount_price;
+        }
 
         Product::findOrFail($id)->update([
             'brand_id' => $request->brand_id,
@@ -286,7 +296,8 @@ return redirect()->back();
             'hot_deals' => $deals,
             'featured' => $featuredVAR,
             'special_offer' => $special_offerVAR,
-            'special_deals' => $special_dealsVAR
+            'special_deals' => $special_dealsVAR,
+            'price' => $price
         ]);
 
         

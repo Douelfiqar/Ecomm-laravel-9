@@ -18,7 +18,7 @@ class CategoryClientController extends Controller
 
     public function filterCategory($id,Request $request){
         $categories = Category::all();
-        $ProductFiltreds = Product::where('subsubcategory_id',$id)->paginate(3);
+        $ProductFiltreds = Product::where('subsubcategory_id',$id)->where('status',1)->paginate(3);
         $subCategories = SubCategory::all();
         $subsubCategorties = $id;
         $userR = $request->user()->roles()->get();
@@ -32,18 +32,15 @@ class CategoryClientController extends Controller
             }
         }
 
+
         if ($request->ajax()) {
          
-
             $list_view = view('client.category.list_view_product',compact('ProductFiltreds'))->render();
-
 
             $grid_view = view('client.category.list_view_grid_product',compact('ProductFiltreds'))->render();
 
-
-             return response()->json(['grid_view' => $grid_view,'list_view'=>$list_view]);	
-         
-                 }
+             return response()->json(['grid_view' => $grid_view,'list_view'=>$list_view]);
+        }
 
         return view('client.category.category',compact('ProductFiltreds','categories','subCategories','admin','subsubCategorties'));
     }
@@ -51,7 +48,11 @@ class CategoryClientController extends Controller
     public function order($orderBy,$subsub){
 
         if($orderBy == 'byName'){
-            $ProductFiltreds = Product::where('subsubcategory_id',$subsub)->orderBy('product_name_en','ASC')->paginate(3);
+            $ProductFiltreds = Product::where('subsubcategory_id',$subsub)->where('status',1)->orderBy('product_name_en','ASC')->paginate(9);
+        }else if($orderBy == 'low'){
+            $ProductFiltreds = Product::where('subsubcategory_id',$subsub)->where('status',1)->orderBy('price')->paginate(9);
+        }else{
+            $ProductFiltreds = Product::where('subsubcategory_id',$subsub)->where('status',1)->orderByDesc('price')->paginate(9);
         }
         return response()->json(['ProductFiltreds'=>$ProductFiltreds]);
     }
@@ -80,9 +81,7 @@ class CategoryClientController extends Controller
                 $iteam = $cart;
             }
         }
-        //$selectedColor = $cart->options->color;
-        // $selectedSize = $cart->options->size;
-        // $selectedqty = $cart->qty;
+        
 
         return response()->json(array(
             'product' => $product,

@@ -54,7 +54,6 @@
                               <!-- /.col --> 
                             </div>
                             <!-- /.product-list-row -->
-                            <div class="tag new"><span>new</span></div>
                           </div>
                           <!-- /.product-list --> 
                         </div>

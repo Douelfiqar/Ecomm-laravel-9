@@ -6,7 +6,6 @@
                                   <div class="image"> <a href="{{url('/client/home/details/'.$ProductFiltred->id)}}"><img  src="{{asset('upload/productPhoto/'.$ProductFiltred->product_thambnail)}}" alt=""></a> </div>
                                   <!-- /.image -->
                                   
-                                  <div class="tag new"><span>new</span></div>
                                 </div>
                                 <!-- /.product-image -->
                                 

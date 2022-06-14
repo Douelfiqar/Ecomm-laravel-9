@@ -88,7 +88,7 @@ function getProds(){
                             
                                 <div class="d-flex d-flex justify-content-center align-items-center">
                             
-                                    <a href='#' class="btn btn-success"><i class='ti-reload'></i></a>
+                                    <a href='{{url('/admin/updateProduct/${value.id}')}}' class="btn btn-success"><i class='ti-reload'></i></a>
                             
                                     <button onclick='deleteProduct(${value.id})' id="del" class="btn btn-danger ml-2"><i class='ti-trash'></i></button>
                                 </div>

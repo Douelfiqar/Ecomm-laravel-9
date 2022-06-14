@@ -1,7 +1,11 @@
 @extends('admin.adminMaster')
 
 @section('contentadmin')
-
+<style>
+    tr,th{
+        text-align: center
+    }
+</style>
 <div class="">
     <div class="container-full">
       <!-- Content Header (Page header) -->
@@ -424,20 +428,13 @@
                         <div class="table-responsive" style="padding: 20px">
                             <div id="complex_header_wrapper" class="dataTables_wrapper container-fluid dt-bootstrap4"><div class="row"><div class="col-sm-12 col-md-6"><div class="dataTables_length" id="complex_header_length"><label>Show <select name="complex_header_length" aria-controls="complex_header" class="form-control form-control-sm"><option value="10">10</option><option value="25">25</option><option value="50">50</option><option value="100">100</option></select> entries</label></div></div><div class="col-sm-12 col-md-6"><div id="complex_header_filter" class="dataTables_filter"><label>Search:<input type="search" class="form-control form-control-sm" placeholder="" aria-controls="complex_header"></label></div></div></div><div class="row"><div class="col-sm-12"><table id="complex_header" class="table table-striped table-bordered display dataTable" style="width: 100%;" role="grid" aria-describedby="complex_header_info">
                                 <thead>
-                                    <tr role="row"><th class="sorting" tabindex="0" aria-controls="complex_header" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 105px;">Product Image</th><th class="sorting" tabindex="0" aria-controls="complex_header" rowspan="1" colspan="1" aria-label="Extn.: activate to sort column ascending" style="width: 62px;">Action</th></tr>
+                                    <tr role="row"><th class="sorting" tabindex="0" aria-controls="complex_header" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 105px;">Product Image</th></tr>
                                 </thead>
                               
                                 <tbody>
                                 @foreach ($productMultiImages as $productMultiImage)
                                 <tr>
-                                    <td><img src="{{asset('upload/MultiProductPhoto/'.$productMultiImage->photo_name)}}" alt="" width="100px" height="100px" style="object-fit: contain"></td>
-                                    <td>
-                                        <div class="d-flex d-flex justify-content-center align-items-center">
-        
-                                            <a href="{{url('/admin/updateProduct/')}}" class="btn btn-success"><img src="https://img.icons8.com/fluency/48/000000/approve-and-update.png" width="55px"/></a>
-        
-                                            <a id="deleteee" href="{{url('/admin/deleteProduct/')}}" class="btn btn-danger"><img src="https://img.icons8.com/plasticine/100/000000/filled-trash.png" width="55px"/></a>
-                                        </div>
+                                    <td><img src="{{asset('upload/MultiProductPhoto/'.$productMultiImage->photo_name)}}" alt="" width="100px" height="100px" style="object-fit: contain">
                                     </td>
                                 </tr>
                                 @endforeach
