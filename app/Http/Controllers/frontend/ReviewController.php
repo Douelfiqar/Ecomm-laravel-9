@@ -23,10 +23,11 @@ class ReviewController extends Controller
         $HotDeals = Product::where('hot_deals','1')->whereNotNull('discount_price')->orderBy('id','DESC')->limit(3)->get();
 
       
-        $userR = $request->user()->roles()->get();
 
         $admin = false;
         if(Auth::check()){
+            $userR = $request->user()->roles()->get();
+
             foreach($userR as $u){
                 if($u->name == 'admin' || $u->name == 'SUPERADMIN'){
                     $admin = true;

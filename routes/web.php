@@ -251,6 +251,13 @@ Route::prefix('client')->group(function () {
     
 
 
+//------------------------ ADD TO CART DETAILS -----------------------
+        
+Route::get('/addcart/detail/{id}',[CartController::class,'addToCartDetails']);
+
+  // ---------------------------- Order by ------------------------------------
+
+  Route::get('/orderBy/{orderBy}/{subsub}',[CategoryClientController::class,'order']);
 
 
     Route::middleware(['auth'])->group(function (){
@@ -280,26 +287,18 @@ Route::prefix('client')->group(function () {
 
         //-------------------------AJAX--------------------------------
 
-        Route::get('/home/details/{id}', [ReviewController::class,'index']);
-        
-        Route::get('/getReviews/{id}', [ReviewController::class,'getReviews']);
+     
         
         Route::get('/addReview/{id}', [ReviewController::class,'addReview']);
 
-        //------------------------ ADD TO CART DETAILS -----------------------
         
-        Route::get('/addcart/detail/{id}',[CartController::class,'addToCartDetails']);
-
         // -------------------------- Contact -------------------------------------
 
         Route::get('/contact',[ContactController::class,'index'])->name('client.contact');
         
         Route::get('/commentContact',[ContactController::class,'contact'])->name('client.comment');
 
-        // ---------------------------- Order by ------------------------------------
-
-        Route::get('/orderBy/{orderBy}/{subsub}',[CategoryClientController::class,'order']);
-
+      
         
         // ----------------------------- Track Orders ---------------------------------
 
@@ -322,13 +321,19 @@ Route::prefix('client')->group(function () {
     });
 });
 
+// --------------------------------details pages --------------------
 
+
+Route::get('/client/home/details/{id}', [ReviewController::class,'index']);
+        
+Route::get('/client/getReviews/{id}', [ReviewController::class,'getReviews']);
 
     // -------------------------------SEARCH------------------------------------
 
 
-Route::get('search-product', [SearchController::class, 'SearchProduct']);
+Route::get('/search-product', [SearchController::class, 'SearchProduct']);
 
+Route::get('/client/search-product', [SearchController::class, 'SearchProduct']);
 
 //------------------------------------facebook-----------------------------
 

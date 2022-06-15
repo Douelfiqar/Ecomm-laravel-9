@@ -19,10 +19,11 @@ class ShoppingCartController extends Controller
         $categories = Category::all();
         $carts = Cart::content();
 
-        $userR = $request->user()->roles()->get();
 
         $admin = false;
         if(Auth::check()){
+            $userR = $request->user()->roles()->get();
+
             foreach($userR as $u){
                 if($u->name == 'admin' || $u->name == 'SUPERADMIN'){
                     $admin = true;

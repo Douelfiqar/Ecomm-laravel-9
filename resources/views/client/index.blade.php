@@ -45,7 +45,7 @@
                           <!-- /.col -->
                           <div class="col col-xs-7">
                             <div class="product-info">
-                              <h3 class="name"><a href="{url('/client/home/details/'.$SpecialOffer->id)}}">{{$SpecialOffer->product_name_en}}</a></h3>
+                              <h3 class="name"><a href="{{url('/client/home/details/'.$SpecialOffer->id)}}">{{$SpecialOffer->product_name_en}}</a></h3>
                               <div class="rating rateit-small"></div>
                               <div class="product-price"> <span class="price"> DH {{$SpecialOffer->discount_price}} </span> </div>
                               <!-- /.product-price --> 
@@ -126,6 +126,7 @@
                                 @else
                                 {{$SpecialDeal->product_color_en}}
                                 @endif
+                              </a>
                               </h3>
                               <div class="rating rateit-small"></div>
                               <div class="product-price"> @if ($SpecialDeal->discount_price)
@@ -133,7 +134,7 @@
                                 <span class="price">DH{{$SpecialDeal->discount_price}} </span> 
                                 @else
                                 <span class="price">DH{{$SpecialDeal->selling_price}} </span> 
-                              </a>
+                              
                                 @endif </div>
                               <!-- /.product-price --> 
                               
@@ -173,7 +174,7 @@
 
               @foreach ($slides as $slider)
               <div class="item" style="background-image: url({{asset('upload/slider/'.$slider->slider_img)}});">
-                <div class="container-fluid">
+                {{-- <div class="container-fluid">
                   <div class="caption bg-color vertical-center text-left">
                     <div class="slider-header fadeInDown-1">Top Brands</div>
                     <div class="big-text fadeInDown-1"> {{$slider->title}} </div>
@@ -181,7 +182,7 @@
                     <div class="button-holder fadeInDown-3"> <a href="index.php?page=single-product" class="btn-lg btn btn-uppercase btn-primary shop-now-button">Shop Now</a> </div>
                   </div>
                   <!-- /.caption --> 
-                </div>
+                </div> --}}
                 <!-- /.container-fluid --> 
               </div>
               @endforeach
@@ -472,7 +473,7 @@
                   <div class="action">
                     <ul class="list-unstyled">
                       <li class="add-cart-button btn-group">
-                        <button class="btn btn-primary icon" type="button" title="Add Cart" data-toggle="modal" data-target="#exampleModal" onClick="viewProduct(this.id)" id='{{$Featured->id}}'> <i class="fa fa-shopping-cart"></i> </button>
+                        <button class="btn btn-primary icon" type="button" title="Add Cart" data-toggle="modal" data-target="#exampleModal" onClick="viewProduct(this.id,1)" id='{{$Featured->id}}'> <i class="fa fa-shopping-cart"></i> </button>
                                 <button class="btn btn-primary cart-btn" type="button">Add to cart</button>
                       </li>
                       <li class="add-cart-button "> <button data-toggle="tooltip" class="btn btn-primary icon" id='{{$Featured->id}}' onclick="addToWish(this.id)" title="Wishlist"> <i class="icon fa fa-heart"></i> </button> </li>
@@ -572,10 +573,11 @@
                   <div class="action">
                     <ul class="list-unstyled">
                       <li class="add-cart-button btn-group">
-                        <button class="btn btn-primary icon" type="button" title="Add Cart" data-toggle="modal" data-target="#exampleModal" onClick="viewProduct(this.id)" id='{{$Electronique->id}}'> <i class="fa fa-shopping-cart"></i> </button>
+                        <button class="btn btn-primary icon" type="button" title="Add Cart" data-toggle="modal" data-target="#exampleModal" onClick="viewProduct(this.id,1)" id='{{$Electronique->id}}'> <i class="fa fa-shopping-cart"></i> </button>
                         <button class="btn btn-primary cart-btn" type="button">Add to cart</button>
                       </li>
-                      <li class="add-cart-button "> <button data-toggle="tooltip" class="btn btn-primary icon" id='{{$Electronique->id}}' onclick="addToWish(this.id)" title="Wishlist"> <i class="icon fa fa-heart"></i> </button> </li>
+                      <li class="add-cart-button "> <button data-toggle="tooltip" class="btn btn-primary icon" id='{{$Electronique->id}}' 
+                        onClick='addToWish(this.id)' title="Wishlist"> <i class="icon fa fa-heart"></i> </button> </li>
                       <li class="lnk"> <a class="add-to-cart" href="detail.html" title="Compare"> <i class="fa fa-signal" aria-hidden="true"></i> </a> </li>
                     </ul>
                   </div>
@@ -951,7 +953,7 @@
                       <div class="action">
                         <ul class="list-unstyled">
                           <li class="add-cart-button btn-group">
-                            <button class="btn btn-primary icon" type="button" title="Add Cart" data-toggle="modal" data-target="#exampleModal" onClick="viewProduct(this.id)" id='{{$beauty->id}}'> <i class="fa fa-shopping-cart"></i> </button>
+                            <button class="btn btn-primary icon" type="button" title="Add Cart" data-toggle="modal" data-target="#exampleModal" onClick="viewProduct(this.id,1)" id='{{$beauty->id}}'> <i class="fa fa-shopping-cart"></i> </button>
                             <button class="btn btn-primary cart-btn" type="button">Add to cart</button>
                           </li>
                           <li class="add-cart-button "> <button data-toggle="tooltip" class="btn btn-primary icon" id='{{$beauty->id}}' onclick="addToWish(this.id)" title="Wishlist"> <i class="icon fa fa-heart"></i> </button> </li>

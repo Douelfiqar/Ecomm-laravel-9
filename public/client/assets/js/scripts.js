@@ -343,15 +343,17 @@ jQuery("[data-toggle='tooltip']").tooltip();
     $("body").on("keyup", "#search", function(){
 
         let text = $("#search").val();
-        // console.log(text);
+        console.log(text);
 if(text.length >= 1 ){
 
     $.ajax({
         data: {search: text},
-        url : site_url + "search-product", 
+        url : "search-product", 
         method : 'get',
         success:function(result){
-            $("#searchProducts").html(result);            }
+            $("#searchProducts").html(result);            
+        // console.log(result)    
+        }
 
     }); // end ajax 
 

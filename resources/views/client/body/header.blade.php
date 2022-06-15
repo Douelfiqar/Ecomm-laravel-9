@@ -92,9 +92,11 @@
                   <input class="search-field" placeholder="Search here..." id="search" name="search" onfocus="search_result_show()" onblur="search_result_hide()" />
                   <a class="search-button" href="#" ></a> </div>
               </form>
+
               <div id="searchProducts">
 
               </div>
+              
             </div>
             <!-- /.search-area --> 
             <!-- ============================================================= SEARCH AREA : END ============================================================= --> </div>
@@ -266,6 +268,7 @@
   function search_result_hide(){
     $("#searchProducts").slideUp();
   }
+  
    function search_result_show(){
       $("#searchProducts").slideDown();
   }

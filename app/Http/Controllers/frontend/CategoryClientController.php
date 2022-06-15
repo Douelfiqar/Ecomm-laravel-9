@@ -21,10 +21,12 @@ class CategoryClientController extends Controller
         $ProductFiltreds = Product::where('subsubcategory_id',$id)->where('status',1)->paginate(3);
         $subCategories = SubCategory::all();
         $subsubCategorties = $id;
-        $userR = $request->user()->roles()->get();
+        
 
         $admin = false;
+
         if(Auth::check()){
+            $userR = $request->user()->roles()->get();
             foreach($userR as $u){
                 if($u->name == 'admin' || $u->name == 'SUPERADMIN'){
                     $admin = true;

@@ -38,7 +38,7 @@
                                       <ul class="list-unstyled">
                                         <li class="add-cart-button btn-group">
                                           <button class="btn btn-primary icon" type="button" title="Add Cart" data-toggle="modal" data-target="#exampleModal" onClick="viewProduct(this.id,1)" id='{{$ProductFiltred->id}}'> <i class="fa fa-shopping-cart"></i> </button>
-                                          <button class="btn btn-primary cart-btn" type="button">Add to cart</button>
+                                          <button class="btn btn-primary cart-btn" type="button"  data-toggle="modal" data-target="#exampleModal" onClick="viewProduct(this.id,1)" id='{{$ProductFiltred->id}}'>Add to cart</button>
                                           
                                         </li>
                                         <li class="add-cart-button "> <button data-toggle="tooltip" class="btn btn-primary icon" id='{{$ProductFiltred->id}}' onclick="addToWish(this.id)" title="Wishlist"> <i class="icon fa fa-heart"></i> </button> </li>

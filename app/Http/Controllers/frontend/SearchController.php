@@ -15,6 +15,8 @@ class SearchController extends Controller
 
 		$item = $request->search;		 
 
-		$products = Product::where('product_name_en','LIKE',"%$item%")->select('product_name_en','product_thambnail','id')->limit(5)->get();
-		return view('client.product.search_product',compact('products'));	} 
+		$products = Product::where('product_name_en','LIKE',"%$item%")->where('status',1)->select('product_name_en','product_thambnail','id')->limit(5)->get();
+		
+		return view('client.product.search_product',compact('products'));
+		} 
 }
