@@ -73,8 +73,8 @@
           <!-- ============================================== SPECIAL OFFER : END ============================================== --> 
           <!-- ============================================== PRODUCT TAGS ============================================== -->
           @php
-              $productTagsEn = App\Models\Product::groupBy('product_tags_en')->select('product_tags_en')->get();
-              $productTagsFr = App\Models\Product::groupBy('product_tags_fr')->select('product_tags_fr')->get();
+              $productTagsEn = App\Models\Product::groupBy('product_tags_en')->select('product_tags_en')->limit(5)->get();
+              $productTagsFr = App\Models\Product::groupBy('product_tags_fr')->select('product_tags_fr')->limit(5)->get();
           @endphp
           <div class="sidebar-widget product-tag wow fadeInUp">
             <h3 class="section-title">Product tags</h3>
@@ -111,7 +111,7 @@
                         <div class="row product-micro-row">
                           <div class="col col-xs-5">
                             <div class="product-image">
-                              <div class="image"> <a href="#"> <img src="{{asset('upload/productPhoto/'.$SpecialDeal->product_thambnail)}}"  alt=""> </a> </div>
+                              <div class="image"> <a href="{{url('/client/home/details/'.$SpecialDeal->id)}}"> <img src="{{asset('upload/productPhoto/'.$SpecialDeal->product_thambnail)}}"  alt=""> </a> </div>
                               <!-- /.image --> 
                               
                             </div>
@@ -120,20 +120,20 @@
                           <!-- /.col -->
                           <div class="col col-xs-7">
                             <div class="product-info">
-                              <h3 class="name"><a href="#">
+                              <h3 class="name"><a href="{{url('/client/home/details/'.$SpecialDeal->id)}}">
                                 @if (session()->get('lang')=='francais')
                                 {{$SpecialDeal->product_color_fr}}
                                 @else
                                 {{$SpecialDeal->product_color_en}}
                                 @endif
-                              </a></h3>
+                              </h3>
                               <div class="rating rateit-small"></div>
                               <div class="product-price"> @if ($SpecialDeal->discount_price)
                                 <span class="price-before-discount">{{$SpecialDeal->selling_price}} </span>
                                 <span class="price">DH{{$SpecialDeal->discount_price}} </span> 
                                 @else
                                 <span class="price">DH{{$SpecialDeal->selling_price}} </span> 
-    
+                              </a>
                                 @endif </div>
                               <!-- /.product-price --> 
                               
@@ -155,56 +155,7 @@
             </div>
             <!-- /.sidebar-widget-body --> 
           </div>
-          <!-- /.sidebar-widget --> 
-          <!-- ============================================== SPECIAL DEALS : END ============================================== --> 
-          <!-- ============================================== NEWSLETTER ============================================== -->
-          {{-- <div class="sidebar-widget newsletter wow fadeInUp outer-bottom-small">
-            <h3 class="section-title">Newsletters</h3>
-            <div class="sidebar-widget-body outer-top-xs">
-              <p>Sign Up for Our Newsletter!</p>
-              <form>
-                <div class="form-group">
-                  <label class="sr-only" for="exampleInputEmail1">Email address</label>
-                  <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Subscribe to our newsletter">
-                </div>
-                <button class="btn btn-primary">Subscribe</button>
-              </form>
-            </div>
-            <!-- /.sidebar-widget-body --> 
-          </div> --}}
-          <!-- /.sidebar-widget --> 
-          <!-- ============================================== NEWSLETTER: END ============================================== --> 
-          
-          <!-- ============================================== Testimonials============================================== -->
-          {{-- <div class="sidebar-widget  wow fadeInUp outer-top-vs ">
-            <div id="advertisement" class="advertisement">
-              <div class="item">
-                <div class="avatar"><img src="assets/images/testimonials/member1.png" alt="Image"></div>
-                <div class="testimonials"><em>"</em> Vtae sodales aliq uam morbi non sem lacus port mollis. Nunc condime tum metus eud molest sed consectetuer.<em>"</em></div>
-                <div class="clients_author">John Doe <span>Abc Company</span> </div>
-                <!-- /.container-fluid --> 
-              </div>
-              <!-- /.item -->
-              
-              <div class="item">
-                <div class="avatar"><img src="assets/images/testimonials/member3.png" alt="Image"></div>
-                <div class="testimonials"><em>"</em>Vtae sodales aliq uam morbi non sem lacus port mollis. Nunc condime tum metus eud molest sed consectetuer.<em>"</em></div>
-                <div class="clients_author">Stephen Doe <span>Xperia Designs</span> </div>
-              </div>
-              <!-- /.item -->
-              
-              <div class="item">
-                <div class="avatar"><img src="assets/images/testimonials/member2.png" alt="Image"></div>
-                <div class="testimonials"><em>"</em> Vtae sodales aliq uam morbi non sem lacus port mollis. Nunc condime tum metus eud molest sed consectetuer.<em>"</em></div>
-                <div class="clients_author">Saraha Smith <span>Datsun &amp; Co</span> </div>
-                <!-- /.container-fluid --> 
-              </div>
-              <!-- /.item --> 
-              
-            </div>
-            <!-- /.owl-carousel --> 
-          </div> --}}
-          
+         
           <!-- ============================================== Testimonials: END ============================================== -->
           
           <div class="home-banner"> <img src="assets/images/banners/LHS-banner.jpg" alt="Image"> </div>
@@ -391,7 +342,6 @@
                           <div class="image"> <a href="{{url('/client/home/details/'.$P->id)}}"><img  src="{{asset('upload/productPhoto/'.$P->product_thambnail)}}" style='height:150px;object-fit:contain' alt=""></a> </div>
                           <!-- /.image -->
                           
-                          <div class="tag new"><span>new</span></div>
                         </div>
                         <!-- /.product-image -->
                         
@@ -423,7 +373,7 @@
                                 <button class="btn btn-primary icon" type="button" title="Add Cart" data-toggle="modal" data-target="#exampleModal" onClick="viewProduct(this.id)" id='{{$P->id}}'> <i class="fa fa-shopping-cart"></i> </button>
                                 <button class="btn btn-primary cart-btn" type="button">Add to cart</button>
                               </li>
-                              <li class="lnk wishlist"> <a data-toggle="tooltip" class="add-to-cart" href="detail.html" title="Wishlist"> <i class="icon fa fa-heart"></i> </a> </li>
+                              <li class="add-cart-button "> <button data-toggle="tooltip" class="btn btn-primary icon" id='{{$P->id}}' onclick="addToWish(this.id)" title="Wishlist"> <i class="icon fa fa-heart"></i> </button> </li>
                               <li class="lnk"> <a data-toggle="tooltip" class="add-to-cart" href="detail.html" title="Compare"> <i class="fa fa-signal" aria-hidden="true"></i> </a> </li>
                             </ul>
                           </div>
@@ -495,7 +445,6 @@
                   <div class="image"> <a href="{{url('/client/home/details/'.$Featured->id)}}" ><img style='height:150px;object-fit:contain'  src="{{asset('/upload/productPhoto/'.$Featured->product_thambnail)}}" alt=""></a> </div>
                   <!-- /.image -->
                   
-                  <div class="tag hot"><span>hot</span></div>
                 </div>
                 <!-- /.product-image -->
                 
@@ -526,7 +475,7 @@
                         <button class="btn btn-primary icon" type="button" title="Add Cart" data-toggle="modal" data-target="#exampleModal" onClick="viewProduct(this.id)" id='{{$Featured->id}}'> <i class="fa fa-shopping-cart"></i> </button>
                                 <button class="btn btn-primary cart-btn" type="button">Add to cart</button>
                       </li>
-                      <li class="lnk wishlist"> <a class="add-to-cart" href="detail.html" title="Wishlist"> <i class="icon fa fa-heart"></i> </a> </li>
+                      <li class="add-cart-button "> <button data-toggle="tooltip" class="btn btn-primary icon" id='{{$Featured->id}}' onclick="addToWish(this.id)" title="Wishlist"> <i class="icon fa fa-heart"></i> </button> </li>
                       <li class="lnk"> <a class="add-to-cart" href="detail.html" title="Compare"> <i class="fa fa-signal" aria-hidden="true"></i> </a> </li>
                     </ul>
                   </div>
@@ -562,9 +511,7 @@
                         <span class="shopping-needs">Save up to 40% off</span></h2>
                     </div>
                   </div>
-                  <div class="new-label">
-                    <div class="text">NEW</div>
-                  </div>
+                 
                   <!-- /.new-label --> 
                 </div>
                 <!-- /.wide-banner --> 
@@ -596,7 +543,6 @@
                   <div class="image"> <a href="{{url('/client/home/details/'.$Electronique->id)}}"><img style='height:150px;object-fit:contain'e  src="{{asset('/upload/productPhoto/'.$Electronique->product_thambnail)}}" alt=""></a> </div>
                   <!-- /.image -->
                   
-                  <div class="tag hot"><span>hot</span></div>
                 </div>
                 <!-- /.product-image -->
                 
@@ -629,7 +575,7 @@
                         <button class="btn btn-primary icon" type="button" title="Add Cart" data-toggle="modal" data-target="#exampleModal" onClick="viewProduct(this.id)" id='{{$Electronique->id}}'> <i class="fa fa-shopping-cart"></i> </button>
                         <button class="btn btn-primary cart-btn" type="button">Add to cart</button>
                       </li>
-                      <li class="lnk wishlist"> <a class="add-to-cart" href="detail.html" title="Wishlist"> <i class="icon fa fa-heart"></i> </a> </li>
+                      <li class="add-cart-button "> <button data-toggle="tooltip" class="btn btn-primary icon" id='{{$Electronique->id}}' onclick="addToWish(this.id)" title="Wishlist"> <i class="icon fa fa-heart"></i> </button> </li>
                       <li class="lnk"> <a class="add-to-cart" href="detail.html" title="Compare"> <i class="fa fa-signal" aria-hidden="true"></i> </a> </li>
                     </ul>
                   </div>
@@ -682,7 +628,7 @@
                                 {{$bestSeller->product_name_fr}}
                                 @else
                                 {{$bestSeller->product_name_en}}
-                                @endif/a></h3>
+                                @endif</a></h3>
                               <div class="rating rateit-small"></div>
                               <div class="product-price"> @if ($bestSeller->discount_price)
                                 <span class="price-before-discount">{{$bestSeller->selling_price}} </span>
@@ -729,7 +675,7 @@
                                 {{$bestSeller->product_name_fr}}
                                 @else
                                 {{$bestSeller->product_name_en}}
-                                @endif/a></h3>
+                                @endif</a></h3>
                               <div class="rating rateit-small"></div>
                               <div class="product-price"> @if ($bestSeller->discount_price)
                                 <span class="price-before-discount">{{$bestSeller->selling_price}} </span>
@@ -776,7 +722,7 @@
                                 {{$bestSeller->product_name_fr}}
                                 @else
                                 {{$bestSeller->product_name_en}}
-                                @endif/a></h3>
+                                @endif</a></h3>
                               <div class="rating rateit-small"></div>
                               <div class="product-price"> @if ($bestSeller->discount_price)
                                 <span class="price-before-discount">{{$bestSeller->selling_price}} </span>
@@ -979,7 +925,6 @@
                       <div class="image"> <a href="{{url('/client/home/details/'.$beauty->id)}}"><img  src="{{asset('/upload/productPhoto/'.$beauty->product_thambnail)}}" style='height:150px;object-fit:contain' alt=""></a> </div>
                       <!-- /.image -->
                       
-                      <div class="tag new"><span>new</span></div>
                     </div>
                     <!-- /.product-image -->
                     
@@ -1009,7 +954,7 @@
                             <button class="btn btn-primary icon" type="button" title="Add Cart" data-toggle="modal" data-target="#exampleModal" onClick="viewProduct(this.id)" id='{{$beauty->id}}'> <i class="fa fa-shopping-cart"></i> </button>
                             <button class="btn btn-primary cart-btn" type="button">Add to cart</button>
                           </li>
-                          <li class="lnk wishlist"> <a class="add-to-cart" href="detail.html" title="Wishlist"> <i class="icon fa fa-heart"></i> </a> </li>
+                          <li class="add-cart-button "> <button data-toggle="tooltip" class="btn btn-primary icon" id='{{$beauty->id}}' onclick="addToWish(this.id)" title="Wishlist"> <i class="icon fa fa-heart"></i> </button> </li>
                           <li class="lnk"> <a class="add-to-cart" href="detail.html" title="Compare"> <i class="fa fa-signal" aria-hidden="true"></i> </a> </li>
                         </ul>
                       </div>

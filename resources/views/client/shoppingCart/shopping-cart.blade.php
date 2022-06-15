@@ -61,7 +61,7 @@
 </div><!-- /.shopping-cart-table -->		
 		<!-- /.estimate-ship-tax -->
 
-<div class="col-md-4 col-sm-12 estimate-ship-tax">
+{{-- <div class="col-md-4 col-sm-12 estimate-ship-tax">
 	<table class="table">
 		<thead>
 			<tr>
@@ -84,7 +84,7 @@
 				</tr>
 		</tbody><!-- /tbody -->
 	</table><!-- /table -->
-</div><!-- /.estimate-ship-tax -->
+</div><!-- /.estimate-ship-tax --> --}}
 
 <div class="col-md-4 col-sm-12 cart-shopping-total">
 	<table class="table">
@@ -331,7 +331,7 @@ function updateCart(){
 	  Swal.fire({
   position: 'top-end',
   icon: 'success',
-  title: 'Your update has been saved',
+  title: 'Your iteam update has been updated successfully',
   showConfirmButton: false,
   timer: 1500
 })

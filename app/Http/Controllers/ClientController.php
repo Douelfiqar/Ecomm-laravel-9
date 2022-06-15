@@ -22,7 +22,7 @@ class ClientController extends Controller
         $categories = Category::all();
         $brands = Brand::all();
         $slides = Slider::where('status','1')->orderBy('id','DESC')->limit(3)->get();
-        $products = Product::where('status','1')->orderBy('id','DESC')->limit(6)->get();
+        $products = Product::inRandomOrder()->where('status','1')->limit(6)->get();
         $HotDeals = Product::where('hot_deals','1')->whereNotNull('discount_price')->where('status','1')->orderBy('id','DESC')->limit(3)->get();
 
         $SpecialOffers = Product::where('special_offer','1')->whereNotNull('discount_price')->where('status','1')->orderBy('id','DESC')->limit(3)->get();

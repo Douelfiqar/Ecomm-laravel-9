@@ -286,10 +286,10 @@ $.ajax({
           miniCart += `<div class="cart-item product-summary">
                     <div class="row">
                       <div class="col-xs-4">
-                        <div class="image"> <a href="detail.html"><img src="/upload/productPhoto/${value.options.image}" alt=""></a> </div>
+                        <div class="image"> <a href="{{url('/client/home/details/${value.id}')}}"><img src="/upload/productPhoto/${value.options.image}" alt=""></a> </div>
                       </div>
                       <div class="col-xs-7">
-                        <h3 class="name"><a href="index.php?page-detail">${value.name}</a></h3>
+                        <h3 class="name"><a href="{{url('/client/home/details/${value.id}')}}">${value.name}</a></h3>
                         <div class="price">$ ${value.price} * ${value.qty}</div>
                       </div>
                       <div class="col-xs-1 action"> <button id="${value.rowId}" onclick="removeMiniCart(this.id)"> <i class="fa fa-trash"></i> </button> </div>
@@ -356,12 +356,12 @@ success:function(data){
     
     <td class="romove-item"><button title="cancel" class="icon" id="${value.rowId}" onclick="removeIteam(this.id)"><i class="fa fa-trash-o"></i></button></td>
 					<td class="cart-image">
-						<a class="entry-thumbnail" href="detail.html">
+						<a class="entry-thumbnail" href="{{url('/client/home/details/${value.id}')}}">
 						    <img src="/upload/productPhoto/${value.options.image}" style='height:90px;object-fit:contain' alt="">
 						</a>
 					</td>
 					<td class="cart-product-name-info">
-						<h4 class='cart-product-description'><a href="detail.html">${value.name}</a></h4>
+						<h4 class='cart-product-description'><a href="{{url('/client/home/details/${value.id}')}}">${value.name}</a></h4>
 						<div class="row">
 							<div class="col-sm-4">
 								<div class="rating rateit-small"></div>
@@ -416,6 +416,13 @@ function removeIteam(rowId){
         url:'/client/removeCart/'+rowId,
         dataType:'json',
         success:function(data){
+          Swal.fire({
+  position: 'top-end',
+  icon: 'success',
+  title: 'Your iteam has been removed successfully',
+  showConfirmButton: false,
+  timer: 1000
+})
           getCart()
         }
     })
@@ -430,6 +437,13 @@ function updateQuantiter(rowId,qty){
     dataType: 'json',
     success:function(data){
       getCart()      
+      Swal.fire({
+  position: 'top-end',
+  icon: 'success',
+  title: 'Cart has been updated successfully',
+  showConfirmButton: false,
+  timer: 1000
+})
     }
   })
 }

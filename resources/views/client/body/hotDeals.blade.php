@@ -5,9 +5,9 @@
       <div class="item">
         <div class="products">
           <div class="hot-deal-wrapper">
-            <div class="image"> <img src="{{asset('upload/productPhoto/'.$HotDeal->product_thambnail)}}" alt=""> </div>
-            <div class="sale-offer-tag"><span>$ {{$HotDeal->discount_price}}<br>
-              </span></div>
+            <div class="image"> <a href="{{url('/client/home/details/'.$HotDeal->id)}}">
+              <img src="{{asset('upload/productPhoto/'.$HotDeal->product_thambnail)}}" alt=""> </div>
+           
             <div class="timing-wrapper">
               <div class="box-wrapper">
                 <div class="date box"> <span class="key">120</span> <span class="value">DAYS</span> </div>
@@ -26,7 +26,7 @@
           <!-- /.hot-deal-wrapper -->
           
           <div class="product-info text-left m-t-20">
-            <h3 class="name"><a href="detail.html">@if (session()->get('lang')=='francais')
+            <h3 class="name">@if (session()->get('lang')=='francais')
               {{$HotDeal->product_name_fr}}
               @else
               {{$HotDeal->product_name_en}}
@@ -47,8 +47,8 @@
           <div class="cart clearfix animate-effect">
             <div class="action">
               <div class="add-cart-button btn-group">
-                <button class="btn btn-primary icon" data-toggle="dropdown" type="button"> <i class="fa fa-shopping-cart"></i> </button>
-                <button class="btn btn-primary cart-btn" type="button">Add to cart</button>
+                <button class="btn btn-primary icon" type="button" title="Add Cart" data-toggle="modal" data-target="#exampleModal" onClick="viewProduct(this.id,1)" id='{{$HotDeal->id}}'> <i class="fa fa-shopping-cart"></i> </button>
+                <button class="btn btn-primary cart-btn" type="button" title="Add Cart" data-toggle="modal" data-target="#exampleModal" onClick="viewProduct(this.id,1)" id='{{$HotDeal->id}}'>Add to cart</button>
               </div>
             </div>
             <!-- /.action --> 

@@ -141,7 +141,11 @@
 						</div>
 							</td>
 							<td class="col-md-2">
-								<button data-toggle="modal" data-target="#exampleModal" onClick="viewProduct(this.id,1)" id='${value.product_id}'>
+								<button data-toggle="modal" data-target="#exampleModal" onClick="viewProduct(this.id,1)" style='border: none;
+    background: none;
+    cursor: pointer;
+    margin: 0;
+    padding: 0;' id='${value.product_id}'>
 								<a href="#" class="btn-upper btn btn-primary">Add to cart</a>
 							</button>
 								</td>
@@ -176,6 +180,13 @@ console.log(data)
 // getContent()
 $('#troww').empty();
 getContent()
+Swal.fire({
+  position: 'top-end',
+  icon: 'success',
+  title: 'Your iteam has been removed successfully',
+  showConfirmButton: false,
+  timer: 1000
+})
 		}
 		})
 	}

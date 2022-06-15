@@ -21,9 +21,9 @@
                                   <div class="rating rateit-small"></div>
                                   <div class="product-price"> @if ($ProductFiltred->discount_price)
                                     <span class="price-before-discount">{{$ProductFiltred->selling_price}} </span>
-                                    <span class="price">${{$ProductFiltred->discount_price}} </span> 
+                                    <span class="price">DH {{$ProductFiltred->discount_price}} </span> 
                                     @else
-                                    <span class="price">${{$ProductFiltred->selling_price}} </span> 
+                                    <span class="price">DH {{$ProductFiltred->selling_price}} </span> 
                 
                                     @endif </div>
                                   <!-- /.product-price -->
@@ -37,10 +37,11 @@
                                     <div class="action">
                                       <ul class="list-unstyled">
                                         <li class="add-cart-button btn-group">
-                                          <button class="btn btn-primary icon" data-toggle="dropdown" type="button"> <i class="fa fa-shopping-cart"></i> </button>
+                                          <button class="btn btn-primary icon" type="button" title="Add Cart" data-toggle="modal" data-target="#exampleModal" onClick="viewProduct(this.id,1)" id='{{$ProductFiltred->id}}'> <i class="fa fa-shopping-cart"></i> </button>
                                           <button class="btn btn-primary cart-btn" type="button">Add to cart</button>
+                                          
                                         </li>
-                                        <li class="lnk wishlist"> <a class="add-to-cart" href="detail.html" title="Wishlist"> <i class="icon fa fa-heart"></i> </a> </li>
+                                        <li class="add-cart-button "> <button data-toggle="tooltip" class="btn btn-primary icon" id='{{$ProductFiltred->id}}' onclick="addToWish(this.id)" title="Wishlist"> <i class="icon fa fa-heart"></i> </button> </li>
                                         <li class="lnk"> <a class="add-to-cart" href="detail.html" title="Compare"> <i class="fa fa-signal"></i> </a> </li>
                                       </ul>
                                     </div>

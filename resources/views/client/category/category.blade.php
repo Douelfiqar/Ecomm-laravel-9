@@ -94,8 +94,8 @@
                 <!-- ============================================== PRICE SILDER : END ============================================== --> 
 
                 @php
-              $productTagsEn = App\Models\Product::groupBy('product_tags_en')->select('product_tags_en')->get();
-              $productTagsFr = App\Models\Product::groupBy('product_tags_fr')->select('product_tags_fr')->get();
+              $productTagsEn = App\Models\Product::groupBy('product_tags_en')->select('product_tags_en')->limit(5)->get();
+              $productTagsFr = App\Models\Product::groupBy('product_tags_fr')->select('product_tags_fr')->limit(5)->get();
           @endphp
           <div class="sidebar-widget product-tag wow fadeInUp">
             <h3 class="section-title">Product tags</h3>

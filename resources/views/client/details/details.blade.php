@@ -68,8 +68,8 @@
                   <div class="cart clearfix animate-effect">
                     <div class="action">
                       <div class="add-cart-button btn-group">
-                        <button class="btn btn-primary icon" data-toggle="dropdown" type="button"> <i class="fa fa-shopping-cart"></i> </button>
-                        <button class="btn btn-primary cart-btn" type="button">Add to cart</button>
+						<button class="btn btn-primary icon" type="button" title="Add Cart" data-toggle="modal" data-target="#exampleModal" onClick="viewProduct(this.id,1)" id='{{$HotDeal->id}}'> <i class="fa fa-shopping-cart"></i> </button>
+						<button class="btn btn-primary cart-btn" type="button" title="Add Cart" data-toggle="modal" data-target="#exampleModal" onClick="viewProduct(this.id,1)" id='{{$HotDeal->id}}'>Add to cart</button>
                       </div>
                     </div>
                     <!-- /.action --> 
@@ -525,7 +525,6 @@
 					<a href="{{url('/client/home/details/'.$productCateg->id)}}"><img style="height:150px;object-fit:contain" src="{{asset('upload/productPhoto/'.$productCateg->product_thambnail)}}" alt=""></a>
 				</div><!-- /.image -->			
 	
-							<div class="tag sale"><span>sale</span></div>            		   
 			</div><!-- /.product-image -->
 				
 			
@@ -556,16 +555,12 @@
 					<div class="action">
 						<ul class="list-unstyled">
 							<li class="add-cart-button btn-group">
-								<button class="btn btn-primary icon" type="button" title="Add Cart" data-toggle="modal" data-target="#exampleModal" onClick="viewProduct(this.id)" id='{{$productCateg->id}}'> <i class="fa fa-shopping-cart"></i> </button>
+								<button class="btn btn-primary icon" type="button" title="Add Cart" data-toggle="modal" data-target="#exampleModal" onClick="viewProduct(this.id,1)" id='{{$productCateg->id}}'> <i class="fa fa-shopping-cart"></i> </button>
 								<button class="btn btn-primary cart-btn" type="button">Add to cart</button>
 														
 							</li>
 						   
-							<li class="lnk wishlist">
-								<a class="add-to-cart" href="detail.html" title="Wishlist">
-									 <i class="icon fa fa-heart"></i>
-								</a>
-							</li>
+							<li class="add-cart-button "> <button data-toggle="tooltip" class="btn btn-primary icon" id='{{$product->id}}' onclick="addToWish(this.id)" title="Wishlist"> <i class="icon fa fa-heart"></i> </button> </li>
 	
 							<li class="lnk">
 								<a class="add-to-cart" href="detail.html" title="Compare">
@@ -598,18 +593,27 @@
 
 <script>
 										
+	
+
+function addToCartDetails(id){
 	var qty = $('#qty').val()
 	var size = $('#dsize').val()
 	var color = $('#dcolor').val()
 
-function addToCartDetails(id){
-$.ajax({
+	$.ajax({
 type:'get',
 url: '/client/addcart/detail/'+id,
 dataType: 'json',
 data:{color:color,size:size,qty:qty},
 success:function(data){
 miniCart()
+Swal.fire({
+  position: 'top-end',
+  icon: 'success',
+  title: 'Your iteam has been added successfully',
+  showConfirmButton: false,
+  timer: 1000
+})
 }
 })
 
