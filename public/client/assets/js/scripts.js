@@ -338,7 +338,7 @@ jQuery("[data-toggle='tooltip']").tooltip();
 })
 
 
-    const site_url = "http://127.0.0.1:8000/";
+    const site_url = "http://localhost:8000/";
 
     $("body").on("keyup", "#search", function(){
 
@@ -348,7 +348,7 @@ if(text.length >= 1 ){
 
     $.ajax({
         data: {search: text},
-        url : "search-product", 
+        url : site_url+"search-product", 
         method : 'get',
         success:function(result){
             $("#searchProducts").html(result);            

@@ -333,7 +333,6 @@ Route::get('/client/getReviews/{id}', [ReviewController::class,'getReviews']);
 
 Route::get('/search-product', [SearchController::class, 'SearchProduct']);
 
-Route::get('/client/search-product', [SearchController::class, 'SearchProduct']);
 
 //------------------------------------facebook-----------------------------
 
