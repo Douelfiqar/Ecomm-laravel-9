@@ -133,14 +133,17 @@
 
 
         </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" id="close-btn-model" data-dismiss="modal">Close</button>
-          <input type="hidden" id="pprod_id" >
-          <button type="button" class="btn btn-primary" onclick="addToCart()">ADD TO CART</button>
+        <div class="modal-footer" id="wishCart">
+         
+       
         </div>
       </div>
     </div>
   </div>
+
+
+
+
 
 <script type="text/javascript">
   $.ajaxSetup({
@@ -150,13 +153,34 @@
   })
 
   
-  function viewProduct(id){
+  function viewProduct(id,WishCart){
 
-$.ajax({
+
+    $.ajax({
   type: 'GET',
   url: '/client/product/view/modal/'+id,
   dataType: 'json', 
   success:function(data){
+
+    if(WishCart == 1){
+  $('#wishCart').empty()
+
+  cart = `  
+  <button type="button" class="btn btn-secondary" id="close-btn-model" data-dismiss="modal">Close</button>
+          <input type="hidden" id="pprod_id" >
+          <button type="button" class="btn btn-primary" onclick="addToCart()">ADD TO CART</button>
+`
+}else{
+  $('#wishCart').empty()
+
+  cart = `  <button type="button" class="btn btn-secondary" id="close-btn-model" data-dismiss="modal">Close</button>
+          <input type="hidden" id="pprod_id" >
+          <button type="button" class="btn btn-primary" onclick="addToWish()">ADD TO Wish List</button>`
+}
+$('#wishCart').append(cart)
+
+
+
     $('#pprod_id').attr('value',id);
     $('#psize').empty();
 
@@ -199,19 +223,48 @@ function addToCart(){
 
 
   $.ajax({
-    type:'post',
+    type:'get',
     dataType: 'json',
     data:{
       product_name:product_name,product_id:product_id,color:color,size:size,qty:qty
     },
     url: "/client/cart/data/store/"+product_id,
     success:function(data){
-      console.log(data)
+
       miniCart()
-      console.log(data)
       $('#close-btn-model').click();
+      Swal.fire({
+  position: 'top-end',
+  icon: 'success',
+  title: 'Your iteam has been added to wishList',
+  showConfirmButton: false,
+  timer: 1000
+})
     }
   })
+
+}
+
+
+
+
+function addToWish(prodId){
+
+$.ajax({
+  type:'get',
+  dataType: 'json',
+  url: "/client/wishList/data/store/"+prodId,
+  success:function(data){
+    console.log(data)
+    Swal.fire({
+  position: 'top-end',
+  icon: 'success',
+  title: 'Your iteam has been added to wishList',
+  showConfirmButton: false,
+  timer: 1000
+})
+  }
+})
 
 }
 </script>
@@ -267,6 +320,13 @@ function addToCart(){
       url: '/client/product/remove/mini/cart/'+rowId,
       dataType:'json',
       success:function(response){
+        Swal.fire({
+  position: 'top-end',
+  icon: 'success',
+  title: 'Your iteam has been removed successfully',
+  showConfirmButton: false,
+  timer: 1000
+})
         miniCart();
       }
 

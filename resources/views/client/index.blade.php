@@ -326,7 +326,6 @@
                           <div class="image"> <a href="{{url('/client/home/details/'.$product->id)}}"><img style='height:150px;object-fit:contain' src="{{asset('upload/productPhoto/'.$product->product_thambnail)}}" alt=""></a> </div>
                           <!-- /.image -->
                           
-                          <div class="tag new"><span>new</span></div>
                         </div>
                         <!-- /.product-image -->
                         
@@ -349,11 +348,11 @@
                           <div class="action">
                             <ul class="list-unstyled">
                               <li class="add-cart-button btn-group">
-                                <button class="btn btn-primary icon" type="button" title="Add Cart" data-toggle="modal" data-target="#exampleModal" onClick="viewProduct(this.id)" id='{{$product->id}}'> <i class="fa fa-shopping-cart"></i> </button>
+                                <button class="btn btn-primary icon" type="button" title="Add Cart" data-toggle="modal" data-target="#exampleModal" onClick="viewProduct(this.id,1)" id='{{$product->id}}'> <i class="fa fa-shopping-cart"></i> </button>
                                 <button class="btn btn-primary cart-btn" type="button">Add to cart</button>
                                 
                               </li>
-                              <li class="lnk wishlist"> <a data-toggle="tooltip" class="add-to-cart" href="detail.html" title="Wishlist"> <i class="icon fa fa-heart"></i> </a> </li>
+                              <li class="add-cart-button "> <button data-toggle="tooltip" class="btn btn-primary icon" id='{{$product->id}}' onclick="addToWish(this.id)" title="Wishlist"> <i class="icon fa fa-heart"></i> </button> </li>
                               <li class="lnk"> <a data-toggle="tooltip" class="add-to-cart" href="detail.html" title="Compare"> <i class="fa fa-signal" aria-hidden="true"></i> </a> </li>
                             </ul>
                           </div>
@@ -683,7 +682,7 @@
                                 {{$bestSeller->product_name_fr}}
                                 @else
                                 {{$bestSeller->product_name_en}}
-                                @endif</a></h3>
+                                @endif/a></h3>
                               <div class="rating rateit-small"></div>
                               <div class="product-price"> @if ($bestSeller->discount_price)
                                 <span class="price-before-discount">{{$bestSeller->selling_price}} </span>
@@ -730,7 +729,7 @@
                                 {{$bestSeller->product_name_fr}}
                                 @else
                                 {{$bestSeller->product_name_en}}
-                                @endif</a></h3>
+                                @endif/a></h3>
                               <div class="rating rateit-small"></div>
                               <div class="product-price"> @if ($bestSeller->discount_price)
                                 <span class="price-before-discount">{{$bestSeller->selling_price}} </span>
@@ -777,7 +776,7 @@
                                 {{$bestSeller->product_name_fr}}
                                 @else
                                 {{$bestSeller->product_name_en}}
-                                @endif</a></h3>
+                                @endif/a></h3>
                               <div class="rating rateit-small"></div>
                               <div class="product-price"> @if ($bestSeller->discount_price)
                                 <span class="price-before-discount">{{$bestSeller->selling_price}} </span>

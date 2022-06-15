@@ -12,11 +12,13 @@ use App\Http\Controllers\SliderController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\FacebookController;
 use App\Http\Controllers\ShippingController;
+use App\Http\Controllers\WishListController;
+use App\Http\Controllers\GithubAuthController;
 use App\Http\Controllers\ManageAdminController;
 use App\Http\Controllers\ReviewAdminController;
 use App\Http\Controllers\SubCategoryController;
-use App\Http\Controllers\Auth\FacebookController;
 use App\Http\Controllers\frontend\CartController;
 use App\Http\Controllers\SubSubCategoryController;
 use App\Http\Controllers\frontend\DetailController;
@@ -229,7 +231,7 @@ Route::prefix('client')->group(function () {
 
     Route::get('/product/view/modal/{id}', [CategoryClientController::class,'modelCategory']);
 
-    Route::post('/cart/data/store/{id}', [CartController::class,'addCart']);
+    Route::get('/cart/data/store/{id}', [CartController::class,'addCart']);
 
     Route::get('/cart/data/update/{id}', [CartController::class,'updateCart']);
 
@@ -306,6 +308,17 @@ Route::prefix('client')->group(function () {
         Route::get('/getOrders',[OrderController::class,'getorders']);
 
         Route::get('/cancelOrder/{id}',[OrderController::class,'cancelOrder'])->name('profile.cancelOrder');
+
+        // ----------------------------- Wish list ------------------------------------
+
+        Route::get('/wishList',[WishListController::class,'index']);
+
+        Route::get('/getContentWish',[WishListController::class,'getWishListContent']);
+        
+        Route::get('/wishList/data/store/{prodId}',[WishListController::class,'addWishList']);
+
+        Route::get('/removeWish/{id}',[WishListController::class,'removeWishList']);
+
     });
 });
 
@@ -320,8 +333,8 @@ Route::get('search-product', [SearchController::class, 'SearchProduct']);
 //------------------------------------facebook-----------------------------
 
 
-Route::get('/auth/facebook/redirect', [FacebookController::class, 'handleFacebookRedirect']);
-Route::get('/auth/facebook/callback', [FacebookController::class, 'handleFacebookCallback']);
+Route::get('/facebook', [FacebookController::class, 'redirectToFacebook']);
+Route::get('/facebook/callback', [FacebookController::class, 'facebookSignin']);
 
 
 
@@ -329,6 +342,9 @@ Route::prefix('google')->name('google.')->group( function(){
     Route::get('login', [GoogleController::class, 'loginWithGoogle'])->name('login');
     Route::any('callback', [GoogleController::class, 'callbackFromGoogle'])->name('callback');
 });
+
+Route::get('github/auth', [GithubAuthController::class, 'githubAuth']);
+Route::get('github/auth/callback', [GithubAuthController::class, 'callbackGithub']);
 
 
 

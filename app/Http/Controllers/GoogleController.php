@@ -12,44 +12,45 @@ class GoogleController extends Controller
 {
     public function loginWithGoogle()
     {
-        return Socialite::driver('google')->redirect();
+        return Socialite::driver('google')->stateless()->redirect();
     }
 
     public function callbackFromGoogle()
     {
         try {
 
-            $user = Socialite::driver('google')->user();
+            $user = Socialite::driver('google')->stateless()->user();
 
 
-            dd($user);
-            // Check Users Email If Already There
-            // $is_user = User::where('email', $user->getEmail())->first();
+            // dd($user->name);
+            //Check Users Email If Already There
 
-            // dd($request);
-            // if(!$is_user){
+            $is_user = User::where('email', $user->getEmail())->first();
 
-            //     // $saveUser = User::updateOrCreate([
-            //     //     'google_id' => $user->getId(),
-            //     // ],[
-            //     //     'name' => $user->getName(),
-            //     //     'email' => $user->getEmail(),
-            //     //     'password' => Hash::make($user->getName().'@'.$user->getId())
-            //     // ]);
-            //     dd($request);
-            // }else{
-            //     // $saveUser = User::where('email',  $user->getEmail())->update([
-            //     //     'google_id' => $user->getId(),
-            //     // ]);
-            //     // $saveUser = User::where('email', $user->getEmail())->first();
+            if(!$is_user){
 
-            //     dd($request);
-            // }
+                $saveUser = User::create([
+                    'google_id' => $user->id,
+                    'name' => $user->name,
+                    'email' => $user->email,
+                    'password' => Hash::make($user->name.'@'.$user->id)
+                ]);
+                    
+                Auth::loginUsingId($saveUser->id);
+
+            }else{
+                
+                $saveUser = User::where('email',  $user->email)->update([
+                    'google_id' => $user->id,
+                ]);
+                $saveUser = User::where('email', $user->email)->first();
+                Auth::loginUsingId($saveUser->id);
+
+            }
 
 
-          //  Auth::loginUsingId($saveUser->id);
             
-            return redirect()->route('home');
+           return redirect()->route('home');
         } catch (\Throwable $th) {
             throw $th;
         }

@@ -35,9 +35,14 @@ return [
         'redirect' => 'http://localhost:8000/google/callback/'
     ],
     'facebook' => [
-        'client_id' => env('FACEBOOK_CLIENT_ID') ,
-        'client_secret' => env('FACEBOOK_CLIENT_SECRET'),
-        'redirect' => 'http://127.0.0.1:8000/facebook/auth/facebook/callback',
+        'client_id' => '595524281770775' ,
+        'client_secret' => '7a25d56d774dfd7498807d86cd3e2e01',
+        'redirect' => 'http://127.0.0.1:8000/facebook/callback',
+    ],
+    'github' => [
+        'client_id' => '74e92da7d470cc1a843f' ,
+        'client_secret' => 'fb88cb5725a04ccff649319a40fefafc7a107121',
+        'redirect' => 'http://localhost:8000/github/auth/callback',
     ],
 
 ];
