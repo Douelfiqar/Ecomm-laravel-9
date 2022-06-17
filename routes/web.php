@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\SmsController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\BrandController;
 use App\Http\Controllers\OrderController;
@@ -328,12 +329,6 @@ Route::get('/client/home/details/{id}', [ReviewController::class,'index']);
         
 Route::get('/client/getReviews/{id}', [ReviewController::class,'getReviews']);
 
-    // -------------------------------SEARCH------------------------------------
-
-
-Route::get('/search-product', [SearchController::class, 'SearchProduct']);
-
-
 //------------------------------------facebook-----------------------------
 
 
@@ -358,4 +353,16 @@ Route::get('/admin/manageAdmin',[ManageAdminController::class,'index'])->name('a
 
 Route::get('/admin/getAdmins',[ManageAdminController::class,'getAdmins']);
 
+
+// --------------------------------SMS----------------------------
+
+
 });
+
+
+Route::get('/sms',[SmsController::class,'index']);
+
+
+// -------------------------------SEARCH------------------------------------
+
+Route::get('/search-product', [SearchController::class, 'SearchProduct']);

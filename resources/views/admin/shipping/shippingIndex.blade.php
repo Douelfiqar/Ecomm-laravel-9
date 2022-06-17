@@ -359,22 +359,7 @@ console.log('first')
                     })
                 }
 
-                console.log('first')
-//                 function getShipping(){
-// console.log('first')
-//     // $.ajax({
-//     //                     url:'/admin/getOrders',
-//     //                     type:'get',
-//     //                     dataType:'json',
-//     //                     success:function(data){
-
-//     //                             console.log(data)
-
-//     //                     }}
-//     //                     )
-// }
-
-// getShipping()
+              
 
             </script>
 

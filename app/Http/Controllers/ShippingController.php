@@ -8,6 +8,7 @@ use App\Models\Order;
 use App\Models\Country;
 use App\Models\Shipping;
 use Illuminate\Http\Request;
+use Nexmo\Laravel\Facade\Nexmo;
 use Illuminate\Support\Facades\Auth;
 
 class ShippingController extends Controller
@@ -49,12 +50,21 @@ class ShippingController extends Controller
 
             $Order->Status = "Valid";
 
+            Nexmo::message()->send([
+                'to' => '212696307442',
+                'from' => 'Flipmart',
+                'text' => 'Your commande '.$Order->id.' has been confirmed. Thank you for your purchase on flipmart.     '
+            ]);
+
         }else{
             $Order->Status = "Invalid";
-
         }
 
         $Order->save();
+
+
+       
+
 
         return redirect()->back();
     }
