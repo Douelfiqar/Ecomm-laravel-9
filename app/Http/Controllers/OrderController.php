@@ -51,7 +51,7 @@ class OrderController extends Controller
 
         Cart::destroy();
 
-        return redirect()->route('home');
+        return redirect()->route('profile.trackOrder');
     }
 
     public function trackOrder(Request $request){

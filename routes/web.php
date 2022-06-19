@@ -366,3 +366,10 @@ Route::get('/sms',[SmsController::class,'index']);
 // -------------------------------SEARCH------------------------------------
 
 Route::get('/search-product', [SearchController::class, 'SearchProduct']);
+
+
+// ---------------------------- LIST OF PRODUCT --------------------------
+
+Route::get('/client/searchList/{id}', [CategoryClientController::class, 'filterCategory']);
+
+Route::get('/client/mail', [SmsController::class, 'basic_email']);

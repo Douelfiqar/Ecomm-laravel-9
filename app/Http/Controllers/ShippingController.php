@@ -53,7 +53,7 @@ class ShippingController extends Controller
             Nexmo::message()->send([
                 'to' => '212696307442',
                 'from' => 'Flipmart',
-                'text' => 'Your commande '.$Order->id.' has been confirmed. Thank you for your purchase on flipmart.     '
+                'text' => 'Your commande '.$Order->id.'  has been confirmed. Thank you for your purchase on flipmart.     '
             ]);
 
         }else{

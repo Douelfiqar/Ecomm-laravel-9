@@ -153,9 +153,46 @@
                         <div class="dropdown dropdown-small dropdown-med dropdown-white inline">
                           <button data-toggle="dropdown" type="button" class="btn dropdown-toggle"> Position <span class="caret"></span> </button>
                           <ul role="menu" class="dropdown-menu">
-                            <li role="presentation"><button id="low" onclick="order(this.id)">Price:Lowest first</button</li>
-                            <li role="presentation"><button id="hight" onclick="order(this.id)">Price:Highest first</button></li>
-                            <li role="presentation"><button id="byName" onclick="order(this.id)">Product Name: A to Z</button></li>
+                            @if($iteams)
+                            <li role="presentation"><button style=" border: none;
+                              background: none;
+                              cursor: pointer;
+                              margin: 0;
+                              padding: 0;" id="low" onclick="order(this.id,true)">Price:Lowest first</button</li>
+                              @else
+                              <li role="presentation"><button style=" border: none;
+                                background: none;
+                                cursor: pointer;
+                                margin: 0;
+                                padding: 0;" id="low" onclick="order(this.id,false)">Price:Lowest first</button</li>
+                                @endif
+
+                                @if($iteams)
+                            <li role="presentation"><button style=" border: none;
+                              background: none;
+                              cursor: pointer;
+                              margin: 0;
+                              padding: 0;" id="hight" onclick="order(this.id,true)">Price:Highest first</button></li>
+                            @else
+                            <li role="presentation"><button style=" border: none;
+                              background: none;
+                              cursor: pointer;
+                              margin: 0;
+                              padding: 0;" id="hight" onclick="order(this.id,false)">Price:Highest first</button></li>
+                            @endif
+                            @if($iteams)
+                            <li role="presentation"><button style=" border: none;
+                              background: none;
+                              cursor: pointer;
+                              margin: 0;
+                              padding: 0;" id="byName" onclick="order(this.id,true)">Product Name: A to Z</button></li>
+                            @else
+                            <li role="presentation"><button style=" border: none;
+                              background: none;
+                              cursor: pointer;
+                              margin: 0;
+                              padding: 0;" id="byName" onclick="order(this.id,false)">Product Name: A to Z</button></li>
+                            @endif
                           </ul>
                         </div>
                       </div>
@@ -179,7 +216,7 @@
             <div class="search-result-container ">
               <div id="myTabContent" class="tab-content category-list">
                 <div class="tab-pane active " id="grid-container">
-                  <div class="category-product">
+                  <div class="category-product ">
                     <div class="row" id="list_view_product">
 
                         @include('client.category.list_view_product')
@@ -233,7 +270,8 @@
         <!-- /.logo-slider --> 
         <!-- ============================================== BRANDS CAROUSEL : END ============================================== --> </div>
       <!-- /.container --> 
-      
+      <input type="hidden" id="SearchVal" value="{{$iteams}}">
+
     </div>
     <!-- /.body-content --> 
     
@@ -284,14 +322,20 @@
 
 
 
-    function order(id){
+    function order(id,List){
       
       var subsub = $('#subsub').val();
+
+      if(List == false) List = false
+      else{
+        List = true
+      } 
 
       $.ajax({
         type:'get',
         url:'/client/orderBy/'+id+'/'+subsub,
         dataType:'json',
+        data:{List:List,SearchVal:$('#SearchVal').val()},
         success:function(data){
 
           $('#list_view_product').empty();
@@ -300,14 +344,16 @@
 
           var list = ""
           var grid = ""
-          console.log(data)
+
           $.each(data.ProductFiltreds.data, function(key,value){
+
             list += `
             <div class="col-sm-6 col-md-4 wow fadeInUp">
                             <div class="products">
                               <div class="product">
                                 <div class="product-image">
-                                  <div class="image"> <a href="/client/home/details/${value.id}"><img src="{{asset('upload/productPhoto/${value.product_thambnail}')}}" alt=""></a> </div>
+                                  <div class="image">
+                                     <a href="/client/home/details/${value.id}"><img src="{{asset('upload/productPhoto/${value.product_thambnail}')}}" alt=""></a> </div>
                                   <!-- /.image -->
                                   
                                   <div class="tag new"><span>new</span></div>

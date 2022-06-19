@@ -73,14 +73,14 @@
             <!-- /.contact-row --> 
             <!-- ============================================================= SEARCH AREA ============================================================= -->
             <div class="search-area">
-              <form>
+              <form method="get" action="{{url('/client/searchList/2')}}">
                 <div class="control-group">
                   <ul class="categories-filter animate-dropdown">
                     <li class="dropdown"> <a class="dropdown-toggle"  data-toggle="dropdown" href="category.html">Categories <b class="caret"></b></a>
                       <ul class="dropdown-menu" role="menu" >
                         @foreach ($categories as $category)
                         <li role="presentation"><a role="menuitem" tabindex="-1" href="category.html">- 
-                          @if (session()->get('lang')=='francais')
+                          @if (session()->get('lang') == 'francais')
                           {{$category->category_name_fr}}
                           @else
                           {{$category->category_name_en}}
@@ -89,9 +89,12 @@
                       </ul>
                     </li>
                   </ul>
-                  <input class="search-field" placeholder="Search here..." id="search" name="search" onfocus="search_result_show()" onblur="search_result_hide()" />
-                  <a class="search-button" href="#" ></a> </div>
-              </form>
+                  
+                  <input class="search-field" placeholder="Search here..." id="search" name="listOfproduct" onfocus="search_result_show()" onblur="search_result_hide()" />
+
+                  <button class="search-button" type="submit"></button> </div>
+              
+                </form>
 
               <div id="searchProducts">
 

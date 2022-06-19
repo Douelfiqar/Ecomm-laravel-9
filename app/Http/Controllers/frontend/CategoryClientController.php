@@ -17,6 +17,7 @@ class CategoryClientController extends Controller
     
 
     public function filterCategory($id,Request $request){
+
         $categories = Category::all();
         $ProductFiltreds = Product::where('subsubcategory_id',$id)->where('status',1)->paginate(3);
         $subCategories = SubCategory::all();
@@ -33,6 +34,16 @@ class CategoryClientController extends Controller
                 }  
             }
         }
+$iteams = NULL;
+
+        if($request->listOfproduct){
+            $iteams = $request->listOfproduct;
+
+            $ProductFiltreds = Product::where('product_name_en','LIKE',"%$iteams%")->where('status',1)->paginate(9);
+            // dd($request->listOfproduct);
+
+        }
+
 
 
         if ($request->ajax()) {
@@ -44,18 +55,33 @@ class CategoryClientController extends Controller
              return response()->json(['grid_view' => $grid_view,'list_view'=>$list_view]);
         }
 
-        return view('client.category.category',compact('ProductFiltreds','categories','subCategories','admin','subsubCategorties'));
+        return view('client.category.category',compact('ProductFiltreds','categories','subCategories','admin','subsubCategorties','iteams'));
     }
 
-    public function order($orderBy,$subsub){
+    public function order($orderBy,$subsub,Request $request){
 
-        if($orderBy == 'byName'){
-            $ProductFiltreds = Product::where('subsubcategory_id',$subsub)->where('status',1)->orderBy('product_name_en','ASC')->paginate(9);
-        }else if($orderBy == 'low'){
-            $ProductFiltreds = Product::where('subsubcategory_id',$subsub)->where('status',1)->orderBy('price')->paginate(9);
-        }else{
-            $ProductFiltreds = Product::where('subsubcategory_id',$subsub)->where('status',1)->orderByDesc('price')->paginate(9);
-        }
+        $searchValue = $request->List;
+if($searchValue == 'false'){
+    if($orderBy == 'byName'){
+        $ProductFiltreds = Product::where('subsubcategory_id',$subsub)->where('status',1)->orderBy('product_name_en','ASC')->paginate(9);
+    }else if($orderBy == 'low'){
+        $ProductFiltreds = Product::where('subsubcategory_id',$subsub)->where('status',1)->orderBy('price')->paginate(9);
+    }else{
+        $ProductFiltreds = Product::where('subsubcategory_id',$subsub)->where('status',1)->orderByDesc('price')->paginate(9);
+    }
+
+}else{
+    $iteams = $request->SearchVal;
+
+    if($orderBy == 'byName'){
+        $ProductFiltreds = Product::where('product_name_en','LIKE',"%$iteams%")->where('status',1)->orderBy('product_name_en','ASC')->paginate(16);
+    }else if($orderBy == 'low'){
+        $ProductFiltreds = Product::where('product_name_en','LIKE',"%$iteams%")->where('status',1)->orderBy('price')->paginate(12);
+    }else{
+        $ProductFiltreds = Product::where('product_name_en','LIKE',"%$iteams%")->where('status',1)->orderByDesc('price')->paginate(12);
+    }
+}
+       
         return response()->json(['ProductFiltreds'=>$ProductFiltreds]);
     }
 
