@@ -26,8 +26,7 @@
                 <div class="products">
                   <div class="hot-deal-wrapper">
                     <div class="image"> <img src="{{asset('upload/productPhoto/'.$HotDeal->product_thambnail)}}" alt=""> </div>
-                    <div class="sale-offer-tag"><span>DH {{$HotDeal->discount_price}}<br>
-                      </span></div>
+                    
                     <div class="timing-wrapper">
                       <div class="box-wrapper">
                         <div class="date box"> <span class="key">120</span> <span class="value">DAYS</span> </div>

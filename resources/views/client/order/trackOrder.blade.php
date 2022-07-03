@@ -45,8 +45,8 @@
      <th scope="col">Phone Number</th>
      <th scope="col">Price Total</th>
      <th scope="col">Payement METHODE</th>
-     <th scope="col">State</th>
      <th scope="col">Status</th>
+     <th scope="col">Action</th>
 
  </tr>
 </thead>

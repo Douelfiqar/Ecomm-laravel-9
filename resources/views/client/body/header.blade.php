@@ -75,20 +75,7 @@
             <div class="search-area">
               <form method="get" action="{{url('/client/searchList/2')}}">
                 <div class="control-group">
-                  <ul class="categories-filter animate-dropdown">
-                    <li class="dropdown"> <a class="dropdown-toggle"  data-toggle="dropdown" href="category.html">Categories <b class="caret"></b></a>
-                      <ul class="dropdown-menu" role="menu" >
-                        @foreach ($categories as $category)
-                        <li role="presentation"><a role="menuitem" tabindex="-1" href="category.html">- 
-                          @if (session()->get('lang') == 'francais')
-                          {{$category->category_name_fr}}
-                          @else
-                          {{$category->category_name_en}}
-                          @endif</a></li>
-                        @endforeach
-                      </ul>
-                    </li>
-                  </ul>
+                 
                   
                   <input class="search-field" placeholder="Search here..." id="search" name="listOfproduct" onfocus="search_result_show()" onblur="search_result_hide()" />
 
@@ -112,7 +99,7 @@
               <div class="items-cart-inner">
                 <div class="basket"> <i class="glyphicon glyphicon-shopping-cart"></i> </div>
                 <div class="basket-item-count"><span class="count" id="countMiniCart"></span></div>
-                <div class="total-price-basket"> <span class="lbl"></span> <span class="total-price"> <span class="sign">DH </span><span class="value" id="totalMiniCart1"></span> </span> </div>
+                <div class="total-price-basket"> <span class="lbl"></span> <span class="total-price"> <span class="value" id="totalMiniCart1"></span> <span class="sign">DH </span></span> </div>
               </div>
               </a>
               <ul class="dropdown-menu">

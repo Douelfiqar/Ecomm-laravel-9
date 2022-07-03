@@ -34,13 +34,9 @@
 		  	<label>
 		    	<input type="radio" name="optionsRadios" id="optionsRadios2" value="option2" name="remember">Remember me! 
 		  	</label>
-		  	<a href="{{route('forgotPassword')}}" class="forgot-password pull-right">Forgot your Password?</a>
+		  	{{-- <a href="{{route('forgotPassword')}}" class="forgot-password pull-right">Forgot your Password?</a> --}}
 		</div>
-		 @if (Route::has('password.request'))
-                    <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('password.request') }}">
-                        {{ __('Forgot your password?') }}
-                    </a>
-        @endif
+		<a href="{{route('forgotPassword')}}" class="forgot-password pull-right">Forgot your Password?</a>
 	  	<button type="submit" class="btn-upper btn btn-primary checkout-page-button">Login</button>
 	</form>					
 </div>

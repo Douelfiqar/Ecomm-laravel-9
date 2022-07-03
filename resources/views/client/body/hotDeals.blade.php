@@ -33,10 +33,10 @@
               @endif</a></h3>
             <div class="rating rateit-small"></div>
             <div class="product-price"> @if ($HotDeal->discount_price)
-              <span class="price-before-discount">{{$HotDeal->selling_price}} </span>
-              <span class="price">DH{{$HotDeal->discount_price}} </span> 
+              <span class="price-before-discount">{{$HotDeal->selling_price}} DH</span>
+              <span class="price">{{$HotDeal->discount_price}} DH</span> 
               @else
-              <span class="price">DH{{$HotDeal->selling_price}} </span> 
+              <span class="price">{{$HotDeal->selling_price}} DH</span> 
     
               @endif </div>
             <!-- /.product-price --> 

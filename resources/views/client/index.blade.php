@@ -47,7 +47,7 @@
                             <div class="product-info">
                               <h3 class="name"><a href="{{url('/client/home/details/'.$SpecialOffer->id)}}">{{$SpecialOffer->product_name_en}}</a></h3>
                               <div class="rating rateit-small"></div>
-                              <div class="product-price"> <span class="price"> DH {{$SpecialOffer->discount_price}} </span> </div>
+                              <div class="product-price"> <span class="price"> {{$SpecialOffer->discount_price}} DH</span> </div>
                               <!-- /.product-price --> 
                               
                             </div>
@@ -130,10 +130,10 @@
                               </h3>
                               <div class="rating rateit-small"></div>
                               <div class="product-price"> @if ($SpecialDeal->discount_price)
-                                <span class="price-before-discount">{{$SpecialDeal->selling_price}} </span>
-                                <span class="price">DH{{$SpecialDeal->discount_price}} </span> 
+                                <span class="price-before-discount">{{$SpecialDeal->selling_price}} DH</span>
+                                <span class="price">{{$SpecialDeal->discount_price}} DH</span> 
                                 @else
-                                <span class="price">DH{{$SpecialDeal->selling_price}} </span> 
+                                <span class="price">{{$SpecialDeal->selling_price}} DH</span> 
                               
                                 @endif </div>
                               <!-- /.product-price --> 
@@ -220,7 +220,7 @@
                         <h4 class="info-box-heading green">free shipping</h4>
                       </div>
                     </div>
-                    <h6 class="text">Shipping on orders over DH 99</h6>
+                    <h6 class="text">Shipping on orders over 99 DH</h6>
                   </div>
                 </div>
                 <!-- .col -->
@@ -286,10 +286,10 @@
                           <div class="rating rateit-small"></div>
                           <div class="description"></div>
                           <div class="product-price"> @if ($product->discount_price)
-                            <span class="price-before-discount">{{$product->selling_price}} </span>
-                            <span class="price">DH {{$product->discount_price}} </span> 
+                            <span class="price-before-discount">{{$product->selling_price}} DH</span>
+                            <span class="price"> {{$product->discount_price}} DH</span> 
                             @else
-                            <span class="price">DH {{$product->selling_price}} </span> 
+                            <span class="price"> {{$product->selling_price}} DH</span> 
 
                             @endif </div>
                           <!-- /.product-price --> 
@@ -353,10 +353,10 @@
                           <div class="product-price">
 
                             @if ($P->discount_price)
-                            <span class="price-before-discount">{{$P->selling_price}} </span>
-                            <span class="price">DH{{$P->discount_price}} </span> 
+                            <span class="price-before-discount">{{$P->selling_price}} DH</span>
+                            <span class="price">{{$P->discount_price}} DH</span> 
                             @else
-                            <span class="price">DH{{$P->selling_price}} </span> 
+                            <span class="price">{{$P->selling_price}} DH</span> 
 
                             @endif
                             
@@ -459,10 +459,10 @@
                   <div class="rating rateit-small"></div>
                   <div class="description"></div>
                   <div class="product-price"> @if ($Featured->discount_price)
-                    <span class="price-before-discount">{{$Featured->selling_price}} </span>
-                    <span class="price">DH{{$Featured->discount_price}} </span> 
+                    <span class="price-before-discount">{{$Featured->selling_price}} DH </span>
+                    <span class="price">{{$Featured->discount_price}} DH</span> 
                     @else
-                    <span class="price">DH{{$Featured->selling_price}} </span> 
+                    <span class="price">{{$Featured->selling_price}} DH</span> 
 
                     @endif </div>
                   <!-- /.product-price --> 
@@ -559,10 +559,10 @@
                   <div class="rating rateit-small"></div>
                   <div class="description"></div>
                   <div class="product-price"> @if ($Electronique->discount_price)
-                    <span class="price-before-discount">{{$Electronique->selling_price}} </span>
-                    <span class="price">DH{{$Electronique->discount_price}} </span> 
+                    <span class="price-before-discount">{{$Electronique->selling_price}} DH</span>
+                    <span class="price">{{$Electronique->discount_price}} DH</span> 
                     @else
-                    <span class="price">DH{{$Electronique->selling_price}} </span> 
+                    <span class="price">{{$Electronique->selling_price}} DH</span> 
 
                     @endif </div>
                   <!-- /.product-price --> 
@@ -633,10 +633,10 @@
                                 @endif</a></h3>
                               <div class="rating rateit-small"></div>
                               <div class="product-price"> @if ($bestSeller->discount_price)
-                                <span class="price-before-discount">{{$bestSeller->selling_price}} </span>
-                                <span class="price">DH{{$bestSeller->discount_price}} </span> 
+                                <span class="price-before-discount">{{$bestSeller->selling_price}} DH</span>
+                                <span class="price">{{$bestSeller->discount_price}} DH</span> 
                                 @else
-                                <span class="price">DH{{$bestSeller->selling_price}} </span> 
+                                <span class="price">{{$bestSeller->selling_price}} DH</span> 
             
                                 @endif  </span> </div>
                               <!-- /.product-price --> 
@@ -680,10 +680,10 @@
                                 @endif</a></h3>
                               <div class="rating rateit-small"></div>
                               <div class="product-price"> @if ($bestSeller->discount_price)
-                                <span class="price-before-discount">{{$bestSeller->selling_price}} </span>
-                                <span class="price">DH{{$bestSeller->discount_price}} </span> 
+                                <span class="price-before-discount">{{$bestSeller->selling_price}} DH</span>
+                                <span class="price">{{$bestSeller->discount_price}} DH</span> 
                                 @else
-                                <span class="price">DH{{$bestSeller->selling_price}} </span> 
+                                <span class="price">{{$bestSeller->selling_price}} DH</span> 
             
                                 @endif  </span> </div>
                               <!-- /.product-price --> 
@@ -727,10 +727,10 @@
                                 @endif</a></h3>
                               <div class="rating rateit-small"></div>
                               <div class="product-price"> @if ($bestSeller->discount_price)
-                                <span class="price-before-discount">{{$bestSeller->selling_price}} </span>
-                                <span class="price">DH{{$bestSeller->discount_price}} </span> 
+                                <span class="price-before-discount">{{$bestSeller->selling_price}} DH</span>
+                                <span class="price">{{$bestSeller->discount_price}} DH</span> 
                                 @else
-                                <span class="price">DH{{$bestSeller->selling_price}} </span> 
+                                <span class="price">{{$bestSeller->selling_price}} DH</span> 
             
                                 @endif  </span> </div>
                               <!-- /.product-price --> 
@@ -774,10 +774,10 @@
                                 @endif</a></h3>
                               <div class="rating rateit-small"></div>
                               <div class="product-price"> @if ($bestSeller->discount_price)
-                                <span class="price-before-discount">{{$bestSeller->selling_price}} </span>
-                                <span class="price">DH{{$bestSeller->discount_price}} </span> 
+                                <span class="price-before-discount">{{$bestSeller->selling_price}} DH </span>
+                                <span class="price">{{$bestSeller->discount_price}} DH</span> 
                                 @else
-                                <span class="price">DH{{$bestSeller->selling_price}} </span> 
+                                <span class="price">{{$bestSeller->selling_price}} DH</span> 
             
                                 @endif  </span> </div>
                               <!-- /.product-price --> 
@@ -836,7 +836,7 @@
                     
                     <div class="blog-post-info text-left">
                       <h3 class="name"><a href="#">Dolorem eum fugiat quo voluptas nulla pariatur</a></h3>
-                      <span class="info">By Saraha Smith &nbsp;|&nbsp; 21 March 2016 </span>
+                      <span class="info">By Saraha Smith &nbsp;|&nbsp; </span>
                       <p class="text">Sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem.</p>
                       <a href="#" class="lnk btn btn-primary">Read more</a> </div>
                     <!-- /.blog-post-info --> 
@@ -857,7 +857,7 @@
                     
                     <div class="blog-post-info text-left">
                       <h3 class="name"><a href="#">Dolorem eum fugiat quo voluptas nulla pariatur</a></h3>
-                      <span class="info">By Saraha Smith &nbsp;|&nbsp; 21 March 2016 </span>
+                      <span class="info">By Saraha Smith &nbsp;|&nbsp; </span>
                       <p class="text">Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium</p>
                       <a href="#" class="lnk btn btn-primary">Read more</a> </div>
                     <!-- /.blog-post-info --> 
@@ -876,7 +876,7 @@
                     
                     <div class="blog-post-info text-left">
                       <h3 class="name"><a href="#">Dolorem eum fugiat quo voluptas nulla pariatur</a></h3>
-                      <span class="info">By Saraha Smith &nbsp;|&nbsp; 21 March 2016 </span>
+                      <span class="info">By Saraha Smith &nbsp;|&nbsp; </span>
                       <p class="text">Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium</p>
                       <a href="#" class="lnk btn btn-primary">Read more</a> </div>
                     <!-- /.blog-post-info --> 
@@ -895,7 +895,7 @@
                     
                     <div class="blog-post-info text-left">
                       <h3 class="name"><a href="#">Dolorem eum fugiat quo voluptas nulla pariatur</a></h3>
-                      <span class="info">By Saraha Smith &nbsp;|&nbsp; 21 March 2016 </span>
+                      <span class="info">By Saraha Smith &nbsp;|&nbsp; </span>
                       <p class="text">Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium</p>
                       <a href="#" class="lnk btn btn-primary">Read more</a> </div>
                     <!-- /.blog-post-info --> 

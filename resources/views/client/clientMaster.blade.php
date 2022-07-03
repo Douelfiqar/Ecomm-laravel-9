@@ -290,7 +290,7 @@ $.ajax({
                       </div>
                       <div class="col-xs-7">
                         <h3 class="name"><a href="{{url('/client/home/details/${value.id}')}}">${value.name}</a></h3>
-                        <div class="price">$ ${value.price} * ${value.qty}</div>
+                        <div class="price"> ${value.price} DH * ${value.qty}</div>
                       </div>
                       <div class="col-xs-1 action"> <button id="${value.rowId}" onclick="removeMiniCart(this.id)"> <i class="fa fa-trash"></i> </button> </div>
                     </div>
@@ -302,7 +302,7 @@ $.ajax({
 
 
          $('#totalMiniCart1').text(response.cartTotal);
-         $('#totalMiniCart2').text(response.cartTotal + ' $');
+         $('#totalMiniCart2').text(response.cartTotal + ' DH');
          $('#countMiniCart').text(response.cartQty)
 
         $('#miniCart').html(miniCart)
@@ -384,8 +384,8 @@ success:function(data){
 				                <input type="number" value="${value.qty}" id='qty' min='1' max='$stock'>
 			              </div>
 		            </td>
-					<td class="cart-product-sub-total"><span class="cart-sub-total-price">${value.price} $</span></td>
-					<td class="cart-product-grand-total"><span class="cart-grand-total-price">${total} $</span></td>
+					<td class="cart-product-sub-total"><span class="cart-sub-total-price">${value.price} DH</span></td>
+					<td class="cart-product-grand-total"><span class="cart-grand-total-price">${total} DH</span></td>
           <td>
           <input type="hidden" id="hrowId" value="${value.rowId}" >
            <button class="btn btn-upper btn-primary pull-right outer-right-xs"
@@ -455,7 +455,7 @@ function getTotal(){
     url: '/client/getTotal',
     dataType: 'json',
     success:function(data){
-      $('#subTotal').text(data.response+'  $')
+      $('#subTotal').text(data.response+'  DH')
     }
   })
 }

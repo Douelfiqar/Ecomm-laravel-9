@@ -351,7 +351,7 @@ jQuery("[data-toggle='tooltip']").tooltip();
         url : "http://127.0.0.1:8000/search-product", 
         method : 'get',
         success:function(result){
-
+console.log(result)
             $("#searchProducts").html(result);
                         
         }
